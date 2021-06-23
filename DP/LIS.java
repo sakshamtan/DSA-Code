@@ -312,4 +312,29 @@ public static int buildingBridges(int[][] arr)
     }
     return len; // max parallel bridges ->  LIS on ep after sorting on sp
 }
+//Leetcode 354 -> Russian Doll Envelopes -> same as building briges (chotte height and width ke env. bade height and width vaale env. ke andar daalne hai)
+public int maxEnvelopes(int[][] envelopes) 
+{
+    Arrays.sort(envelopes,(a,b)->{ 
+        return a[0] - b[0]; // height ke basis pr sort then width pr LIS to find sorted order w.r.t both height and width
+    });
+        
+    int n = envelopes.length;
+    int[] dp = new int[n];
+    int maxLen = 0;
+        
+    for(int i = 0; i < n; i++)
+    {
+        dp[i] = 1;
+        for(int j = i - 1; j >= 0; j--)
+        {
+            if(envelopes[j][0] < envelopes[i][0] && envelopes[j][1] < envelopes[i][1])
+            {
+                dp[i] = Math.max(dp[i],dp[j] + 1);
+            }
+        }
+        maxLen = Math.max(dp[i],maxLen);
+    }
+    return maxLen;
+}
 }
