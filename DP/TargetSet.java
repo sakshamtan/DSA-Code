@@ -52,8 +52,63 @@ public static int coinChangePermutation_DP(int[] arr,int Tar,int[] dp)
     return dp[Tar];
 }
 
+public static void coinChangePermutation()
+{
+    int[] arr = {2,3,5,7}; // coins
+    int tar = 10;
+
+    int[] dp = new int[tar+1];
+    // Arrays.fill(dp,-1); only for memo
+
+    // System.out.println(coinChangePermutation_memo(arr,tar,dp));
+    System.out.println(coinChangePermutation_DP(arr,tar,dp));
+
+    print1D(dp);
+}
+
 //A single coin can be picked infinite no. of times
-public static int coinChangeCombination_DP(int[] arr,int Tar,int[] dp)
+public static int coinChangeCombination_memo(int[] arr,int li,int tar,int[][] dp)
+{
+    if(tar == 0)
+    return dp[li][tar] = 1;
+
+    if(dp[li][tar] != -1)
+    return dp[li][tar];
+
+    int count = 0;
+    for(int i = li; i >= 0; i--)
+    {
+        if(tar - arr[i] >= 0)
+        count += coinChangeCombination_memo(arr,i,tar-arr[i],dp);
+    }
+    return dp[li][tar] = count;
+}
+
+//Tabulation is better in this question than memo as not much repetition of calls is taking place
+public static int coinChangeCombination_DP(int[] arr,int Li,int Tar,int[][] dp)
+{
+    for(int li = 0; li <= Li; li++)
+    {
+        for(int tar = 0; tar <= Tar; tar++)
+        {
+            if(tar == 0)
+            {
+                dp[li][tar] = 1;
+                continue;
+            }
+
+            for(int i = li; i >= 0; i--)  // coins pr peeche se chla rhe hai loop taaki 0,0 pr base case bne
+            {
+                if(tar - arr[i] >= 0)
+                dp[li][tar] += dp[i][tar-arr[i]];
+            }
+        }
+    }
+    return dp[Li][Tar];
+}
+
+//optimized version of coinChangeCombination_DP as here we are just using 1D dp
+public static int coinChangeCombination_1DP(int[] arr,int Tar,int[] dp)
 {
     dp[0] = 1;
     for(int ele : arr) // ek coin ke saare tar bnane ke options exhaust then agle coin pe move kia
@@ -67,24 +122,27 @@ public static int coinChangeCombination_DP(int[] arr,int Tar,int[] dp)
     return dp[Tar];
 }
 
-public static void coinChange()
+public static void coinChangeCombination()
 {
-    int[] arr = {2,3,5,7}; // coins
+    int[] arr = {2,3,5,7};
     int tar = 10;
+    // int[] dp = new int[tar+1];
+    int[][] dp = new int[arr.length][tar+1];
+    // for(int[] d : dp)
+    // Arrays.fill(d,-1); only for memo
 
-    int[] dp = new int[tar+1];
-    // Arrays.fill(dp,-1); only for memo
+    // System.out.println(coinChangeCombination_memo(arr,arr.length-1,tar,dp));
+    System.out.println(coinChangeCombination_DP(arr,arr.length-1,tar,dp));
+    // System.out.println(coinChangeCombination_1DP(arr,tar,dp));
 
-    // System.out.println(coinChangePermutation_memo(arr,tar,dp));
-    // System.out.println(coinChangePermutation_DP(arr,tar,dp));
-    System.out.println(coinChangeCombination_DP(arr,tar,dp));
-
-
-    print1D(dp);
+    // print1D(dp);
+    print2D(dp);
 }
+
 
 public static void main(String[] args)
 {
-    coinChange();
+    // coinChangePermutation();
+    coinChangeCombination();
 }
 }
