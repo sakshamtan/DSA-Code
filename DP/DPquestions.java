@@ -137,4 +137,53 @@ public int findLengthOfLCIS(int[] arr)
     }     
     return maxLen;
 }
+
+//Leetcode 1671 -> Minimum number of removals to make Mountain Array -> Arr.length - LBS
+public int[] LIS_LR(int[] arr)
+{
+    int n = arr.length;
+    int[] dp = new int[n];
+    for(int i = 0; i < n; i++)
+    {
+        dp[i] = 1;
+        for(int j = i - 1; j >= 0; j--)
+        {
+            if(arr[j] < arr[i])
+                dp[i] = Math.max(dp[i],dp[j] + 1);
+        }
+    }
+    return dp;
+}
+    
+public int[] LIS_RL(int[] arr)
+{
+    int n = arr.length;
+    int[] dp = new int[n];
+    for(int i = n-1; i >= 0; i--)
+    {
+        dp[i] = 1;
+        for(int j = i + 1; j < n; j++)
+        {
+            if(arr[j] < arr[i])
+                dp[i] = Math.max(dp[i],dp[j] + 1);
+        }
+    }
+    return dp;
+}
+
+//Leetcode function  
+public int minimumMountainRemovals(int[] nums) 
+{
+    int[] LIS = LIS_LR(nums);
+    int[] LDS = LIS_RL(nums);
+    int LBS = 0;
+    for(int i = 0; i < nums.length; i++)
+    {
+        if(LIS[i] == 1 || LDS[i] == 1) // taaki only increasing and only decreasing subseq ke time LBS calculate naa ho.
+            continue;
+            
+        LBS = Math.max(LBS,LIS[i] + LDS[i] - 1);
+    }
+    return nums.length - LBS;
+}
 }
