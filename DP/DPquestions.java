@@ -186,4 +186,49 @@ public int minimumMountainRemovals(int[] nums)
     }
     return nums.length - LBS;
 }
+
+//Leetcode 845 -> Longest Mountain in Array -> LBCS -> Longest Bitonic Longest Continuous Subsequence
+public int[] LCIS_LR(int[] arr)
+{
+    int n = arr.length;
+    int[] dp = new int[n];
+    dp[0] = 1;
+    for(int i = 1; i < n; i++)
+    {
+        dp[i] = 1;
+        if(arr[i] > arr[i-1])
+            dp[i] = dp[i-1] + 1;
+    }
+    return dp;
+}
+    
+public int[] LCIS_RL(int[] arr) 
+{
+    int n = arr.length;
+    int[] dp = new int[n];
+    dp[n-1] = 1;
+    for(int i = n-2; i >= 0; i--)
+    {
+        dp[i] = 1;
+        if(arr[i] > arr[i+1])
+            dp[i] = dp[i+1] + 1;
+    }
+    return dp;
+}
+
+public int longestMountain(int[] nums) 
+{
+    int[] LCIS = LCIS_LR(nums);
+    int[] LCDS = LCIS_RL(nums);
+    int LCBS = 0;
+    for(int i = 0; i < nums.length; i++)
+    {
+        if(LCIS[i] == 1 || LCDS[i] == 1)  // sirf increasing ya sirf decreasing ho to LCBS calculate nhi krna
+            continue;
+            
+        LCBS = Math.max(LCBS,LCIS[i] + LCDS[i] - 1);
+    }
+    return LCBS;
+}
+
 }
