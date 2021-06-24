@@ -2,7 +2,6 @@ import java.util.Arrays;
 
 public class TargetSet{
 
-
 public static void print1D(int[] arr)
 {
     for(int ele : arr)
@@ -182,6 +181,54 @@ public int change(int amount, int[] coins)
 {
     int[] dp = new int[amount+1];
     return coinChange(amount,coins,dp);
+}
+
+//Leetcode 322 -> Coin Change -> Tell minimum no of coins to make up amount
+//As no of coins permu and combi mei same rehte hai so dono mei se koi bhi use kr skte hai(permu ki call simpler hoti hai to using that)
+public int coinChange_memo(int[] coins,int amount,int[] dp)
+{
+    if(amount == 0)
+        return dp[amount] = 0;  // 0 coins are used to make 0 target
+        
+    if(dp[amount] != (int)1e9)  // 1e8 ans ka part bn skta hai so 1e9 rkhni hai default value
+        return dp[amount];
+        
+    int minCoins = (int)1e8;
+    for(int ele : coins)
+    {
+        if(amount - ele >= 0)
+            minCoins = Math.min(minCoins,coinChange_memo(coins,amount-ele,dp)+1);
+    }
+    return dp[amount] = minCoins;
+}
+
+//Tabulation
+public int coinChange_DP(int[] coins,int Tar,int[] dp)
+{
+    dp[0] = 0;
+    for(int amount = 1; amount <= Tar; amount++)
+    {
+        int minCoins = (int)1e8;
+        for(int ele : coins)
+        {
+            if(amount - ele >= 0)
+                minCoins = Math.min(minCoins,dp[amount-ele]+1);
+        }
+        dp[amount] = minCoins;      
+    }
+    return dp[Tar];        
+}
+
+//Leetcode function
+public int coinChange(int[] coins, int amount) 
+{
+    int[] dp = new int[amount+1];
+    // Arrays.fill(dp,(int)1e9); only for memo
+        
+    // int ans = coinChange_memo(coins,amount,dp);
+    int ans = coinChange_DP(coins,amount,dp);
+        
+    return ans == (int)1e8 ? -1 : ans;        
 }
 
 public static void main(String[] args)
