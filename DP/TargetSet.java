@@ -231,9 +231,67 @@ public int coinChange(int[] coins, int amount)
     return ans == (int)1e8 ? -1 : ans;        
 }
 
+// Number of Solutions of a linear equation of n variables
+// 2p + 3q + 5r + 7s = 10 => coins(2,3,5,7) with target = 10 so coinChangeCombination
+public static int noOfSolutions_DP(int[] coeff,int rhs)
+{
+    int[] dp = new int[rhs+1];
+    dp[0] = 1;
+    for(int ele : coeff)
+    {
+        for(int tar = 0; tar <= rhs; tar++)
+        {
+            if(tar - ele >= 0)
+            dp[tar] += dp[tar-ele];
+        }
+    } 
+    return dp[rhs];
+}
+
+//Now print the solutions of the given equation
+public static int printSolutions(int[] coeff,int rhs,int aRHS,int idx,int[] freq)
+{
+    if(rhs == 0)
+    {
+        for(int i = 0; i < coeff.length; i++)
+        {
+            System.out.print(coeff[i] + "(" + freq[i] + ")" );
+            if(i != coeff.length - 1)
+            System.out.print(" + ");
+        }
+        System.out.println(" = " + aRHS);
+        return 1;
+    }
+
+    int count = 0;
+    for(int i = idx; i < coeff.length; i++)
+    {
+        if(rhs - coeff[i] >= 0)
+        {
+            freq[i]++; // konsa coin kitni baar use kr rhe hai ye store kr rhe hai
+            count += printSolutions(coeff,rhs - coeff[i],aRHS,i,freq);
+            freq[i]--;
+        }
+    }
+    return count;
+}
+
+public static void numberOfSoltions()
+{
+    int[] coeff = {2,3,5,7};
+    int rhs = 10;
+    int[] freq = new int[coeff.length];
+
+    // System.out.println(noOfSolutions_DP(coeff,rhs));
+    System.out.println(printSolutions(coeff,rhs,rhs,0,freq));
+
+}
+
 public static void main(String[] args)
 {
     // coinChangePermutation();
-    coinChangeCombination();
+    // coinChangeCombination();
+    numberOfSoltions();
+
 }
 }
