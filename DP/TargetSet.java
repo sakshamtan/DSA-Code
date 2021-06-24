@@ -139,6 +139,50 @@ public static void coinChangeCombination()
     print2D(dp);
 }
 
+//Leetcode 377 -> Combination Sum IV -> CoinChangePermutation_Infi
+public int coinChangePermu(int[] arr,int Tar,int[] dp)
+{
+    dp[0] = 1;
+    for(int tar = 0; tar <= Tar; tar++)
+    {
+        for(int ele : arr)
+        {
+            if(tar - ele >= 0)
+                dp[tar] += dp[tar-ele];
+        }
+    }
+    return dp[Tar];
+}
+
+//Leetcode function
+public int combinationSum4(int[] nums, int target) 
+{
+    int[] dp = new int[target+1];
+    return coinChangePermu(nums,target,dp);
+}
+
+//Leetcode 518 -> Coin Change 2 -> CoinChangeCombinations_Infi
+// Solved using 1D dp -> most optimized
+public int coinChange(int Tar,int[] coins,int[] dp)
+{
+    dp[0] = 1;
+    for(int ele : coins)
+    {
+        for(int tar = 0; tar <= Tar; tar++)
+        {
+            if(tar - ele >= 0)
+                dp[tar] += dp[tar-ele];
+        }
+    }
+    return dp[Tar];
+}
+
+//Leetcode function
+public int change(int amount, int[] coins) 
+{
+    int[] dp = new int[amount+1];
+    return coinChange(amount,coins,dp);
+}
 
 public static void main(String[] args)
 {
