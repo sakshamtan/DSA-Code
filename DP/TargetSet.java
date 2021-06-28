@@ -433,7 +433,7 @@ public int findTargetSumWays_02(int[] nums, int target)
     if(target > arrSum || target < -arrSum)
         return 0;
         
-    int[][] dp = new int[n+1][2 * arrSum + 1];
+    int[][] dp = new int[n+1][2 * arrSum + 1]; // -arrSum to +arrSum tak range so 0 se 2*arrSum+1 ki range leli
     for(int[] d : dp)
         Arrays.fill(d,-1);
     return findTargetSumWays_memo(nums,n,0 + arrSum,target + arrSum,dp);
