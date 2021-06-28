@@ -364,6 +364,82 @@ public static void subsetSum(int[] arr,int tar)
     print2D(dp);
 }
 
+//Leetcode 416 -> partition Equal Subset Sum -> uses subsetSum
+public boolean canPartition(int[] nums) 
+{
+    int n = nums.length;
+    int sum = 0;
+    for(int ele : nums)
+        sum += ele;
+        
+    if(sum % 2 != 0)  // agr arr ka sum odd aaya to usko do equal no.s mei partition nhi kr skte
+        return false;
+        
+    int tar = sum/2;  // even aaya to sum/2 tar agr subsetSum bnaa paa rha hai means we can divide arr into two subsets with equal sums
+    int[][] dp = new int[n+1][tar+1];
+    for(int[] d : dp)
+        Arrays.fill(d,-1);
+    return subsetSum_memo(nums,n,tar,dp) == 1;
+} 
+
+//Leetcode 494 -> Target Sum
+public int findTargetSumWays_recur(int[] arr,int n,int sum,int tar)
+{
+    if(n == 0)
+        return (sum == tar) ? 1 : 0;
+        
+    int count = 0;
+    count += findTargetSumWays_recur(arr,n-1,sum + arr[n-1],tar);
+    count += findTargetSumWays_recur(arr,n-1,sum - arr[n-1],tar);
+        
+    return count;
+}
+
+//Leetcode function -> Through Recursion
+public int findTargetSumWays_01(int[] nums, int target) 
+{
+    int n = nums.length;
+    int arrSum = 0;
+    for(int ele : nums)
+        arrSum += ele;
+    if(target > arrSum || target < -arrSum)
+        return 0;
+    return findTargetSumWays_recur(nums,n,0,target);
+}
+
+//Using 2D dp with origin shifting
+public int findTargetSumWays_memo(int[] arr,int n,int sum,int tar,int[][] dp)
+{
+    if(n == 0)
+        return dp[n][sum] = (sum == tar) ? 1 : 0;
+        
+    if(dp[n][sum] != -1)
+        return dp[n][sum];
+        
+    int count = 0;
+    count += findTargetSumWays_memo(arr,n-1,sum + arr[n-1],tar,dp);
+    count += findTargetSumWays_memo(arr,n-1,sum - arr[n-1],tar,dp);
+        
+    return dp[n][sum] = count;
+}
+
+//Leetcode function -> Through memoization
+public int findTargetSumWays_02(int[] nums, int target) 
+{
+    int n = nums.length;
+    int arrSum = 0;
+    for(int ele : nums)
+        arrSum += ele;
+    if(target > arrSum || target < -arrSum)
+        return 0;
+        
+    int[][] dp = new int[n+1][2 * arrSum + 1];
+    for(int[] d : dp)
+        Arrays.fill(d,-1);
+    return findTargetSumWays_memo(nums,n,0 + arrSum,target + arrSum,dp);
+    //Shifting so sum so far gets shifted 0 + arrSum and target gets shifted to target + arrSum
+}
+
 public static void main(String[] args)
 {
     // coinChangePermutation();
