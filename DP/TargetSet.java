@@ -328,6 +328,31 @@ public static boolean subsetSum_DP(int[] arr,int Tar)
     return dp[N][Tar];
 }
 
+//Now tell total no of ways to subset the arr that sums upto target(so idhr saari ways explore krni hai and count+= vaala concenpt use krna hai)
+public static int subsetSumTotalWays_DP(int[] arr,int Tar)
+{
+    int N = arr.length;
+    int[][] dp = new int[N+1][Tar+1];
+
+    for(int n = 0; n <= N; n++)
+    {
+        for(int tar = 0; tar <= Tar; tar++)
+        {
+            if(n == 0 || tar == 0)
+            {
+                dp[n][tar] = (tar == 0) ? 1 : 0;
+                continue;
+            }
+
+            if(tar - arr[n-1] >= 0)
+                dp[n][tar] += dp[n-1][tar-arr[n-1]];
+            dp[n][tar] +=  dp[n-1][tar];
+        }
+    }
+    return dp[N][Tar];
+}
+
+
 public static void subsetSum(int[] arr,int tar)
 {
     int n = arr.length;
