@@ -437,7 +437,7 @@ public int findTargetSumWays_02(int[] nums, int target)
     for(int[] d : dp)
         Arrays.fill(d,-1);
     return findTargetSumWays_memo(nums,n,0 + arrSum,target + arrSum,dp);
-    //Shifting so sum so far gets shifted 0 + arrSum and target gets shifted to target + arrSum
+    //Shifting so SumSoFar gets shifted 0 + arrSum and target gets shifted to target + arrSum
 }
 
 public static void main(String[] args)
