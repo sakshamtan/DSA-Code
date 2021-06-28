@@ -287,11 +287,65 @@ public static void numberOfSoltions()
 
 }
 
+//Subset Sum -> GFG
+public static int subsetSum_memo(int[] arr,int n,int tar,int[][] dp)
+{
+    if(n == 0 || tar == 0)
+    return dp[n][tar] = (tar == 0) ? 1 : 0;
+
+    if(dp[n][tar] != -1)
+    return dp[n][tar];
+
+    boolean res = false;
+    if(tar - arr[n-1] >= 0)
+        res = res || (subsetSum_memo(arr,n-1,tar-arr[n-1],dp) == 1);
+    res = res || (subsetSum_memo(arr,n-1,tar,dp) == 1);
+
+    return dp[n][tar] = (res) ? 1 : 0;
+}
+
+//Tabulation -> defualt value ki need nhi to boolean ki hi dp bnaa skte hai
+public static boolean subsetSum_DP(int[] arr,int Tar)
+{
+    int N = arr.length;
+    boolean[][] dp = new boolean[N+1][Tar+1];
+
+    for(int n = 0; n <= N; n++)
+    {
+        for(int tar = 0; tar <= Tar; tar++)
+        {
+            if(n == 0 || tar == 0)
+            {
+                dp[n][tar] = (tar == 0);
+                continue;
+            }
+
+            if(tar - arr[n-1] >= 0)
+                dp[n][tar] = dp[n][tar] || dp[n-1][tar-arr[n-1]];
+            dp[n][tar] = dp[n][tar] || dp[n-1][tar];
+        }
+    }
+    return dp[N][Tar];
+}
+
+public static void subsetSum(int[] arr,int tar)
+{
+    int n = arr.length;
+    int[][] dp = new int[n+1][tar+1];
+    for(int[] d : dp)
+    Arrays.fill(d,-1);
+
+    boolean res = subsetSum_memo(arr,n,tar,dp) == 1;
+    System.out.println(res);
+    print2D(dp);
+}
+
 public static void main(String[] args)
 {
     // coinChangePermutation();
     // coinChangeCombination();
-    numberOfSoltions();
+    // numberOfSoltions();
+    subsetSum(new int[]{2,3,5,7},10);
 
 }
 }
