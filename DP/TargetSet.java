@@ -440,12 +440,74 @@ public int findTargetSumWays_02(int[] nums, int target)
     //Shifting so SumSoFar gets shifted 0 + arrSum and target gets shifted to target + arrSum
 }
 
+// 01 KnapSack -> GFG
+public static int knapSack_memo(int[] weight,int[] value,int n,int bagWeight,int[][] dp) //bagWeight => capactiy of knapsack
+{
+    if(n == 0 || bagWeight == 0)
+    return dp[n][bagWeight] = 0; // base case 
+
+    if(dp[n][bagWeight] != 0)
+    return dp[n][bagWeight];
+
+    int maxCost = 0;
+    if(bagWeight - weight[n-1] >= 0)
+        maxCost = knapSack_memo(weight,value,n-1,bagWeight - weight[n-1],dp) + value[n-1]; // present wt pick krne ki call
+    maxCost = Math.max(maxCost,knapSack_memo(weight,value,n-1,bagWeight,dp)); // present wt pick nhi krne ki call
+
+    return dp[n][bagWeight] = maxCost; // dono calls ka max = ans of present state
+}
+
+public static int knapSack_DP(int[] weight,int[] value,int N,int BagWeight,int[][] dp)
+{
+    for(int n = 0; n <= N; n++)
+    {
+        for(int bagWeight = 0; bagWeight <= BagWeight; bagWeight++)
+        {
+            if(n == 0 || bagWeight == 0)
+            {
+                dp[n][bagWeight] = 0;
+                continue;
+            }
+
+            if(bagWeight - weight[n-1] >= 0)
+                dp[n][bagWeight] = dp[n-1][bagWeight - weight[n-1]] + value[n-1]; // present wt pick krne ki call
+            dp[n][bagWeight] = Math.max(dp[n][bagWeight],dp[n-1][bagWeight]); // present wt pick nhi krne ki call
+
+        }  
+    }
+    return dp[N][BagWeight];
+}
+
+//GFG function
+public static int knapsack(int[] weight,int[] value,int bagWeight)
+{
+    int n = weight.length;
+    int[][] dp = new int[n+1][bagWeight+1];
+
+    return knapSack_memo(weight,value,n,bagWeight,dp);
+    // return knapSack_DP(weight,value,n,bagWeight,dp);
+}
+
+//KnapSack-unbouded -> a single wt can be picked any no of times -> same as coinChangeCombi/permu_Infi
+public static int knapSack_unbounded(int[] weight,int[] value,int BagWeight) // same as coinChangeCombi_1D
+{
+    int N = weight.size();
+    int[] dp = new int[BagWeight+1];
+    for(int i = 0; i < N; i++)
+    {
+        for(int bagWeight = weight[i]; bagWeight <= BagWeight; bagWeight++) // present weight apne se bade wt.s hi bnaa paayega
+        {
+            dp[bagWeight] = Math.max(dp[bagWeight],dp[bagWeight - weight[i]] + value[i]);
+        }
+    }
+    return dp[BagWeight];
+}
+
 public static void main(String[] args)
 {
     // coinChangePermutation();
     // coinChangeCombination();
     // numberOfSoltions();
     subsetSum(new int[]{2,3,5,7},10);
-
 }
 }
