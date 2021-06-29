@@ -197,6 +197,7 @@ public static int LBS_downhill(int[] arr)
 }
 
 //Leetcode 673 -> Number of Longest Increasing Subsequence -> Count no of LIS
+//LIS mei bs ek count ka array saath maintain krna hai
 public int findNumberOfLIS(int[] arr) 
 {
     int n = arr.length;
@@ -305,7 +306,7 @@ public static int buildingBridges(int[][] arr)
         dp[i] = 1;
         for(int j = i - 1; j >= 0; j--)
         {
-            if(arr[j][0] < arr[i][0] && arr[j][1] < arr[i][1])
+            if(arr[j][0] < arr[i][0] && arr[j][1] < arr[i][1]) // pehle index ke basis pe sort to krdia lekin equal hogye pehle index to vo bhi consider nhi kr skte hence [j][0] < [i][0] vaala check
             dp[i] = Math.max(dp[i],dp[j] + 1);
         }
         len = Math.max(dp[i],len);
@@ -329,7 +330,7 @@ public int maxEnvelopes(int[][] envelopes)
         dp[i] = 1;
         for(int j = i - 1; j >= 0; j--)
         {
-            if(envelopes[j][0] < envelopes[i][0] && envelopes[j][1] < envelopes[i][1])
+            if(envelopes[j][0] < envelopes[i][0] && envelopes[j][1] < envelopes[i][1]) // test case -> [4,5][4,6] isko output -> 2 dega agr [j][0] < [i][0] vaala check nhi lagaaya to(as LIS to ab bn jaayega dusre index ke basis pe)
             {
                 dp[i] = Math.max(dp[i],dp[j] + 1);
             }
