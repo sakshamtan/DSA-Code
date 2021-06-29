@@ -503,6 +503,51 @@ public static int knapSack_unbounded(int[] weight,int[] value,int BagWeight) // 
     return dp[BagWeight];
 }
 
+//Leetcode 698 -> Partition to K Equal sum Subsets
+public boolean canPartitionKSubsets_(int[] arr,int k,int idx,int sumSF,int tar,boolean[] vis)
+{
+    if(k == 0)
+        return true;
+    if(sumSF > tar)
+        return false;
+
+    if(sumSF == tar) // ek set mila hai to aage k-1 ki recursive call dobaara dusre sets ko dhoondhne ki
+    {
+        return canPartitionKSubsets_(arr,k-1,0,0,tar,vis);
+    }
+        
+    boolean res = false;
+    for(int i = idx; i < arr.length; i++)
+    {
+        if(vis[i])
+            continue;
+        vis[i] = true;
+        res = res || canPartitionKSubsets_(arr,k,i+1,sumSF+arr[i],tar,vis);
+        vis[i] = false;
+    }
+        
+    return res;
+}
+
+//Leetcode function
+public boolean canPartitionKSubsets(int[] arr, int k) 
+{
+    int n = arr.length;
+    int sum = 0;
+    int maxEle = 0;
+    for(int ele : arr)
+    {
+        sum += ele;
+        maxEle = Math.max(maxEle,ele);
+    }
+        
+    if(sum % k != 0 || maxEle > sum / k)
+        return false;
+        
+    boolean[] vis = new boolean[n];
+    return canPartitionKSubsets_(arr,k,0,0,sum / k,vis);
+}
+
 public static void main(String[] args)
 {
     // coinChangePermutation();
