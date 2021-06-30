@@ -86,7 +86,7 @@ public static int MCM_DP_02(int[] arr,int SI,int EI,int[][] dp)
                 int lans = dp[si][cut];
                 int rans = dp[cut][ei];
 
-                minAns = Math.min(minAns,lans + arr[si] * (3 * arr[cut] + 5(arr[cut] - 1)) * arr[ei] + rans); 
+                minAns = Math.min(minAns,lans + arr[si] * (3 * arr[cut] + 5 * (arr[cut] - 1)) * arr[ei] + rans); 
                 // now formula becomes -> 3*q (5*(q-1)) * pr
             }
             dp[si][ei] = minAns;
@@ -104,7 +104,7 @@ public static void MCM()
     // for(int[] d : dp)
     // Arrays.fill(d,-1);
 
-    System.out.println(MCM_DP_02(arr,0,n-1,dp));
+    System.out.println(MCM_DP(arr,0,n-1,dp));
     print2D(dp);
 
 }
