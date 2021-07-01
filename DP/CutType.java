@@ -109,6 +109,7 @@ public static void MCM()
 
 }
 
+//Minimum and Maximum Values of an Expression with '+' and '*' (GFG)
 public static class pair{
     int minValue = (int)1e9;
     int maxValue = -(int)1e9;
