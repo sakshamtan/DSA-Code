@@ -109,8 +109,68 @@ public static void MCM()
 
 }
 
+public static class pair{
+    int minValue = (int)1e9;
+    int maxValue = -(int)1e9;
+
+    pair()
+    {}
+
+    pair(int minValue,int maxValue)
+    {
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+    }
+}
+
+public static int evaluate(int a,int b,char ch)
+{
+    if(ch == '+')
+    return a + b;
+    else
+    return a * b;
+}
+
+public static pair minMaxEvalution_memo(String str,int si,int ei,pair[][] dp)
+{
+    if(si == ei)
+    {
+        int val = str.charAt(si) - '0';  // jab single no. bach jaaye last mei to vohi minValue and vohi maxValue
+        return dp[si][ei] = new pair(val,val);
+    }
+
+    if(dp[si][ei] != null)
+    return dp[si][ei];
+    
+    pair res = new pair();
+    for(int cut = si+1; cut < ei; cut += 2)
+    {
+        pair lans = minMaxEvalution_memo(str,si,cut-1,dp);
+        pair rans = minMaxEvalution_memo(str,cut+1,ei,dp);
+
+        int minValue = evaluate(lans.minValue,rans.minValue,str.charAt(cut));
+        int maxValue = evaluate(lans.maxValue,rans.maxValue,str.charAt(cut));
+
+        res.minValue = Math.min(res.minValue,minValue);
+        res.maxValue = Math.max(res.maxValue,maxValue);
+    }
+    return dp[si][ei] = res;
+}
+
+public static void minMaxEvalution()
+{
+    String str = "1+2*3+4*5";
+    int n = str.length();
+
+    pair[][] dp = new pair[n][n];
+    pair res = minMaxEvalution_memo(str,0,n-1,dp);
+    System.out.println("MinValue : " + res.minValue + "\n MaxValue : " + res.maxValue);
+
+}
+
 public static void main(String[] args)
 {
-    MCM();
+    // MCM();
+    minMaxEvalution();
 }
 }
