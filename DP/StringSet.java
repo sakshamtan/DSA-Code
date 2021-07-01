@@ -470,4 +470,33 @@ long countPS(String str)
         
     return countPS_memo(str,0,n-1,dp);
 }
+
+//Leetcode 5 -> Longest Palindromic Substring -> only tabulation is required -> gap strategy -> Diagonal filling
+public String longestPalindrome(String str)
+{
+    int n = str.length();
+    int[][] dp = new int[n][n];
+    int si = 0;
+    int len = 0;
+        
+    for(int gap = 0; gap < n; gap++)
+    {
+        for(int i = 0, j = gap; j < n; i++,j++)
+        {
+            if(gap == 0)
+                dp[i][j] = 1;
+            else if(gap == 1)
+                dp[i][j] = (str.charAt(i) == str.charAt(j)) ? 2 : 0;
+            else
+                dp[i][j] = (str.charAt(i) == str.charAt(j) && dp[i+1][j-1] != 0) ? dp[i+1][j-1] + 2 : 0;
+                
+            if(dp[i][j] > len)
+            {
+                len = dp[i][j];
+                si = i; // updating starting index of longest palindromic substring
+            }
+        }
+    }
+    return str.substring(si,si+len);
+}
 }
