@@ -112,6 +112,8 @@ public static void MCM()
 public static class pair{
     int minValue = (int)1e9;
     int maxValue = -(int)1e9;
+    String minExpression = "";
+    String maxExpression = "";
 
     pair()
     {}
@@ -120,6 +122,14 @@ public static class pair{
     {
         this.minValue = minValue;
         this.maxValue = maxValue;
+    }
+
+    pair(int minValue,int maxValue,String minExpression,String maxExpression)
+    {
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.minExpression = minExpression;
+        this.maxExpression = maxExpression;
     }
 }
 
@@ -136,7 +146,7 @@ public static pair minMaxEvalution_memo(String str,int si,int ei,pair[][] dp)
     if(si == ei)
     {
         int val = str.charAt(si) - '0';  // jab single no. bach jaaye last mei to vohi minValue and vohi maxValue
-        return dp[si][ei] = new pair(val,val);
+        return dp[si][ei] = new pair(val,val,val + "",val + "");
     }
 
     if(dp[si][ei] != null)
@@ -151,8 +161,19 @@ public static pair minMaxEvalution_memo(String str,int si,int ei,pair[][] dp)
         int minValue = evaluate(lans.minValue,rans.minValue,str.charAt(cut));
         int maxValue = evaluate(lans.maxValue,rans.maxValue,str.charAt(cut));
 
-        res.minValue = Math.min(res.minValue,minValue);
-        res.maxValue = Math.max(res.maxValue,maxValue);
+        // res.minValue = Math.min(res.minValue,minValue);
+        // res.maxValue = Math.max(res.maxValue,maxValue);
+
+        if(minValue < res.minValue) // jab res.minValue update to res.minExpr bhi update
+        {
+            res.minValue = minValue;
+            res.minExpression = "(" + lans.minExpression + " " + str.charAt(cut) + " " + rans.minExpression + ")";
+        }
+        if(maxValue > res.maxValue)
+        {
+            res.maxValue = maxValue;
+            res.maxExpression = "(" + lans.maxExpression + " " + str.charAt(cut) + " " + rans.maxExpression + ")";
+        }
     }
     return dp[si][ei] = res;
 }
@@ -164,7 +185,9 @@ public static void minMaxEvalution()
 
     pair[][] dp = new pair[n][n];
     pair res = minMaxEvalution_memo(str,0,n-1,dp);
-    System.out.println("MinValue : " + res.minValue + "\n MaxValue : " + res.maxValue);
+
+    System.out.println("MinValue : " + res.minValue + "\n MinExpression : " + res.minExpression);
+    System.out.println("MaxValue : " + res.maxValue + "\n MaxExpression : " + res.maxExpression);
 
 }
 
