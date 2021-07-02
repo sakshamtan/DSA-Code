@@ -128,7 +128,7 @@ public static void coinChangeCombination()
     // int[] dp = new int[tar+1];
     int[][] dp = new int[arr.length][tar+1];
     // for(int[] d : dp)
-    // Arrays.fill(d,-1); only for memo
+    // Arrays.fill(d,-1);// only for memo
 
     // System.out.println(coinChangeCombination_memo(arr,arr.length-1,tar,dp));
     System.out.println(coinChangeCombination_DP(arr,arr.length-1,tar,dp));
@@ -491,7 +491,7 @@ public static int knapsack(int[] weight,int[] value,int bagWeight)
 //KnapSack-unbouded -> a single wt can be picked any no of times -> same as coinChangeCombi/permu_Infi
 public static int knapSack_unbounded(int[] weight,int[] value,int BagWeight) // same as coinChangeCombi_1D
 {
-    int N = weight.size();
+    int N = weight.length;
     int[] dp = new int[BagWeight+1];
     for(int i = 0; i < N; i++)
     {
