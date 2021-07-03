@@ -208,6 +208,27 @@ public int minCut_memo(String s,int si,boolean[][] isPalindrome,int[] dp)
     return dp[si] = minCuts;
 }
 
+public int minCut_DP(String s,int SI,boolean[][] isPalindrome,int[] dp)
+{
+    for(int si = s.length() -1; si >= 0; si--)
+    {
+        if(isPalindrome[si][s.length()-1])
+        {
+            dp[si] = 0;
+            continue;
+        }
+            
+        int minCuts = (int)1e9;
+        for(int cut = si; cut < s.length(); cut++)
+        {
+            if(isPalindrome[si][cut])
+                minCuts = Math.min(minCuts,dp[cut+1] + 1);
+        }
+        dp[si] = minCuts;
+    }
+    return dp[SI];
+}
+
 //Leetcode function
 public int minCut(String s) 
 {
@@ -230,6 +251,7 @@ public int minCut(String s)
     }
         
     return minCut_memo(s,0,isPalindrome,dp);
+    // return minCut_DP(s,0,isPalindrome,dp);
 }
 
 public static void main(String[] args)
