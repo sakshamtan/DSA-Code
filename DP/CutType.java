@@ -254,6 +254,38 @@ public int minCut(String s)
     // return minCut_DP(s,0,isPalindrome,dp);
 }
 
+//Leetcode 312 -> Burst Balloons -> Important -> Post Order mei balloons burst kr rhe hai
+public int maxCoins_memo(int[] arr,int si,int ei,int[][] dp)
+{
+    if(dp[si][ei] != -1)
+        return dp[si][ei];
+        
+    int lval = (si - 1 == -1) ? 1 : arr[si-1];  // ek (si,ei) ki range ke liye same lval aur rval honge
+    int rval = (ei + 1 == arr.length) ? 1 : arr[ei+1];
+        
+    int maxAns = 0;
+    for(int cut = si; cut <= ei; cut++)
+    {
+        int lans = (cut == si) ? 0 : maxCoins_memo(arr,si,cut-1,dp); // if si pe hi cut maardenge to left call mei arr bachega nhi to return 0
+        int rans = (cut == ei) ? 0 : maxCoins_memo(arr,cut+1,ei,dp); // same agr ei pe hi cut maardenge to
+            
+        maxAns = Math.max(maxAns,lans + lval * arr[cut] * rval + rans);
+            
+    }
+    return dp[si][ei] = maxAns;
+}
+
+//Leetcode function
+public int maxCoins(int[] nums) 
+{
+    int n = nums.length;
+    int[][] dp = new int[n][n];
+    for(int[] d : dp)
+        Arrays.fill(d,-1);
+    return maxCoins_memo(nums,0,n-1,dp);
+
+}
+
 public static void main(String[] args)
 {
     // MCM();
