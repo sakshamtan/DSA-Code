@@ -275,6 +275,31 @@ public int maxCoins_memo(int[] arr,int si,int ei,int[][] dp)
     return dp[si][ei] = maxAns;
 }
 
+public int maxCoins_DP(int[] arr,int SI,int EI,int[][] dp)
+{
+    int n = arr.length;
+    for(int gap = 0; gap < n; gap++)
+    {
+        for(int si = 0, ei = gap; ei < n; si++,ei++)
+        {
+            int lval = (si - 1 == -1) ? 1 : arr[si-1];
+            int rval = (ei + 1 == arr.length) ? 1 : arr[ei+1];
+        
+            int maxAns = 0;
+            for(int cut = si; cut <= ei; cut++)
+            {
+                int lans = (cut == si) ? 0 : dp[si][cut-1];
+                int rans = (cut == ei) ? 0 : dp[cut+1][ei];
+            
+                maxAns = Math.max(maxAns,lans + lval * arr[cut] * rval + rans);
+        
+            }
+            dp[si][ei] = maxAns;
+        }
+    }
+    return dp[SI][EI];
+}
+
 //Leetcode function
 public int maxCoins(int[] nums) 
 {
