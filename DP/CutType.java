@@ -333,6 +333,35 @@ public int minScoreTriangulation_memo(int[] arr,int si,int ei,int[][] dp)
     
 }
 
+public int minScoreTriangulation_DP(int[] arr,int SI,int EI,int[][] dp)
+{
+    int n = arr.length;
+    for(int gap = 0; gap < n; gap++)
+    {
+        for(int si = 0, ei = gap; ei < n; si++,ei++)
+        {
+            if(ei - si <= 1)
+            {
+                dp[si][ei] = 0;
+                continue;
+            }
+                
+            int minAns = (int)1e9;
+            for(int cut = si+1; cut < ei; cut++)
+            {
+                int lans = dp[si][cut];
+                int rans = dp[cut][ei];
+            
+                minAns = Math.min(minAns,lans + arr[si] * arr[cut] * arr[ei] + rans);
+            }
+
+        dp[si][ei] = minAns;
+        }
+    }
+    return dp[SI][EI];
+}
+
+
 //Leetcode function
 public int minScoreTriangulation(int[] values) 
 {
@@ -342,7 +371,10 @@ public int minScoreTriangulation(int[] values)
         Arrays.fill(d,-1);
         
     return minScoreTriangulation_memo(values,0,n-1,dp);
+    // return minScoreTriangulation_DP(values,0,n-1,dp);
+
 }
+
 
 public static void main(String[] args)
 {
