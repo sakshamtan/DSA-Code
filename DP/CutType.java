@@ -375,6 +375,79 @@ public int minScoreTriangulation(int[] values)
 
 }
 
+//Boolean Parenthization -> GFG
+public static class pairBoolean{
+    int trueWays = 0;   // No. of ways to make expression evaluate true 
+    int falseWays = 0;  // No. of ways to make expression evaluate false
+
+    pairBoolean(int trueWays,int falseWays)
+    {
+        this.trueWays = trueWays;
+        this.falseWays = falseWays;
+    }
+}
+
+//calculates the no of true and false ways based on the operator '&' '|' or '^'
+static int mod = 1003;
+public static pairBoolean evaluate(pairBoolean left,pairBoolean right,char operator)
+{
+    
+    int totalWays = ((left.falseWays + left.trueWays) % mod * (right.falseWays + right.trueWays) % mod) % mod;
+
+    pairBoolean ans = new pairBoolean(0,0);
+    if(operator == '&')
+    {
+        ans.trueWays = (left.trueWays * right.trueWays) % mod;
+        ans.falseWays = (totalWays - ans.trueWays + mod) % mod;
+    }
+    else if(operator == '|')
+    {
+        ans.falseWays = (left.falseWays * right. falseWays) % mod;
+        ans.trueWays = (totalWays - ans.falseWays + mod) % mod;
+    }
+    else // for '^' (XOR) operator
+    {
+        ans.trueWays = ((left.falseWays * right.trueWays) % mod + (left.trueWays * right.falseWays) % mod) % mod;
+        ans.falseWays = (totalWays - ans.trueWays + mod) % mod;
+    }
+    return ans;
+}
+
+public static pairBoolean booleanParen(String str,int si,int ei,pairBoolean[][] dp)
+{
+    if(si == ei)
+    {
+        char ch = str.charAt(si);
+        return new pairBoolean(ch == 'T' ? 1 : 0, ch == 'F' ? 1 : 0);
+    }
+
+    if(dp[si][ei] != null)
+    return dp[si][ei];
+
+    pairBoolean myAns = new pairBoolean(0,0);
+    for(int cut = si+1; cut < ei; cut += 2)
+    {
+        char operator = str.charAt(cut);
+        pairBoolean lans = booleanParen(str,si,cut-1,dp);
+        pairBoolean rans = booleanParen(str,cut+1,ei,dp);
+
+        pairBoolean recAns = evaluate(lans,rans,operator);
+
+        myAns.trueWays = (myAns.trueWays % mod + recAns.trueWays % mod) % mod;
+        myAns.falseWays = (myAns.falseWays % mod + recAns.falseWays % mod) % mod;
+    }
+
+    return dp[si][ei] = myAns;
+}
+
+//GFG function
+public static int countWays(int N, String S)
+{
+    pairBoolean[][] dp = new pairBoolean[N][N];
+    pairBoolean ans = booleanParen(S,0,N-1,dp);
+    
+    return ans.trueWays;
+}
 
 public static void main(String[] args)
 {
