@@ -312,6 +312,38 @@ public int maxCoins(int[] nums)
 
 }
 
+//Leetcode 1039 -> Minimum Score Triangulation of Polygon
+public int minScoreTriangulation_memo(int[] arr,int si,int ei,int[][] dp)
+{
+    if(ei - si <= 1)
+        return dp[si][ei] = 0;
+
+    if(dp[si][ei] != -1)
+        return dp[si][ei];
+
+    int minAns = (int)1e9;
+    for(int cut = si+1; cut < ei; cut++)
+    {
+        int lans = minScoreTriangulation_memo(arr,si,cut,dp);
+        int rans = minScoreTriangulation_memo(arr,cut,ei,dp);
+            
+        minAns = Math.min(minAns,lans + arr[si] * arr[cut] * arr[ei] + rans);
+    }
+    return dp[si][ei] = minAns;
+    
+}
+
+//Leetcode function
+public int minScoreTriangulation(int[] values) 
+{
+    int n = values.length;
+    int[][] dp = new int[n][n];
+    for(int[] d : dp)
+        Arrays.fill(d,-1);
+        
+    return minScoreTriangulation_memo(values,0,n-1,dp);
+}
+
 public static void main(String[] args)
 {
     // MCM();
