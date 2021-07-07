@@ -231,4 +231,26 @@ public int longestMountain(int[] nums)
     return LCBS;
 }
 
+//Leetcode 940 -> Distinct Subsequences II
+public int distinctSubseqII(String s) 
+{
+    s = '$' + s;
+    int n = s.length();
+    int[] dp = new int[n];
+    int[] lastOcc = new int[26];
+    Arrays.fill(lastOcc,-1);
+    int mod = (int)1e9 + 7;
+        
+    dp[0] = 1; // for empty string
+    for(int i = 1; i < n; i++)
+    {
+        dp[i] = (dp[i-1] * 2) % mod;
+        int idx = s.charAt(i) - 'a';
+        if(lastOcc[idx] != -1)
+            dp[i] = (dp[i] - dp[lastOcc[idx]-1] + mod) % mod;
+        
+        lastOcc[idx] = i;
+    }
+    return dp[n-1] - 1;
+}
 }
