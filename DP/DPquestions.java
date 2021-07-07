@@ -253,4 +253,60 @@ public int distinctSubseqII(String s)
     }
     return dp[n-1] - 1;
 }
+
+//Leetcode 1278 -> Palindrome Partiotioning III
+// Ek string ko kitne changes krke palindrome mei convert kr skte hai iski dp hai minChangeDP
+public int[][] minChanges(String str)
+{
+    int n = str.length();
+    int[][] dp = new int[n][n];
+        
+    for(int gap = 1; gap < n; gap++)
+    {
+        for(int i = 0, j = gap; j < n; i++,j++)
+        {
+            if(gap == 1)
+                dp[i][j] = str.charAt(i) == str.charAt(j) ? 0 : 1;
+            else
+                dp[i][j] = str.charAt(i) == str.charAt(j) ? dp[i+1][j-1] : dp[i+1][j-1] + 1;
+        }
+    }
+    return dp;
+}
+
+//Present set mei string cut krke store kr rhe hai and usme minChanges calculate kr rhe hai through 
+//minChangeDP and baaki ki string ko k-1 sets mei divide hokr min changes btaane ko bol rhe hai
+public int palindromePartition_memo(String str,int k,int si,int[][] dp,int[][] minChangeDP)
+{
+    if(str.length() - si <= k)
+        return dp[si][k] = (str.length() - si == k) ? 0 : (int)1e9;
+        
+    if(k == 1)
+        return dp[si][k] = minChangeDP[si][str.length()-1];
+        
+    if(dp[si][k] != -1)
+        return dp[si][k];
+        
+    int minAns = (int)1e9;
+    for(int i = si; i < str.length()-1; i++)
+    {
+        int minChangesInMySet = minChangeDP[si][i];
+        int minChangesInRecSet = palindromePartition_memo(str,k-1,i+1,dp,minChangeDP);
+            
+        if(minChangesInRecSet != (int)1e9)
+            minAns = Math.min(minAns,minChangesInMySet + minChangesInRecSet);
+    }
+    return dp[si][k] = minAns;
+}
+
+//Leetcode function
+public int palindromePartition(String s, int k) 
+{
+    int[][] minChangeDP = minChanges(s);
+    int[][] dp = new int[s.length()][k+1];
+    for(int[] d : dp)
+        Arrays.fill(d,-1);
+
+    return palindromePartition_memo(s,k,0,dp,minChangeDP);        
+}
 }
