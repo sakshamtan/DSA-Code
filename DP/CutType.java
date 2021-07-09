@@ -116,8 +116,7 @@ public static class pair{
     String minExpression = "";
     String maxExpression = "";
 
-    pair()
-    {}
+    pair(){}
 
     pair(int minValue,int maxValue)
     {
