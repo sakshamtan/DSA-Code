@@ -196,8 +196,10 @@ public int minCut_memo(String s,int si,boolean[][] isPalindrome,int[] dp)
 {
     if(isPalindrome[si][s.length()-1])
         return dp[si] = 0;
+
     if(dp[si] != -1)
         return dp[si];
+        
     int minCuts = (int)1e9;
     for(int cut = si; cut < s.length(); cut++)
     {
