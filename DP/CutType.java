@@ -87,7 +87,7 @@ public static int MCM_DP_02(int[] arr,int SI,int EI,int[][] dp)
                 int rans = dp[cut][ei];
 
                 minAns = Math.min(minAns,lans + arr[si] * (3 * arr[cut] + 5 * (arr[cut] - 1)) * arr[ei] + rans); 
-                // now formula becomes -> 3*q (5*(q-1)) * pr
+                // now formula becomes -> p * (3*q + 5*(q-1)) * r -> q => arr[cut] 
             }
             dp[si][ei] = minAns;
         }
