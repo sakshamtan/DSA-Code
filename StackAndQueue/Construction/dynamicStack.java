@@ -39,7 +39,7 @@ public void push(int data) throws Exception
             temp[i--] = super.pop_(); // seedhe order ke liye peeche se arr fill kr rhe hai
         }
 
-        super.initialize(2 * n); // now arr ka size twice kr dia and saara data dobaara copy krdia
+        super.initialize(2 * n); // now st ke arr ka size twice kr dia and saara data dobaara copy krdia
         for(int ele : temp)
         {
             super.push_(ele);
