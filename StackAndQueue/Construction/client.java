@@ -25,8 +25,8 @@ public static int divide(int a,int b) throws Exception
 
 public static void main(String[] args) throws Exception
 {
-    stack st = new stack();
-    for(int i = 0; i < 10; i++)
+    dynamciStack st = new dynamicStack();
+    for(int i = 0; i < 12; i++)
     {
         st.push(i+10);
     }
