@@ -331,7 +331,6 @@ public int minScoreTriangulation_memo(int[] arr,int si,int ei,int[][] dp)
         minAns = Math.min(minAns,lans + arr[si] * arr[cut] * arr[ei] + rans);
     }
     return dp[si][ei] = minAns;
-    
 }
 
 public int minScoreTriangulation_DP(int[] arr,int SI,int EI,int[][] dp)
