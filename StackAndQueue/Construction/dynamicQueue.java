@@ -1,27 +1,49 @@
 public class dynamicQueue extends queue{
-    dynamicQueue()
+
+    public dynamicQueue()
     {
         super();
     }
-    dynamicQueue(int size)
+
+    public dynamicQueue(int size)
     {
         super(size);
     }
-    @Override
-    public void push(int data)
-    {
-        if(this.size() == que.length)
-        {
-            int [] temp = que;
-            que = new int [2*temp.length];
 
-            for(int i = 0; i < this.size; i++)
-            {
-                que[i] = temp[(this.head + i) % temp.length];
-            }
-            this.head = 0;
-            this .tail  =  temp.length - 1;
+    //Constructor to convert arr into dynamicQueue
+    public int dynamicQueue(int[] arr)
+    {
+        int n = arr.length;
+        super.initialize(n * 2);
+
+        for(int ele : arr)
+        {
+            super.push_(ele);
         }
-        super.push(data);
     }
+
+//Same as dynamicStack idhr bhi sirf push ko override krne ki need hai baaki sb pichle features same use ho jaayenge
+@Override
+public void push(int data)
+{
+    if(super.size() == super.capacity)
+    {
+        int n = super.size();
+        int[] temp = new int[n];
+        int i = 0;
+        while(super.size() != 0)
+        {
+            temp[i++] = super.pop_();
+        }
+
+        super.initialize(n * 2);
+
+        for(int ele : temp)
+        {
+            super.push_(ele);
+        }
+
+    }
+    super.push(data);
+}
 }
