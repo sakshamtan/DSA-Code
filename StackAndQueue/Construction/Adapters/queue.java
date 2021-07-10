@@ -1,4 +1,4 @@
-public class stack{ // stack implementation using LL (LL bhi khud ki likhi huyi)
+public class queue{ // queue implementation using LL (LL bhi khud ki likhi huyi)
 
     private class ListNode{
         int data = 0;
@@ -14,8 +14,8 @@ public class stack{ // stack implementation using LL (LL bhi khud ki likhi huyi)
     private ListNode tail = null;
     private int NoOfElements = 0;
 
-//addFirst and removeFirst se stack implement ho jaata hai
-private void addFirst(ListNode node)
+//addLast and removeFirst se queue implement ho jaati hai
+private void addLast(ListNode node)
 {
     if(this.head == null)
     {
@@ -24,8 +24,8 @@ private void addFirst(ListNode node)
     }
     else
     {
-        node.next = this.head;
-        this.head = node;
+        this.tail.next = node;
+        this.tail = node;
     }
 }
 
@@ -56,16 +56,16 @@ public boolean isEmpty()
 }
 
 //LL is dynamic in size so stack kbhi overflow nhi hoga
-protected void stackEmptyException() throws Exception
+protected void queueEmptyException() throws Exception
 {
     if(this.NoOfElements == 0)
-    throw new Exception("StackIsEmpty");
+    throw new Exception("QueueIsEmpty");
 }
 
 public void push(int data)
 {
     ListNode node = new ListNode(data);
-    addFirst(node);
+    addLast(node);
     this.NoOfElements++;
 }
 
@@ -76,7 +76,7 @@ public int top_()
 
 public int top() throws Exception
 {
-    stackEmptyException();
+    queueEmptyException();
     return top_();
 }
 
@@ -89,7 +89,7 @@ public int pop_()
 
 public int pop() throws Exception
 {
-    stackEmptyException();
+    queueEmptyException();
     return pop_();
 }
 }
