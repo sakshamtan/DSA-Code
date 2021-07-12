@@ -268,7 +268,7 @@ public int maxCoins_memo(int[] arr,int si,int ei,int[][] dp)
     for(int cut = si; cut <= ei; cut++)
     {
         int lans = (cut == si) ? 0 : maxCoins_memo(arr,si,cut-1,dp); // if si pe hi cut maardenge to left call mei arr bachega nhi to return 0
-        int rans = (cut == ei) ? 0 : maxCoins_memo(arr,cut+1,ei,dp); // same agr ei pe hi cut maardenge to
+        int rans = (cut == ei) ? 0 : maxCoins_memo(arr,cut+1,ei,dp); // same agr ei pe hi cut maardenge to right vaali call mei arr nhi bachega
             
         maxAns = Math.max(maxAns,lans + lval * arr[cut] * rval + rans);
             
