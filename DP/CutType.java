@@ -316,7 +316,7 @@ public int maxCoins(int[] nums)
 //Leetcode 1039 -> Minimum Score Triangulation of Polygon
 public int minScoreTriangulation_memo(int[] arr,int si,int ei,int[][] dp)
 {
-    if(ei - si <= 1)
+    if(ei - si <= 1) // No of available sides < 3 so return 0
         return dp[si][ei] = 0;
 
     if(dp[si][ei] != -1)
