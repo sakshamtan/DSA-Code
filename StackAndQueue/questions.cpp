@@ -1,19 +1,19 @@
 #include <iostream>
 #include <stack>
-#include<vector>
+#include <vector>
 
 using namespace std;
 
 //N : next , G : greater , S : smaller , R : right , L : left
-void NGOR(vector<int>& arr,vector<int>& ans)
+void NGOR(vector<int> &arr, vector<int> &ans)
 {
     int n = arr.size();
-    ans.resize(n,n);
+    ans.resize(n, n);
 
     stack<int> st;
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        while(st.size() != 0 && arr[st.top()] < arr[i])
+        while (st.size() != 0 && arr[st.top()] < arr[i])
         {
             ans[st.top()] = i;
             st.pop();
@@ -23,15 +23,15 @@ void NGOR(vector<int>& arr,vector<int>& ans)
 }
 
 //Next Greater on Left -> so bs for loop ki direction opposite krni hai
-void NGOL(vector<int>& arr,vector<int>& ans)
+void NGOL(vector<int> &arr, vector<int> &ans)
 {
     int n = arr.size();
-    ans.resize(n,n);
-    
+    ans.resize(n, n);
+
     stack<int> st;
-    for(int i = n-1; i >= 0; i--)
+    for (int i = n - 1; i >= 0; i--)
     {
-        while(st.size() != 0 && arr[st.top()] < arr[i])
+        while (st.size() != 0 && arr[st.top()] < arr[i])
         {
             ans[st.top()] = i;
             st.pop();
@@ -41,15 +41,15 @@ void NGOL(vector<int>& arr,vector<int>& ans)
 }
 
 //Next smaller on right -> bs comparison ka sign change krna hai in NGOR mei
-void NSOR(vector<int>& arr,vector<int>& ans)
+void NSOR(vector<int> &arr, vector<int> &ans)
 {
     int n = arr.size();
-    ans.resize(n,n);
+    ans.resize(n, n);
 
     stack<int> st;
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        while(st.size() != 0 && arr[st.top()] > arr[i])
+        while (st.size() != 0 && arr[st.top()] > arr[i])
         {
             ans[st.top()] = i;
             st.pop();
@@ -58,19 +58,39 @@ void NSOR(vector<int>& arr,vector<int>& ans)
     }
 }
 
-void NSOL(vector<int>& arr,vector<int>& ans)
+void NSOL(vector<int> &arr, vector<int> &ans)
 {
     int n = arr.size();
-    ans.resize(n,n);
+    ans.resize(n, n);
 
     stack<int> st;
-    for(int i = n-1; i >= 0; i--)
+    for (int i = n - 1; i >= 0; i--)
     {
-        while(st.size() != 0 && arr[st.top()] > arr[i])
+        while (st.size() != 0 && arr[st.top()] > arr[i])
         {
             ans[st.top()] = i;
             st.pop();
         }
         st.push(i);
     }
+}
+
+//Leetcode 503 -> Next Greater Element II
+vector<int> nextGreaterElements(vector<int> &arr)
+{
+    int n = arr.size();
+    vector<int> ans(n, -1);
+    stack<int> st;
+
+    for (int i = 0; i < 2 * n; i++)
+    {
+        while (st.size() != 0 && arr[st.top()] < arr[i % n])
+        {
+            ans[st.top()] = arr[i % n];
+            st.pop();
+        }
+        if (i < n)
+            st.push(i);
+    }
+    return ans;
 }
