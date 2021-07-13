@@ -82,14 +82,14 @@ vector<int> nextGreaterElements(vector<int> &arr)
     vector<int> ans(n, -1);
     stack<int> st;
 
-    for (int i = 0; i < 2 * n; i++)
+    for (int i = 0; i < 2 * n; i++) // do baar arr pe iteration(as arr is circular)
     {
         while (st.size() != 0 && arr[st.top()] < arr[i % n])
         {
             ans[st.top()] = arr[i % n];
             st.pop();
         }
-        if (i < n)
+        if (i < n)  // sirf pehli baar mei st mei push krne ki need hai elements ko
             st.push(i);
     }
     return ans;
