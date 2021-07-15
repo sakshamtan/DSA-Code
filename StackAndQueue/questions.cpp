@@ -108,3 +108,29 @@ vector<int> dailyTemperatures(vector<int> &arr)
     }
     return ans;
 }
+
+//Leetcode 20 -> Valid Parenthesis
+bool isValid(string s)
+{
+    stack<char> st;
+    for (int i = 0; i < s.length(); i++)
+    {
+        char ch = s[i];
+        if (ch == '(' || ch == '[' || ch == '{') //opening brakcets st mei push
+            st.push(ch);
+        else
+        {
+            if (st.size() == 0) // means no. of closing brackets > no. of opening brackets
+                return false;
+            else if (ch == ')' && st.top() != '(')
+                return false;
+            else if (ch == ']' && st.top() != '[')
+                return false;
+            else if (ch == '}' && st.top() != '{')
+                return false;
+            else
+                st.pop();
+        }
+    }
+    return st.size() == 0; // when st.size() != 0 even after iterating string means no. of opening brackets > no. of closing brackets.
+}
