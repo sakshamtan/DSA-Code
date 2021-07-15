@@ -288,10 +288,10 @@ public int palindromePartition_memo(String str,int k,int si,int[][] dp,int[][] m
         return dp[si][k];
         
     int minAns = (int)1e9;
-    for(int i = si; i < str.length()-1; i++)
+    for(int cut = si; cut < str.length()-1; cut++)
     {
-        int minChangesInMySet = minChangeDP[si][i];
-        int minChangesInRecSet = palindromePartition_memo(str,k-1,i+1,dp,minChangeDP);
+        int minChangesInMySet = minChangeDP[si][cut];
+        int minChangesInRecSet = palindromePartition_memo(str,k-1,cut+1,dp,minChangeDP);
             
         if(minChangesInRecSet != (int)1e9)
             minAns = Math.min(minAns,minChangesInMySet + minChangesInRecSet);
