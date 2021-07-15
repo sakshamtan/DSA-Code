@@ -151,3 +151,37 @@ bool validateStackSequences(vector<int> &pushed, vector<int> &popped)
     }
     return st.size() == 0;
 }
+
+//Leetcode 1249 -> Minimum Remove to make Valid Parenthesis
+string minRemoveToMakeValid(string s)
+{
+    int n = s.length();
+    vector<int> st; // vector se stack ki functionality use krli
+
+    for (int i = 0; i < n; i++)
+    {
+        char ch = s[i];
+        if (ch == '(')
+            st.push_back(i);
+        else if (ch == ')')
+        {
+            if (st.size() != 0 && s[st.back()] == '(') // balance hogya closing bracket to opening bracket pop kra denge st se
+                st.pop_back();
+            else
+                st.push_back(i); // closing bracket agr st khaali ho jaaye to push krdenge as ab ye remove to krna hi pdega as balance nhi ho paayega kbhi
+        }
+    }
+    string ans = "";
+    int idx = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (idx < st.size() && st[idx] == i) // idx++ hokr st ke size se bda ho jaaye to error aa jaayega st[idx] se
+        {
+            idx++;
+            continue;
+        }
+
+        ans.push_back(s[i]);
+    }
+    return ans;
+}

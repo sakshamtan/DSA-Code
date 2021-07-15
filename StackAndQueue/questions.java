@@ -121,4 +121,37 @@ int day;
         return span;
     }
 }
+
+//Leetcode 1249 -> Minimum Remove to make Valid Parenthesis
+public String minRemoveToMakeValid(String s) 
+{
+    ArrayDeque<Integer> st = new ArrayDeque<>(); // same as LL bs ye arr pe implemented hota hai
+    int n = s.length();
+        
+    for(int i = 0; i < n; i++)
+    {
+        char ch = s.charAt(i);
+        if(ch == '(')
+            st.addFirst(i);
+        else if(ch == ')')
+        {
+            if(st.size() != 0 && s.charAt(st.getFirst()) == '(')
+                st.removeFirst();
+            else
+                st.addFirst(i);
+        }
+    }
+        
+    StringBuilder ans = new StringBuilder();
+    for(int i = 0; i < n; i++)
+    {
+        if(st.size() != 0 && st.getLast() == i)
+        {
+            st.removeLast();
+            continue;
+        }
+        ans.append(s.charAt(i));
+    }
+    return ans.toString();
+}
 }
