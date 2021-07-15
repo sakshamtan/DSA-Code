@@ -134,3 +134,20 @@ bool isValid(string s)
     }
     return st.size() == 0; // when st.size() != 0 even after iterating string means no. of opening brackets > no. of closing brackets.
 }
+
+//Leetcode 946 -> Validate Stack Sequences
+bool validateStackSequences(vector<int> &pushed, vector<int> &popped)
+{
+    int i = 0;
+    stack<int> st;
+    for (int ele : pushed)
+    {
+        st.push(ele);
+        while (st.size() != 0 && st.top() == popped[i])
+        {
+            st.pop();
+            i++;
+        }
+    }
+    return st.size() == 0;
+}
