@@ -89,8 +89,22 @@ vector<int> nextGreaterElements(vector<int> &arr)
             ans[st.top()] = arr[i % n];
             st.pop();
         }
-        if (i < n)  // sirf pehli baar mei st mei push krne ki need hai elements ko
+        if (i < n) // sirf pehli baar mei st mei push krne ki need hai elements ko
             st.push(i);
+    }
+    return ans;
+}
+
+//Leetcode 739 -> Daily Temperatures -> uses NGOR
+vector<int> dailyTemperatures(vector<int> &arr)
+{
+    int n = arr.size();
+    vector<int> ans = NGOR(arr);
+
+    for (int i = 0; i < n; i++)
+    {
+        if (ans[i] != 0)
+            ans[i] = ans[i] - i;
     }
     return ans;
 }

@@ -97,4 +97,28 @@ public static int[] calculateSpan(int price[], int n)
     }
     return ans;
 }
+
+//Leetcode 901 -> Online Stock Span
+class StockSpanner {
+Stack<int[]> st;
+int day;
+    
+    public StockSpanner() 
+    {
+        this.st = new Stack<>();
+        this.day = 0;
+        
+        st.push(new int[]{-1,-1}); // day vs data -> -1,-1 default value for easier calculations
+    }
+    
+    public int next(int price) 
+    {
+        while(st.size() != 1 && st.peek()[1] <= price) // agr top pe pdhe ele se bda ya equal price aayega to pop krte rahenge
+            st.pop();
+        
+        int span = day - st.peek()[0];
+        st.push(new int[]{day++,price});
+        return span;
+    }
+}
 }
