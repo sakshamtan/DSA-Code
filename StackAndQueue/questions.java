@@ -154,4 +154,25 @@ public String minRemoveToMakeValid(String s)
     }
     return ans.toString();
 }
+
+//Leetcode 32 -> Longest Valid Parenthesis
+public int longestValidParentheses(String s) 
+{
+    int n = s.length();
+    Stack<Integer> st = new Stack<>();
+    st.push(-1);
+        
+    int maxLen = 0;
+    for(int i = 0; i < n; i++)
+    {
+        if(st.peek() != -1 && s.charAt(st.peek()) == '(' && s.charAt(i) == ')')
+        {
+            st.pop();
+            maxLen = Math.max(maxLen,i - st.peek());
+        }
+        else
+            st.push(i);
+    }
+    return maxLen;
+}
 }
