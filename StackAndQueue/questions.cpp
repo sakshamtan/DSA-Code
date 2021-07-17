@@ -216,3 +216,25 @@ vector<int> asteroidCollision(vector<int> &arr)
     }
     return ans;
 }
+
+//Leetcode 84 -> Largest Rectangle in Histogram
+//Using NSOL and NSOR
+int largestRectangleArea(vector<int> &heights)
+{
+    int n = heights.size();
+    vector<int> nsol;
+    vector<int> nsor;
+
+    NSOL(heights, nsol);
+    NSOR(heights, nsor);
+
+    int maxArea = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int h = heights[i];
+        int w = nsor[i] - nsol[i] - 1; // nsor and nsol dono ko include nhi krna for a particular bar.
+
+        maxArea = max(maxArea, h * w);
+    }
+    return maxArea;
+}
