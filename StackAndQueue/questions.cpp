@@ -185,3 +185,34 @@ string minRemoveToMakeValid(string s)
     }
     return ans;
 }
+
+//Leetcode 735 -> Asteroid Collision
+vector<int> asteroidCollision(vector<int> &arr)
+{
+    stack<int> st;
+    for (int ele : arr)
+    {
+        if (ele > 0)
+        {
+            st.push(ele);
+            continue;
+        }
+
+        while (st.size() != 0 && st.top() > 0 && st.top() < -ele)
+            st.pop();
+        if (st.size() != 0 && st.top() == -ele)
+            st.pop();
+        else if (st.size() == 0 || st.top() < 0)
+            st.push(ele);
+    }
+    
+    int n = st.size();
+    vector<int> ans(n, 0);
+    int idx = n - 1;
+    while (st.size() != 0)
+    {
+        ans[idx--] = st.top();
+        st.pop();
+    }
+    return ans;
+}
