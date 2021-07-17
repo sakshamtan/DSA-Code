@@ -61,7 +61,7 @@ void NSOR(vector<int> &arr, vector<int> &ans)
 void NSOL(vector<int> &arr, vector<int> &ans)
 {
     int n = arr.size();
-    ans.resize(n, n);
+    ans.resize(n, -1);
 
     stack<int> st;
     for (int i = n - 1; i >= 0; i--)
@@ -205,7 +205,7 @@ vector<int> asteroidCollision(vector<int> &arr)
         else if (st.size() == 0 || st.top() < 0)
             st.push(ele);
     }
-    
+
     int n = st.size();
     vector<int> ans(n, 0);
     int idx = n - 1;
