@@ -26,7 +26,7 @@ void NGOR(vector<int> &arr, vector<int> &ans)
 void NGOL(vector<int> &arr, vector<int> &ans)
 {
     int n = arr.size();
-    ans.resize(n, n);
+    ans.resize(n, -1);
 
     stack<int> st;
     for (int i = n - 1; i >= 0; i--)
