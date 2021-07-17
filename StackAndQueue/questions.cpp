@@ -238,3 +238,68 @@ int largestRectangleArea(vector<int> &heights)
     }
     return maxArea;
 }
+
+//Leetcode 85 -> Maximal Rectangle -> uses largest Rectangle Area
+int maximalRectangle(vector<vector<char> > &matrix)
+{
+    if (matrix.size() == 0 || matrix[0].size() == 0)
+        return 0;
+    int n = matrix.size();
+    int m = matrix[0].size();
+    vector<int> heights(m, 0);
+
+    int maxRec = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            char ch = matrix[i][j];
+            heights[j] = (ch == '1') ? heights[j] + 1 : 0;
+        }
+        maxRec = max(maxRec, largestRectangleArea(heights));
+    }
+    return maxRec;
+}
+
+//Leetcode 221 -> Maximal Square -> similar to maximal Rectangle just one additional condition
+int largestSquareArea(vector<int> &heights)
+{
+    int n = heights.size();
+    vector<int> nsol;
+    vector<int> nsor;
+
+    NSOL(heights, nsol);
+    NSOR(heights, nsor);
+
+    int maxArea = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int h = heights[i];
+        int w = nsor[i] - nsol[i] - 1;
+
+        maxArea = max(maxArea, h < w ? h * h : w * w); // h,w mei se minimum ka square hi max possible square bna skta for values of h,w
+    }
+    return maxArea;
+}
+
+//Leetcode function -> uses largestSquareArea -> same as largestRectangleArea
+int maximalSquare(vector<vector<char> > &matrix)
+{
+    if (matrix.size() == 0 || matrix[0].size() == 0)
+        return 0;
+    int n = matrix.size();
+    int m = matrix[0].size();
+    vector<int> heights(m, 0);
+
+    int maxSq = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            char ch = matrix[i][j];
+            heights[j] = (ch == '1') ? heights[j] + 1 : 0;
+        }
+        maxSq = max(maxSq, largestSquareArea(heights));
+    }
+    return maxSq;
+}
