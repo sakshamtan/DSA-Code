@@ -239,6 +239,42 @@ int largestRectangleArea(vector<int> &heights)
     return maxArea;
 }
 
+//Better approach -> time -> 2n and space -> n
+int largestRectangleArea_02(vector<int> &heights)
+{
+    int n = heights.size();
+    stack<int> st;
+    st.push(-1);
+
+    int maxArea = 0;
+    for (int i = 0; i < n; i++)
+    {
+        while (st.top() != -1 && heights[st.top()] >= heights[i])
+        {
+            int idx = st.top();
+            st.pop();
+
+            int h = heights[idx];
+            int w = i - st.top() - 1;
+
+            maxArea = max(maxArea, h * w);
+        }
+        st.push(i);
+    }
+
+    while (st.top() != -1)
+    {
+        int idx = st.top();
+        st.pop();
+
+        int h = heights[idx];
+        int w = n - st.top() - 1;
+
+        maxArea = max(maxArea, h * w);
+    }
+    return maxArea;
+}
+
 //Leetcode 85 -> Maximal Rectangle -> uses largest Rectangle Area
 int maximalRectangle(vector<vector<char> > &matrix)
 {
@@ -303,3 +339,4 @@ int maximalSquare(vector<vector<char> > &matrix)
     }
     return maxSq;
 }
+
