@@ -249,26 +249,26 @@ int largestRectangleArea_02(vector<int> &heights)
     int maxArea = 0;
     for (int i = 0; i < n; i++)
     {
-        while (st.top() != -1 && heights[st.top()] >= heights[i])
-        {
-            int idx = st.top();
+        while (st.top() != -1 && heights[st.top()] >= heights[i]) // increasing order ka stack mantain kr rhe hai
+        {                                                         // so ek ele se neeche usse just chotta ele hoga means uski left boundary
+            int idx = st.top();                                   // and jo usko pop krwa rha hoga vo uski right boundary.
             st.pop();
 
             int h = heights[idx];
-            int w = i - st.top() - 1;
+            int w = i - st.top() - 1; // dono boundary ko exclude krna hai so -1
 
             maxArea = max(maxArea, h * w);
         }
         st.push(i);
     }
 
-    while (st.top() != -1)
+    while (st.top() != -1) // agr poora arr iterate krne ke baad bhi bach gya(incase of increasing array)
     {
         int idx = st.top();
         st.pop();
 
         int h = heights[idx];
-        int w = n - st.top() - 1;
+        int w = n - st.top() - 1; // un sb ele ke liye right boundary = n and left boundary st mei unse just neeche
 
         maxArea = max(maxArea, h * w);
     }
