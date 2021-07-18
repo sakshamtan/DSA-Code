@@ -340,3 +340,34 @@ int maximalSquare(vector<vector<char> > &matrix)
     return maxSq;
 }
 
+//Leetcode 402 -> Remove K digits
+string removeKdigits(string num, int k)
+{
+    vector<char> st;
+
+    for (int i = 0; i < num.length(); i++)
+    {
+        char ch = num[i];
+        while (st.size() != 0 && st.back() > ch && k > 0)
+        {
+            st.pop_back();
+            k--;
+        }
+        st.push_back(ch);
+    }
+     
+    while (k-- > 0)  // agr k = 0 naa ho iterate krne ke baad bhi to alag se baad mei remove krna pdega
+        st.pop_back();
+
+    string ans = "";
+    bool flag = false;
+    for (char ch : st)
+    {
+        if (ch == '0' && flag == false) // leading zeroes remove krne ke liye
+            continue;
+
+        flag = true;
+        ans += ch;
+    }
+    return ans.length() == 0 ? "0" : ans;  // agr last mei string bachi hi nhi to "0" return krna hai
+}
