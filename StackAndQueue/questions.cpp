@@ -355,8 +355,8 @@ string removeKdigits(string num, int k)
         }
         st.push_back(ch);
     }
-     
-    while (k-- > 0)  // agr k = 0 naa ho iterate krne ke baad bhi to alag se baad mei remove krna pdega
+
+    while (k-- > 0) // agr k = 0 naa ho iterate krne ke baad bhi to alag se baad mei remove krna pdega
         st.pop_back();
 
     string ans = "";
@@ -369,5 +369,37 @@ string removeKdigits(string num, int k)
         flag = true;
         ans += ch;
     }
-    return ans.length() == 0 ? "0" : ans;  // agr last mei string bachi hi nhi to "0" return krna hai
+    return ans.length() == 0 ? "0" : ans; // agr last mei string bachi hi nhi to "0" return krna hai
+}
+
+//Leetcode 316 -> Remove Duplicate Letters (same as Leetcode 1081 -> Smallest Subsequence of Distinct Characters)
+string removeDuplicateLetters(string s)
+{
+    string st = ""; // equivalent to stack
+    vector<bool> presInSt(26, false); // which chars are present in stack to ensure at most once a char comes in the ans
+    vector<int> freq(26, 0);
+
+    for (char ch : s)
+    {
+        freq[ch - 'a']++;
+    }
+
+    for (char ch : s)
+    {
+
+        freq[ch - 'a']--;
+
+        if (presInSt[ch - 'a']) // agr st mei already present hai ch to usse na push krna hai aur na pop
+            continue;
+        while (st.length() != 0 && st.back() > ch && freq[st.back() - 'a'] > 0)
+        {
+            char rch = st.back();
+            st.pop_back();
+            presInSt[rch - 'a'] = false;
+        }
+
+        presInSt[ch - 'a'] = true; // st mei char push krte hi true mark.
+        st.push_back(ch);
+    }
+    return st;
 }

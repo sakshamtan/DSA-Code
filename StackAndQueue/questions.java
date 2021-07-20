@@ -176,5 +176,41 @@ public int longestValidParentheses(String s)
     return maxLen;
 }
 
+//Leetcode 316 -> Remove Duplicate Letters (Leetcode 1081 is also same) 
+public String removeDuplicateLetters(String s) 
+{
+    int n = s.length();
+    StringBuilder st = new StringBuilder(); // using StringBuilder as stack
+    int[] freq = new int[26];
+    boolean[] vis = new boolean[26];
+        
+    for(int i = 0; i < n; i++)
+    {
+        char ch = s.charAt(i);
+        freq[ch-'a']++;
+    }
+        
+    for(int i = 0; i < n; i++)
+    {
+        char ch = s.charAt(i);
+        
+        freq[ch-'a']--;
+            
+        if(vis[ch-'a'])
+            continue;
+            
+        while(st.length() != 0 && st.charAt(st.length()-1) > ch && freq[st.charAt(st.length()-1)-'a'] > 0)
+        {
+            char rch = st.charAt(st.length()-1);
+            st.deleteCharAt(st.length()-1);
+            vis[rch-'a'] = false;
+        }
+            
+        vis[ch-'a'] = true;
+        st.append(ch);
+    }
+    return st.toString();
+}
+
 
 }
