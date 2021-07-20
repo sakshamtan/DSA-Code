@@ -433,3 +433,30 @@ int trap_01(vector<int> &height)
     }
     return totalWater;
 }
+
+//Second method -> using stack similar to largest Rectangle in Histogram
+int trap_02(vector<int> &height)
+{
+    int n = height.size();
+    stack<int> st;
+
+    int totalWater = 0;
+    for (int i = 0; i < n; i++)
+    {
+        while (st.size() != 0 && height[st.top()] < height[i])
+        {
+            int idx = st.top();
+            st.pop();
+
+            if (st.size() == 0) // agr size pop krte hi 0 hogya means no leftBoundary exist to totalWater nhi calculate krna
+                break;
+
+            int h = height[idx];
+            int w = i - st.top() - 1;
+
+            totalWater += (min(height[st.top()], height[i]) - h) * w;
+        }
+        st.push(i);
+    }
+    return totalWater;
+}
