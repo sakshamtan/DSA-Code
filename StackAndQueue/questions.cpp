@@ -375,7 +375,7 @@ string removeKdigits(string num, int k)
 //Leetcode 316 -> Remove Duplicate Letters (same as Leetcode 1081 -> Smallest Subsequence of Distinct Characters)
 string removeDuplicateLetters(string s)
 {
-    string st = ""; // equivalent to stack
+    string st = "";                   // equivalent to stack
     vector<bool> presInSt(26, false); // which chars are present in stack to ensure at most once a char comes in the ans
     vector<int> freq(26, 0);
 
@@ -402,4 +402,34 @@ string removeDuplicateLetters(string s)
         st.push_back(ch);
     }
     return st;
+}
+
+//Leetcode 42 -> Trapping Rain Water
+//Simplest Solution -> Least Optimized
+int trap_01(vector<int> &height)
+{
+    int n = height.size();
+    vector<int> lHeight(n, 0); // Greatest height in left of the bar
+    vector<int> rHeight(n, 0); // Greates height in right of the bar
+
+    int left = 0;
+    for (int i = 0; i < n; i++)
+    {
+        lHeight[i] = max(height[i], left);
+        left = lHeight[i];
+    }
+
+    int right = 0;
+    for (int i = n - 1; i >= 0; i--)
+    {
+        rHeight[i] = max(height[i], right);
+        right = rHeight[i];
+    }
+
+    int totalWater = 0;
+    for (int i = 0; i < n; i++)
+    {
+        totalWater += min(lHeight[i], rHeight[i]) - height[i];
+    }
+    return totalWater;
 }
