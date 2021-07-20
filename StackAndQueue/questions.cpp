@@ -460,3 +460,20 @@ int trap_02(vector<int> &height)
     }
     return totalWater;
 }
+
+//Best Optimized -> Using two pointers to replicate two arrays lHeight and rHeight
+int trap_03(vector<int> &height)
+{
+    int n = height.size();
+    int l = 0, r = n - 1;
+    int lmax = 0, rmax = 0, totalWater = 0;
+
+    while (l < r)
+    {
+        lmax = max(lmax, height[l]);
+        rmax = max(rmax, height[r]);
+
+        totalWater += lmax < rmax ? lmax - height[l++] : rmax - height[r--];
+    }
+    return totalWater;
+}
