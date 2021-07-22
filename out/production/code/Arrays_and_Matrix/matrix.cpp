@@ -1,8 +1,6 @@
-#include <iostream>
-#include <vector>
-
+#include<iostream>
+#include<vector>
 using namespace std;
-
 void display(vector<vector<int>>& arr)
 {
     for (int i=0;i<arr.size();i++)

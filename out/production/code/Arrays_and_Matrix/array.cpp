@@ -9,6 +9,7 @@ void input (vector<int> &arr)
         cin>>arr[i];
     }
 }
+
 void display(vector<int> &arr)
 {
     for (int ele : arr)
@@ -17,6 +18,7 @@ void display(vector<int> &arr)
     }
     cout<<endl;
 }
+
 bool find (vector<int>& arr,int data)
 {
     for(int i = 0; i <= arr.size(); i++)
@@ -26,6 +28,7 @@ bool find (vector<int>& arr,int data)
     }
     return false;
 }
+
 int maximum (vector<int> &arr)
 {
     int max_ = arr[0];
@@ -35,6 +38,7 @@ int maximum (vector<int> &arr)
     }
     return max_;
 }
+
 int minimum (vector<int> &arr)
 {
     int min_ = arr[0];
@@ -44,12 +48,14 @@ int minimum (vector<int> &arr)
     }
     return min_;
 }
+
 void swap_(vector<int> &arr, int i, int j)
 {
     int temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
 }
+
 void reverse (vector<int> &arr ,int li, int ui)
 {
     while(li < ui)
@@ -59,6 +65,7 @@ void reverse (vector<int> &arr ,int li, int ui)
     ui--;
     }
 }
+
 void rotate (vector<int> &arr,int r) //using reverse function.
 {
     r %= arr.size();
@@ -69,6 +76,7 @@ void rotate (vector<int> &arr,int r) //using reverse function.
     reverse(arr,r,arr.size()-1);
     reverse(arr,0,arr.size()-1);
 }
+
 vector<int> inverse(vector<int> &arr)
 {
     vector<int> inv(arr.size(),0);
@@ -79,6 +87,7 @@ vector<int> inverse(vector<int> &arr)
     }
     return inv;
 }
+
 int kadanes(vector<int> &arr)//longest sum in sub-array.
 {
     int csum = arr[0];

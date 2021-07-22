@@ -6,39 +6,14 @@ using namespace std;
 
 //BASIC==================================================================================
 
-// string removeHi(string str)
-//{
-//     if (str.length()==0) return "";
-// char ch=str[0];
-//     if (str.length()>1 && str.substr(0,2)=="hi") return removeHi(str.substr(2));
-//     else return ch + removeHi(str.substr(1));
-// }
-// string keepHit(string str){
-//     if (str.length()==0) return "";
-// char ch=str[0];
-//     if (str.length()>1 && str.substr(0,2)=="hi")
-//     if (str.lenght()>2 && str[2]=='t')
-//      return "hit" keepHit(str.substr(2));
-//     else return ch + keepHit(str.substr(1));
-// }
 
-// void removeDupli(string str,string ans)
-// {
-//     if (str.length()==0){
-//         cout<<ans<<endl;
-//         return;
-//     }
-//     if(ans[ans.length()-1]!=string [0]){
-//         ans+=str[0];
-//         removeDupli(str.substr(1),ans);
-//     }
-// }
-vector<string> subseq (string str)
+//F -> "abc" mei "bc" ke subseq function le aayega humko ek baar "a" add krna hai aur ek baar nhi krna.
+vector<string> subseq(string str)
 {
     if (str.length() == 0)
     {
         vector<string> base;
-        base.push_back(" ");
+        base.push_back("");
         return base;
     }
 
@@ -54,18 +29,20 @@ vector<string> subseq (string str)
     return myAns;
 }
 
-vector<string> codes= {".","abc","def","ghi","jkl","mno","pqrs","tuv","wx","yz","&:","#@","?!"};//10 can mean 1-0 or 10.
-vector<string> keyPad(string str)//some problem with this code.
+//F -> "179" mei se "79" ke combinations functions le aayega aur un combinations ke saath "1" ke combinations add kr dene hai.
+vector<string> codes {".","abc","def","ghi","jkl","mno","pqrs","tuv","wx","yz","&:","#@","?!"};//10 can mean 1-0 or 10.
+vector<string> keyPad(string str)
 {
     if (str.length() == 0)
     {
     vector<string> base;
-    base.push_back(" ");
+    base.push_back("");
     return base;
-   }
+    }
+
     vector<string> myAns;
     char ch = str[0];
-    string word1 = codes[ch - '0']; //char num to integer num conversion.eg->'1' to 1.
+    string word1 = codes[ch - '0']; //char "num" to integer num conversion.eg->'1' to 1.
     vector<string> firstRes = keyPad(str.substr(1));
     for (string s : firstRes)
     {
@@ -74,7 +51,7 @@ vector<string> keyPad(string str)//some problem with this code.
             myAns.push_back(word1[i] + s);
         }
     }
-    if (str.length() > 1 && ch!='0')
+    if (ch != '0' && str.length() > 1)
     {
         int num = (ch -'0') * 10 +(str[1] - '0');
         if (num < 12)
@@ -93,149 +70,132 @@ vector<string> keyPad(string str)//some problem with this code.
 return myAns;
 }
 
-void basic()
-{
-    // string str = "abcd";
-    // vector<string> ans = subseq(str);
-    vector<string> ans = keyPad("10");
-    for (string s : ans)
-    {
-        cout<<s<<endl;
-    }
-  // cout<<removeHi("hiiihihihihih");
-//cout<<keepHit("hithihihi");
-  // cout<<removeDupli("aaabbbcddeffghhii",0)<<endl;
-}
 //MAZEPATH=============================================================================
-// vector<string> mazePathSimple(int sr,int sc,int er,int ec)
-// {
-//     if (sr==er&& sc==ec)
-//     {
-// vector<string> base;
-//         base.push_back("");
-//         return base;
-//     }
-//     vector<string> myAns;
-//     if(sc < ec)
-//     {
-//         vector<string> horizontal=mazePathSimple(sr,sc+1,er,ec);
-//         for (string s: horizontal)
-//         myAns.push_back("h"+s);
-//     }
-//     if(sr < er)
-//     {
-//         vector<string> vertical=mazePathSimple(sr+1,sc,er,ec);
-//         for (string s:vertical)
-//         myAns.push_back("v"+s);
-//     }
-//     if(sr < er && sc<ec)
-//     {
-//         vector<string> diagonal=mazePathSimple(sr+1,sc+1,er,ec);
-//         for(string s:diagonal){
-//             myAns.push_back("d"+s);
-//         }
-//     }
-//     return myAns;
-// }
 
-// vector<string> mazePathJump(int sr,int sc,int er,int ec)
-// {
-//     if (sr==er&& sc==ec)
-//     {
-// vector<string> base;
-//         base.push_back(" ");
-//         return base;
-//     }
-//     vector<string> myAns;
-//         for(int jump=1;sc+jump<=ec;jump++)
-//         {
-// vector<string> horizontal=mazePathJump(sr,sc+jump,er,ec);
-//         for (string s: horizontal)
-//         {
-//         myAns.push_back("h"+to_string(jump)+s);
-//         }
-//         }
-        
-//         for(int jump=1;sr+jump<=er;jump++)
-//         {
-//  vector<string> vertical=mazePathJump(sr+jump,sc,er,ec);
-//         for (string s:vertical)
-//         {
-//         myAns.push_back("v"+to_string(jump)+s);
-//         }
+//F->Faith-> (1,0),(0,1) and (1,1) se saare raste function jaanta hai humko bs vaha tk jaane ka kaam krna hai(returntype)
+vector<string> mazePath_HVD(int sr,int sc,int er,int ec)
+{
+    if(sr == er && sc == ec)
+    {
+        vector<string> base;
+        base.push_back("");
+        return base;
+    }
+    vector<string>myAns;
+    if(sr < sc)
+    {
+        vector<string> vertical = mazePath_HVD(sr+1,sc,er,ec);
+        for(string s : vertical)
+        myAns.push_back("V" + s);
+    }
+    if(sc < ec)
+    {
+        vector<string> horizontal = mazePath_HVD(sr,sc+1,er,ec);
+        for(string s : horizontal)
+        myAns.push_back("H" + s);
+    }
+    if(sr < er && sc < ec)
+    {
+        vector<string> diagonal = mazePath_HVD(sr+1,sc+1,er,ec);
+        for(string s : diagonal)
+        {
+            myAns.push_back("D" + s);
+        }
+    }
+    return myAns;
 
-//         }
-       
-//         for(int jump=1;sr+jump<=er&& sc+jump<=ec;jump++) 
-//         {
-//             vector<string> diagonal=mazePathJump(sr+jump,sc+jump,er,ec);
-//         for(string s:diagonal)
-//         {
-//             myAns.push_back("d"+to_string(jump)+s);
-//         }
-//         }
-        
-    
-//     return myAns;
-// }
+}
 
-// void mazePath()
-// {
-//     vector<string>ans=mazePathJump(0,0,3,3);
-//     for(string s:ans)
-//     cout<<s<<" ";
-// }
+//F-> jumps ke saath cells ke paas dest tk pohochne ke paths hai hume jumps lagakr un cells ke paas pohochna hai.
+vector<string> MazePath_Jump(int sr,int sc,int er,int ec)
+{
+    if(sr == er && sc == ec)
+    {
+        vector<string> base;
+        base.push_back("");
+        return base;
+    }
+    vector<string>myAns;
+    for(int jump = 1; sr + jump <= er; jump++)
+    {
+        vector<string> vertical = MazePath_Jump(sr+jump,sc,er,ec);
+        for(string s : vertical)
+        myAns.push_back("V" + to_string(jump) + s);
+    }
+    for(int jump = 1; sc + jump <= ec; jump++)
+    {
+        vector<string> horizontal = MazePath_Jump(sr,sc+jump,er,ec);
+        for(string s : horizontal)
+        myAns.push_back("H" + to_string(jump) + s);
+    }
+    for(int jump = 1; sr + jump <= er && sc + jump <= ec; jump++)
+    {
+        vector<string> diagonal = MazePath_Jump(sr+jump,sc+jump,er,ec);
+        for(string s : diagonal)
+        myAns.push_back("D" + to_string(jump) + s);
+    }
+    return myAns;
+}
 
 //FLOODFILL=========================================================================================
-
-// bool isSafe(int x,int y,int er,int ec,vector<vector<bool>>&board)
-// {
-//     if(x<0 || y<0 || x>er || y>ec || board[x][y]) return false;
-//     return true;
-// }
-// vector<vector<int>>direction={{0,1},{-1,1,},{-1,0},{-1,-1},{0,-1},{1,-1},{1,0},{1,1}};
-// vector<string>dir={"R","1","U","2","L","3","D","4"};
-// int floodFill(int sr,int sc,int er,int ec,vector<vector<bool>> &board,string ans)
-// {
-//     if(sr==er&& sc==ec)
-//     {
-//     cout<<ans<<endl;
-//     return 1;
-//     }
-//     int count=0;
-//             board[sr][sc]=true;
-//     for(int d=0;d<8;d++){
-//         int x=sr+direction[d][0];
-//         int y=sc+direction[d][1];
+//Using isSafe funct. (voidtype)
+bool isSafe(int x,int y,int er,int ec,vector<vector<bool>>&board)
+{
+    if(x < 0 || y < 0 || x > er || y > ec || board[x][y]) return false;
+    return true;
+}
+vector<vector<int> >direction{{0,1},{-1,1,},{-1,0},{-1,-1},{0,-1},{1,-1},{1,0},{1,1}};
+vector<string>dir{"R","1","U","2","L","3","D","4"};
+int floodFill(int sr,int sc,int er,int ec,vector<vector<bool> > &board,string ans)
+{
+    if(sr == er && sc == ec)
+    {
+    cout<<ans<<endl;
+    return 1;
+    }
+    int count = 0;
+    board[sr][sc] = true;
+    for(int d = 0;d < 8;d++)
+    {
+        int x = sr + direction[d][0];
+        int y = sc + direction[d][1];
     
-//     if(isSafe(x,y,er,ec,board))
-//     {
-//         count+=floodFill(x,y,er,ec,board,ans+dir[d]);
-
-//     }
-//     }
-//     board[sr][sc]=false;
-//     return count;
-// }
-
-
-// void floodFill()
-// {
-//     vector<vector<bool>> board(3,vector<bool>(3,false));
-//     cout<<floodFill(0,0,2,2,board,"");
-// }
-
-
+    if(isSafe(x,y,er,ec,board))
+    {
+        count += floodFill(x,y,er,ec,board,ans+dir[d]);
+    }
+    }
+    board[sr][sc] = false;
+    return count;
+}
 
 //=======================================================================================
+void Basic()
+{
+    vector<string> ans = keyPad("111");
+    for(string s : ans)
+    cout<<s<<endl;
+}
+void mazePath()
+{
+    vector<string>ans = MazePath_Jump(0,0,2,2);
+    // vector<string>ans = mazePath_HVD(0,0,2,2);
+    for(string s:ans)
+    cout<<s<<" ";
+}
+
+void floodFill()
+{
+    vector<vector<bool> > board(3,vector<bool>(3,false));
+    cout<<floodFill(0,0,2,2,board,"");
+}
+
 
 void solve()
 {
-    basic();
-    // mazePathSimple();
-   // mazePath();
-//    floodFill();
-
+    Basic();
+    // mazePath();
+    // floodFill();
 }
 int main()
 {
