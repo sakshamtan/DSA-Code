@@ -218,7 +218,7 @@ class MyStack {
     private Queue<Integer> q2;
     private int tos;
     private int noOfEle;
-    /** Initialize your data structure here. */
+
     public MyStack() 
     {
         this.q1 = new LinkedList<>();
@@ -227,7 +227,7 @@ class MyStack {
         this.noOfEle = 0;
     }
     
-    /** Push element x onto stack. */
+    // Push element x onto stack.
     public void push(int x) 
     {
         q1.add(x);
@@ -235,7 +235,7 @@ class MyStack {
         noOfEle++;
     }
     
-    /** Removes the element on top of the stack and returns that element. */
+    // Removes the element on top of the stack and returns that element.
     public int pop() 
     {
         while(q1.size() > 1)
@@ -252,16 +252,64 @@ class MyStack {
         return rv;
     }
     
-    /** Get the top element. */
+    // Get the top element.
     public int top() 
     {
         return this.tos;
     }
     
-    /** Returns whether the stack is empty. */
+    // Returns whether the stack is empty
     public boolean empty() 
     {
         return this.noOfEle == 0;
+    }
+}
+
+//Leetcode 225 -> (Better approach) Using a single queue -> push = O(N) ; pop = O(1)
+class MyStack {
+    Queue<Integer> que;
+    int noOfEle;
+    int tos;
+
+    public MyStack() 
+    {
+        this.que = new LinkedList<>();
+        this.noOfEle = 0;
+        this.tos = -1;
+    }
+    
+    public void push(int x) 
+    {
+        if(noOfEle == 0)
+        {
+            que.add(x);
+            
+        }
+        else{
+            que.add(x);
+            while(que.peek() != x)  // same que mei hi x jo push hua vo que ke front mei krdia.
+            {
+                que.add(que.remove());
+            }
+        }
+        noOfEle++;
+    }
+    
+    public int pop() 
+    {
+        int rv = que.remove();
+        noOfEle--;
+        return rv;
+    }
+    
+    public int top() 
+    {
+        return que.peek();
+    }
+    
+    public boolean empty() 
+    {
+        return noOfEle == 0;
     }
 }
 }
