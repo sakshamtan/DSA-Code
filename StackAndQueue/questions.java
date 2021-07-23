@@ -312,4 +312,60 @@ class MyStack {
         return noOfEle == 0;
     }
 }
+
+//Leetcode 232 -> Implement Queue using Two Stacks
+class MyQueue {
+    Stack<Integer> st1;
+    Stack<Integer> st2;
+    int noOfEle;
+    int front;
+    
+    public MyQueue() 
+    {
+        this.st1 = new Stack<>();
+        this.st2 = new Stack<>();
+        
+        this.noOfEle = 0;
+        this.front = -1;
+    }
+    
+    // Push element x to the back of queue.
+    public void push(int x) 
+    {
+        if(noOfEle == 0)
+            front = x;
+    
+        st1.push(x);
+        noOfEle++;
+    }
+    
+    // Removes the element from in front of queue and returns that element.
+    public int pop() 
+    {
+        while(st1.size() != 1)
+        {
+            front = st1.peek();
+            st2.push(st1.pop());
+        }
+        int rv = st1.pop();
+        while(st2.size() != 0)
+        {
+            st1.push(st2.pop());
+        }
+        noOfEle--;
+        return rv;
+    }
+    
+    // Get the front element.
+    public int peek() 
+    {
+        return front;
+    }
+    
+    // Returns whether the queue is empty. 
+    public boolean empty() 
+    {
+        return noOfEle == 0;
+    }
+}
 }
