@@ -267,9 +267,9 @@ class MyStack {
 
 //Leetcode 225 -> (Better approach) Using a single queue -> push = O(N) ; pop = O(1)
 class MyStack {
-    Queue<Integer> que;
-    int noOfEle;
-    int tos;
+    private Queue<Integer> que;
+    private int noOfEle;
+    private int tos;
 
     public MyStack() 
     {
@@ -315,10 +315,10 @@ class MyStack {
 
 //Leetcode 232 -> Implement Queue using Two Stacks
 class MyQueue {
-    Stack<Integer> st1;
-    Stack<Integer> st2;
-    int noOfEle;
-    int front;
+    private Stack<Integer> st1;
+    private Stack<Integer> st2;
+    private int noOfEle;
+    private int front;
     
     public MyQueue() 
     {
@@ -366,6 +366,117 @@ class MyQueue {
     public boolean empty() 
     {
         return noOfEle == 0;
+    }
+}
+
+//Leetcode 641 -> Design Circular Dequeue
+class MyCircularDeque {
+    private int[] arr;
+    private int noOfEle;
+    private int front;
+    private int back;
+    private int capacity;
+
+    public MyCircularDeque(int k) 
+    {
+        this.arr = new int[k];
+        this.noOfEle = 0;
+        this.front = 0; // jaha ele aa skta hai vaha rkha hai front and back
+        this.back = 1;
+        this.capacity = k;
+    }
+    
+    // Adds an item at the front of Deque. Return true if the operation is successful
+    public boolean insertFront(int value) 
+    {
+        if(!isFull())
+        {
+            arr[front] = value;
+            front = (front - 1 + capacity) % capacity;
+            
+            noOfEle++;
+            return true;
+        }
+        return false;
+    }
+    
+    // Adds an item at the rear of Deque. Return true if the operation is successful
+    public boolean insertLast(int value) 
+    {
+        if(!isFull())
+        {
+            
+            arr[back] = value;
+            back = ++back % capacity;
+            
+            noOfEle++;
+            return true;
+        }
+        return false;
+    }
+    
+    // Deletes an item from the front of Deque. Return true if the operation is successful
+    public boolean deleteFront() 
+    {
+        if(!isEmpty())
+        {
+            front = (front + 1) % capacity;
+            arr[front] = 0;
+
+            noOfEle--;
+            return true;
+        }
+        return false;
+    }
+    
+    // Deletes an item from the rear of Deque. Return true if the operation is successful
+    public boolean deleteLast() 
+    {
+        if(!isEmpty())
+        {
+            back = (back - 1 + capacity) % capacity;
+            arr[back] = 0;
+               
+            noOfEle--;
+            return true;
+        }
+        return false;
+    }
+    
+    // Get the front item from the deque
+    public int getFront() 
+    {
+        if(!isEmpty())
+        {
+           int frontIdx = (front + 1) % capacity;
+            return arr[frontIdx];
+        }
+    
+        return -1;
+    }
+    
+    // Get the last item from the deque
+    public int getRear() 
+    {
+        if(!isEmpty())
+        {
+            int backIdx = (back - 1 + capacity) % capacity;
+            return arr[backIdx];
+        }
+        
+        return -1;
+    }
+    
+    //Checks whether the circular deque is empty or not
+    public boolean isEmpty() 
+    {
+        return noOfEle == 0;
+    }
+    
+    // Checks whether the circular deque is full or not
+    public boolean isFull() 
+    {
+        return noOfEle == capacity;
     }
 }
 }
