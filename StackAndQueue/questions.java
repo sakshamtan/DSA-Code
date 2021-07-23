@@ -211,4 +211,57 @@ public String removeDuplicateLetters(String s)
     }
     return st.toString();
 }
+
+//Leetcode 225 -> Implement Stack Using Queues -> Push Efficent -> push = O(1) ; pop = O(N)
+class MyStack {
+    private Queue<Integer> q1;
+    private Queue<Integer> q2;
+    private int tos;
+    private int noOfEle;
+    /** Initialize your data structure here. */
+    public MyStack() 
+    {
+        this.q1 = new LinkedList<>();
+        this.q2 = new LinkedList<>();
+        this.tos = -1;
+        this.noOfEle = 0;
+    }
+    
+    /** Push element x onto stack. */
+    public void push(int x) 
+    {
+        q1.add(x);
+        tos = x;
+        noOfEle++;
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() 
+    {
+        while(q1.size() > 1)
+        {
+            tos = q1.remove();
+            q2.add(tos);
+        }
+        int rv = q1.remove();
+        Queue<Integer> temp = q1;
+        q1 = q2;
+        q2 = temp;
+        
+        noOfEle--;
+        return rv;
+    }
+    
+    /** Get the top element. */
+    public int top() 
+    {
+        return this.tos;
+    }
+    
+    /** Returns whether the stack is empty. */
+    public boolean empty() 
+    {
+        return this.noOfEle == 0;
+    }
+}
 }
