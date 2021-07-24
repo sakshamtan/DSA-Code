@@ -1519,18 +1519,16 @@ public int widthOfBinaryTree(TreeNode root)
     return ans;
 }
 
-//Leetcode 1325 -> Delete leaves with a given value.
+//Leetcode 1325 -> Delete leaves with a given value. (Leetcode 814 -> Bianry Tree Pruning is also same bs 0 vaali leaves delete krni hai)
 public TreeNode removeLeafNodes(TreeNode root, int target) 
 {
     if(root == null)
         return null;
-    if(root.val == target && root.left == null && root.right == null)
-        return null;
-
+    
     root.left = removeLeafNodes(root.left,target);
     root.right = removeLeafNodes(root.right,target);
-// ab tree traverse and delete krne ke baad agr koi aur leaf generate huyi jo target ke equal hai to postorder mei usse bhi null return krwaakr delete krdenge.        
-    if(root.val == target && root.left == null && root.right == null)
+    
+    if(root.val == target && root.left == null && root.right == null) //Leaves delete matlab postorder mei delete
         return null;
         
     return root;
