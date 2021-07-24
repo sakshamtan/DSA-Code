@@ -40,7 +40,7 @@ void NGOL(vector<int> &arr, vector<int> &ans)
     }
 }
 
-//Next smaller on right -> bs comparison ka sign change krna hai in NGOR mei
+//Next smaller on right -> bs comparison ka sign change krna hai in NGOR
 void NSOR(vector<int> &arr, vector<int> &ans)
 {
     int n = arr.size();
