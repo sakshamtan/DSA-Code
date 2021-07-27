@@ -53,7 +53,10 @@ public boolean isEmpty()
 
 public void add(int data)
 {
+    this.arr.add(data);
+    int n = this.arr.size();
 
+    upHeapify(n-1);
 }
 
 public int remove() // O(Logn)
@@ -100,6 +103,14 @@ private void downHeapify(int pi) // pi idx pe heap bna deta hai given pi ke lc a
     } 
 }
 
+private void upHeapify(int ci)
+{
+    int pi = (ci - 1) / 2;
 
-
+    if(ci >= 0 && this.arr.get(ci) > this.arr.get(pi))
+    {
+        swap(pi,ci);
+        upHeapify(pi);
+    }
+}
 }
