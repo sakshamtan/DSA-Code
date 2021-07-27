@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -62,7 +63,10 @@ class heap
 
     void add(int data)
     {
+        this->arr.push_back(data);
 
+        int n = this->arr.size();
+        upHeapify(n-1);
     }
 
     int remove()
@@ -102,4 +106,14 @@ class heap
         }
     }
 
+    void upHeapify(int ci)
+    {
+        int pi = (ci - 1) / 2;
+
+        if(pi >= 0 && this->arr[pi] < this->arr[ci])
+        {
+            swap(this->arr[ci],this->arr[pi]);
+            upHeapify(pi);
+        }
+    }
 };
