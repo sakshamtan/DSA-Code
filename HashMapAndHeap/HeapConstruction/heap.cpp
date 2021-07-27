@@ -6,13 +6,13 @@ using namespace std;
 
 class heap
 {
-    private:
+private:
     vector<int> arr;
     bool isMaxHeap;
 
     void constructHeap()
     {
-        for(int i = this->arr.size()-1; i >= 0; i--)
+        for (int i = this->arr.size() - 1; i >= 0; i--)
         {
             downHeapify(i);
         }
@@ -23,27 +23,30 @@ class heap
         this->isMaxHeap = isMaxHeap;
     }
 
-    bool compareTo(bool isMaxHeap)
+    bool compareTo(int i, int j)
     {
-
+        if (this->isMaxHeap)
+            return this->arr[i] > this->arr[j];
+        else
+            return this->arr[i] < this->arr[j];
     }
 
-    public:
+public:
     heap()
     {
         defaultValue(true);
     }
-    
+
     heap(isMaxHeap)
     {
         defaultValue(isMaxHeap);
     }
 
-    heap(vector<int>& arr,bool isMaxHeap)
+    heap(vector<int> &arr, bool isMaxHeap)
     {
         defaultValue(isMaxHeap);
 
-        for(int ele : arr)
+        for (int ele : arr)
         {
             this->arr.push_back(ele);
         }
@@ -66,7 +69,7 @@ class heap
         this->arr.push_back(data);
 
         int n = this->arr.size();
-        upHeapify(n-1);
+        upHeapify(n - 1);
     }
 
     int remove()
@@ -74,7 +77,7 @@ class heap
         int rv = this.arr[0];
 
         int n = this.arr.size();
-        swap(this->arr[0],this->arr[n-1]);
+        swap(this->arr[0], this->arr[n - 1]);
 
         this->arr.pop_back();
         downHeapify(0);
@@ -87,21 +90,21 @@ class heap
         return this->arr[0];
     }
 
-    private:
+private:
     void downHeapify(int pi)
     {
         int maxIdx = pi;
         int lci = (pi * 2) + 1;
         int rci = (pi * 2) + 2;
 
-        if(lci < this->arr.size() && this.arr[lci] > this.arr[maxIdx])
+        if (lci < this->arr.size() && compareTo(lci, maxIdx))
             maxIdx = lci;
-        if(rci < this->arr.size() && this.arr[rci] > this.arr[maxIdx])
+        if (rci < this->arr.size() && compareTo(rci, maxIdx))
             maxIdx = rci;
 
-        if(maxIdx != pi)
+        if (maxIdx != pi)
         {
-            swap(this->arr[pi],this->arr[maxIdx]);
+            swap(this->arr[pi], this->arr[maxIdx]);
             downHeapify(maxIdx);
         }
     }
@@ -110,9 +113,9 @@ class heap
     {
         int pi = (ci - 1) / 2;
 
-        if(pi >= 0 && this->arr[pi] < this->arr[ci])
+        if (pi >= 0 && compareTo(ci, pi))
         {
-            swap(this->arr[ci],this->arr[pi]);
+            swap(this->arr[ci], this->arr[pi]);
             upHeapify(pi);
         }
     }
