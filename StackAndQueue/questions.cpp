@@ -276,12 +276,14 @@ int largestRectangleArea_02(vector<int> &heights)
 }
 
 //Leetcode 85 -> Maximal Rectangle -> uses largest Rectangle Area
-int maximalRectangle(vector<vector<char> > &matrix)
+int maximalRectangle(vector<vector<char>> &matrix)
 {
     if (matrix.size() == 0 || matrix[0].size() == 0)
         return 0;
+
     int n = matrix.size();
     int m = matrix[0].size();
+    
     vector<int> heights(m, 0);
 
     int maxRec = 0;
@@ -319,7 +321,7 @@ int largestSquareArea(vector<int> &heights)
 }
 
 //Leetcode function -> uses largestSquareArea -> same as largestRectangleArea
-int maximalSquare(vector<vector<char> > &matrix)
+int maximalSquare(vector<vector<char>> &matrix)
 {
     if (matrix.size() == 0 || matrix[0].size() == 0)
         return 0;
