@@ -283,7 +283,7 @@ int maximalRectangle(vector<vector<char>> &matrix)
 
     int n = matrix.size();
     int m = matrix[0].size();
-    
+
     vector<int> heights(m, 0);
 
     int maxRec = 0;
@@ -412,7 +412,7 @@ int trap_01(vector<int> &height)
 {
     int n = height.size();
     vector<int> lHeight(n, 0); // Greatest height in left of the bar
-    vector<int> rHeight(n, 0); // Greates height in right of the bar
+    vector<int> rHeight(n, 0); // Greatest height in right of the bar
 
     int left = 0;
     for (int i = 0; i < n; i++)
