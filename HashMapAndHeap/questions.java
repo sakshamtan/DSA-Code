@@ -59,4 +59,30 @@ public int findKthLargest(int[] nums, int k)
 
     return nums[0];
 }
+
+//Leetcode 703 -> Kth Largest Element in a Stream (Now live data is given)
+class KthLargest {
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    int k = 0;
+    
+    public KthLargest(int k, int[] nums) 
+    {
+        this.k = k;
+        for(int ele : nums)
+        {
+            this.pq.add(ele);
+            if(this.pq.size() > this.k)
+                this.pq.remove();
+        }
+    }
+    
+    public int add(int val) 
+    {
+        this.pq.add(val);
+        if(this.pq.size() > this.k)
+            this.pq.remove();
+        
+        return this.pq.peek();
+    }
+}
 }
