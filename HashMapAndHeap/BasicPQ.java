@@ -60,7 +60,7 @@ public static class pair implements Comparable<pair>{
 
 public static void test4(int[][] arr)
 {
-    // PriorityQueue<pair> pq = new PriorityQueue<>((a,b) ->{    // same syntax
+    // PriorityQueue<pair> pq = new PriorityQueue<>((a,b) ->{    // better syntax
     //     return b.i - a.i;
     // });
 
