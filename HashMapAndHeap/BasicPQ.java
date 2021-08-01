@@ -43,7 +43,7 @@ public static void test3(int[][] arr)
     }
 }
 
-public static class pair implements Comparabale<pair>{
+public static class pair implements Comparable<pair>{
     int i = 0, j = 0; // ye this hai
 
     pair(int i, int j)
@@ -52,7 +52,7 @@ public static class pair implements Comparabale<pair>{
         this.j = j;
     }
 
-    public class compareTo(pair o) // o is other
+    public int compareTo(pair o) // o is other
     {
         return o.i - this.i; // other - this so maxPQ
     }
@@ -71,7 +71,7 @@ public static void test4(int[][] arr)
     PriorityQueue<pair> pq = new PriorityQueue<>(); // pair ko compare krna sikha rha hai already so no need of lambda function
 
     for(int[] a : arr)
-        pq.add(new pair(a[0],a[1]);
+        pq.add(new pair(a[0],a[1]));
 
     while(pq.size() != 0)
     {
