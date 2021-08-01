@@ -84,7 +84,10 @@ public static void test4(int[][] arr)
 
 public static void main(String[] args)
 {
-    int[][] arr = {{2,5},{1,-1},{0,-4},{-6,3},{6,9},{9,40}};
-    test4(arr);
+    int[] arr = {2,5,1,-1,0,-4,-6,3,6,9,9,40};
+    test1_minPQ(arr);
+
+    // int[][] arr = {{2,5},{1,-1},{0,-4},{-6,3},{6,9},{9,40}};
+    // test4(arr);
 }
 }
