@@ -77,3 +77,37 @@ vector<int> intersect(vector<int> &nums1, vector<int> &nums2)
     }
     return ans;
 }
+
+//Leetcode 347 -> Top K Frequent Elements
+vector<int> topKFrequent(vector<int> &nums, int k)
+{
+    unordered_map<int, int> map;
+    for (int ele : nums)
+        map[ele]++;
+
+    // (freq,val)
+    priority_queue<vector<int>, vector<vector<int> >, greater<vector<int> > > pq;
+    //vec ke pehle index pe default comparator likha hua hai so freq ko 0th index mei pass krenge
+
+    for (auto &key : map)
+    {
+        int val = key.first;
+        int freq = key.second;
+        pq.push({freq, val});
+        if (pq.size() > k)
+            pq.pop();
+    }
+
+    vector<int> ans;
+    while (pq.size() != 0)
+    {
+        vector<int> p = pq.top();
+        pq.pop();
+
+        int freq = p[0];
+        int val = p[1];
+
+        ans.push_back(val);
+    }
+    return ans;
+}
