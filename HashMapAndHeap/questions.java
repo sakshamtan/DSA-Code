@@ -163,4 +163,38 @@ public int longestConsecutive(int[] nums)
     }
     return len;
 }
+
+//Leetcode 347 -> Top K Frequent Elements (return all k freq ele in an array)
+public int[] topKFrequent(int[] nums, int k) 
+{
+    HashMap<Integer,Integer> map = new HashMap<>();
+    for(int ele : nums)
+        map.put(ele,map.getOrDefault(ele,0) + 1); // freq map
+        
+    // (val,freq)
+    PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->{  // minPQ on the basis of frequency
+        return a[1] - b[1]; 
+    });
+        
+    for(Integer key : map.keySet())
+    {
+
+        pq.add(new int[]{key,map.get(key)});
+        if(pq.size() > k)
+            pq.remove();
+    }
+            
+    int[] ans = new int[pq.size()];  // last mei k freq ele bache hai que mei
+    int i = 0;
+    while(pq.size() != 0)  
+    {
+        int[] p = pq.remove();
+        int val = p[0];
+        int freq = p[1];
+                
+        ans[i++] = val;
+    }
+
+    return ans;   
+}
 }
