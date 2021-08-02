@@ -224,9 +224,7 @@ public int[] topKFrequent_02(int[] nums, int k)
         ans[i++] = pq.remove();
     }
     return ans;   
-}
-        
-
+}      
 
 //Leetcode 973 -> K Closest Points to Origin
 public int[][] kClosest(int[][] points, int k) 
