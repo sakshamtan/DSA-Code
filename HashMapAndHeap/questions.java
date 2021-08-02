@@ -197,4 +197,32 @@ public int[] topKFrequent(int[] nums, int k)
 
     return ans;   
 }
+
+//Leetcode 973 -> K Closest Points to Origin
+public int[][] kClosest(int[][] points, int k) 
+{
+    //(x,y) -> co-ordinartes store kr rhe hai pq mei and distances ke basis pe priority sikha di
+    PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->{
+        int d1 = a[0] * a[0] + a[1] * a[1]; // equiv to x1^2 + y1^2
+        int d2 = b[0] * b[0] + b[1] * b[1];  // x2^2 + y2^2  
+            
+        return d2 - d1; // maxPQ so other - this
+    });
+        
+    for(int[] p : points)
+    {
+        pq.add(p);
+        if(pq.size() > k)
+            pq.remove();
+    }
+        
+    int i = 0;
+    int[][] ans = new int[k][];
+    while(pq.size() != 0)
+    {
+        ans[i++] = pq.remove();
+    }
+        
+    return ans;
+}
 }
