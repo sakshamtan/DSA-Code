@@ -56,3 +56,24 @@ public:
         return this->pq.top();
     }
 };
+
+//Leetcode 350 -> Intersection of Two Arrays II (Now duplicate alloweed)
+vector<int> intersect(vector<int> &nums1, vector<int> &nums2)
+{
+    unordered_map<int, int> map;
+    vector<int> ans;
+    for (int ele : nums1)
+        map[ele]++;
+
+    for (int ele : nums2)
+    {
+        if (map.find(ele) != map.end())
+        {
+            ans.push_back(ele);
+            map[ele]--;
+            if (map[ele] == 0)
+                map.erase(ele);
+        }
+    }
+    return ans;
+}

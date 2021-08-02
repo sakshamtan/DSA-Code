@@ -85,4 +85,56 @@ class KthLargest {
         return this.pq.peek();
     }
 }
+
+//Leetcode 349 -> Intersection of Two Arrays
+public int[] intersection(int[] nums1, int[] nums2) 
+{
+    HashSet<Integer> set = new HashSet<>();
+    ArrayList<Integer> ans = new ArrayList<>();
+        
+    for(int ele : nums1)
+        set.add(ele);
+        
+    for(int ele : nums2)
+    {
+        if(set.contains(ele))
+        {
+            ans.add(ele);
+            set.remove(ele);
+        }
+    }
+        
+    int[] res = new int[ans.size()];
+    for(int i = 0; i < ans.size(); i++)
+        res[i] = ans.get(i);
+    
+    return res;
+}
+
+//Leetcode 350 -> Intersection of Two Arrays II 
+public int[] intersect(int[] nums1, int[] nums2) 
+{
+    HashMap<Integer,Integer> map = new HashMap<>();
+    ArrayList<Integer> ans = new ArrayList<>();
+
+    for(int ele : nums1)
+        map.put(ele,map.getOrDefault(ele,0) + 1);
+        
+    for(int ele : nums2)
+    {
+        if(map.containsKey(ele))
+        {
+            ans.add(ele);
+            map.put(ele,map.get(ele) -1);
+            if(map.get(ele) == 0)
+                map.remove(ele);
+        }
+    }
+
+    int[] res = new int[ans.size()];
+    for(int i = 0; i < ans.size(); i++)
+        res[i] = ans.get(i);
+        
+    return res;
+}
 }
