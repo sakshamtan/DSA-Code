@@ -86,7 +86,7 @@ vector<int> topKFrequent(vector<int> &nums, int k)
         map[ele]++;
 
     // (freq,val)
-    priority_queue<vector<int>, vector<vector<int> >, greater<vector<int> > > pq;
+    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int> >> pq;
     //vec ke pehle index pe default comparator likha hua hai so freq ko 0th index mei pass krenge
 
     for (auto &key : map)
