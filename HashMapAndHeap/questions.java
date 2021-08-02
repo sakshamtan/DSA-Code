@@ -198,6 +198,36 @@ public int[] topKFrequent(int[] nums, int k)
     return ans;   
 }
 
+//Better approach -> only keeping val in pq and sorting it on basis of freq kept in map
+public int[] topKFrequent_02(int[] nums, int k) 
+{
+    HashMap<Integer,Integer> map = new HashMap<>();
+    for(int ele : nums)
+        map.put(ele,map.getOrDefault(ele,0) + 1);
+        
+    // now only val
+    PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->{
+        return map.get(a) - map.get(b);  // sorted on the basis of freq kept in map
+    });
+        
+    for(Integer key : map.keySet())
+    {
+        pq.add(key);
+        if(pq.size() > k)
+            pq.remove();
+    }
+            
+        int[] ans = new int[pq.size()];            
+        int i = 0;
+        while(pq.size() != 0)
+        {
+            ans[i++] = pq.remove();
+        }
+        return ans;   
+    }
+        
+
+
 //Leetcode 973 -> K Closest Points to Origin
 public int[][] kClosest(int[][] points, int k) 
 {
