@@ -217,14 +217,14 @@ public int[] topKFrequent_02(int[] nums, int k)
             pq.remove();
     }
             
-        int[] ans = new int[pq.size()];            
-        int i = 0;
-        while(pq.size() != 0)
-        {
-            ans[i++] = pq.remove();
-        }
-        return ans;   
+    int[] ans = new int[pq.size()];            
+    int i = 0;
+    while(pq.size() != 0)
+    {
+        ans[i++] = pq.remove();
     }
+    return ans;   
+}
         
 
 
