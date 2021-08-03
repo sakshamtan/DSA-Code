@@ -2,10 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class recursionREV
-{
-
-//Basic===========================================================================
+public class recursionREV{
 
 //F -> "abc" mei "bc" ke subseq function le aayega humko ek baar a add krna hai aur ek baar nhi krna.
 public static ArrayList<String> subseq_withASCII (String str)
@@ -197,7 +194,16 @@ public static int Encodings(String str,int idx,String ans)
     return count;   
 }
 
-//PathSet=================================================================================
+public static void basic()
+{
+    // System.out.println(subseq_withASCII("abc"));
+    // System.out.print(nokiaKeypad_02("111"));
+    // System.out.println(print_Subseq("abc",""));
+    // System.out.println(print_nokiaKeyPad("179",""));
+    System.out.println(print_nokiaKeyPad_02("111",""));
+}
+
+//PathSet
 
 //F-> Humaara function second step se raste bnana jaanta hai bs pehla step chalne ka dhyaan dena h.
 public static int printBoardPaths(int src,int dest, String psf)
@@ -443,7 +449,41 @@ public static boolean KnightsTour(int sr,int sc,int[][] board,int steps)
 
 }
 
-//CoinChange=================================================================================
+public static void pathSet()
+{
+    // System.out.print(printBoardPaths(0,10,""));
+    // System.out.print(printBoardPathsOpeningwith1and6(0,10,""));
+
+    // int [] ladders = new int[16];
+    // ladders[2] = 13;
+    // ladders[3] = 11;
+    // ladders[5] = 7;
+    // System.out.println(printBoardPathsWithLadders(0,15,ladders,""));
+    // int [] snl = new int[20];
+    // snl[19] = 2;
+    // snl[3] = 17;
+    // snl[13] = 5;
+    // snl[7] = 11;
+    // int [] moves1 = {2,5,3,4,6,3,4,3,5,1,2,3};
+    // int [] moves2 = {2,5,3,4,6,3,4,3,5,1,1,6,5,2,3,5};
+    // BoardwithSNL(0,20,snl,moves2,0);
+    // System.out.println(MazePath_01(0,0,2,2,""));
+    // System.out.println(MazePath_MM(0,0,3,3,""));
+    // int [][] maze ={{1,1,1,1},
+    //                 {1,1,1,1},
+    //                 {1,1,1,1},
+    //                 {1,1,1,1}
+    //                };
+    // boolean [][] visited = new boolean[maze.length][maze[0].length];
+    // floodFill(0,0,maze,visited,"");
+    // System.out.print(Encodings("123",0,""));
+    int n = 3;
+    int m = 3;
+    int[][] vis = new int[n][m];
+    System.out.println(floodFill_Jumps(0,0,vis,""));
+}
+
+//Coin Change
 
 //Har level pr saare options dene hai taaki saare arrangements aa jaaye using any no. of coins any times.
 //F-> tar 8,7,5,3 se function ko permu bnane aate hai hume bs 2,3,5,7 se unke respective targets tk pohochana hai.
@@ -464,6 +504,7 @@ public static int coinChange_Permutation_01(int [] coins,int tar,String ans)//us
     }
     return count;
 }
+
 //F-> Bs apne present idx se aage vaale indexes pr call lagani hai har level pr yaani idx se lekr end tk taaki sirf combinations aaye.
 //for eg 2 can call/use 3,5,7 and 3 can call/use 5,7 and 5 can only call/use 7 on that certain level.
 public static int coinChange_Combination_01(int [] coins,int idx,int tar,String ans)//using multiple coins.
@@ -523,9 +564,8 @@ public static int coinChange_Permutation_Single_01(int [] coins,int tar,boolean 
     }
     return count;
 }
-// coinChange using Subsequence method =============================================================
-//Subseq method -> ek baar coin use krne ki call lagana and ek baar coin nhi use krne ki call lagana.
 
+//Subseq method -> ek baar coin use krne ki call lagana and ek baar coin nhi use krne ki call lagana.
 //Combination using single coin only.
 public static int coinChange_Combination_Single_Subseq_01(int [] coins,int idx,int tar,String ans)
 {
@@ -618,7 +658,23 @@ public static int coinChange_Permutation_Single_Subseq_01(int [] coins,int idx,i
     return count;
 }
 
-//QueenCombinationAndPermutation=====================================================================
+public static void CoinChange()
+{
+    int[] coins = {2,3,5,7};
+    System.out.println(coinChange_Permutation_01(coins,10,""));
+    // System.out.println(coinChange_Combination_01(coins,0,10,""));
+    // System.out.println(coinChange_Combination_Single_01(coins,0,10,""));
+    boolean [] vis = new boolean[coins.length];
+    // System.out.println(coinChange_Permutation_Subseq_01(coins,0,10,vis,""));
+    // System.out.println(coinChange_Combination_Single_Subseq_01(coins,0,10,""));
+    // System.out.println(coinChange_Combination_Subseq_01(coins,0,10,""));
+    // System.out.println(coinChange_Permutation_Single_Subseq_01(coins,0,10,vis,""));
+    System.out.println(coinChange_Permutation_Subseq_01(coins,0,10,""));
+
+}
+
+
+//QueenCombinationAndPermutation
 
 //q1->q2->q3 proper order of queens.Consider it as a case of coinChange with 1 on every cell of the box and tar = tnq.
 //It is same as coinChangeCombination-single coin.
@@ -703,7 +759,18 @@ public static int queenPermutation2D(boolean [][] box,int qpsf,int tnq,String an
     return count;
 }
 
-//Nqueen =========================================================================================
+public static void QueenPnC()
+{
+    // boolean [] box = new boolean[6];
+    boolean [][] box = new boolean[4][4];
+    int tnq = 4;
+    // System.out.println(queenCombination(box,0,0,tnq,""));
+    // System.out.println(queenPermutation(box,0,tnq,""));
+    System.out.println(queenCombination2D(box,0,0,tnq,""));
+    // System.out.println(queenPermutation2D(box,0,tnq,""));
+}
+
+//Nqueen
 
 public static boolean isSafeToPlaceQueen(boolean [][] box,int r,int c)
 {
@@ -934,7 +1001,28 @@ public static int Nqueen_03_Subseq(int n,int r,int tnq,String ans)
     return count;
 }
 
-//WordBreak=============================================================================================
+public static void Nqueens()
+{
+    boolean [][] box = new boolean[4][4];
+    int tnq = 4;
+    // System.out.println(Nqueen_Combination_01(box,0,0,tnq,""));
+    // System.out.println(Nqueen_Permutataion_01(box,0,tnq,""));
+    int n = box.length;
+    int m = box[0].length;
+
+    rowA = new boolean[n];
+    colA = new boolean[m];
+    diagA = new boolean[n+m-1];
+    adiagA = new boolean[n+m-1];
+    // System.out.println(Nqueen_Combination_02(n,0,0,tnq,""));
+    // System.out.println(Nqueen_Permutation_02(n,0,tnq,""));
+    // System.out.println(Nqueen_03(n,0,tnq,""));
+    // System.out.println(Nqueen_03_Subseq(n,0,tnq,""));
+    System.out.println(Nqueen_Bits(n,0,tnq,""));
+
+}
+
+//WordBreak
 
 //F-> Agr kaata hua word dictionary(HashSet words) mei hai to usko ans mei add krenge and remaining string ko recursion mei bhej denge ki vo apne sub-sentences bna aaye.
 public static int WordBreak_01(String ques,int len,HashSet<String> words,String ans)
@@ -956,7 +1044,7 @@ public static int WordBreak_01(String ques,int len,HashSet<String> words,String 
     return count;
 }
 
-//substring O(N) ka operation hota hai isme call mei idx ke through virtually kaat rhe hai substring hence better complexity than previos.
+//substring O(N) ka operation hota hai isme call mei idx ke through virtually kaat rhe hai substring hence better complexity than previous.
 public static int WordBreak_02(String ques,int len,int idx,HashSet<String> words,String ans)
 {
     if(idx == ques.length())
@@ -976,48 +1064,6 @@ public static int WordBreak_02(String ques,int len,int idx,HashSet<String> words
     return count;
 }
 
-public static void basic()
-{
-    // System.out.println(subseq_withASCII("abc"));
-    // System.out.print(nokiaKeypad_02("111"));
-    // System.out.println(print_Subseq("abc",""));
-    // System.out.println(print_nokiaKeyPad("179",""));
-    System.out.println(print_nokiaKeyPad_02("111",""));
-}
-public static void pathSet()
-{
-    // System.out.print(printBoardPaths(0,10,""));
-    // System.out.print(printBoardPathsOpeningwith1and6(0,10,""));
-
-    // int [] ladders = new int[16];
-    // ladders[2] = 13;
-    // ladders[3] = 11;
-    // ladders[5] = 7;
-    // System.out.println(printBoardPathsWithLadders(0,15,ladders,""));
-    // int [] snl = new int[20];
-    // snl[19] = 2;
-    // snl[3] = 17;
-    // snl[13] = 5;
-    // snl[7] = 11;
-    // int [] moves1 = {2,5,3,4,6,3,4,3,5,1,2,3};
-    // int [] moves2 = {2,5,3,4,6,3,4,3,5,1,1,6,5,2,3,5};
-    // BoardwithSNL(0,20,snl,moves2,0);
-    // System.out.println(MazePath_01(0,0,2,2,""));
-    // System.out.println(MazePath_MM(0,0,3,3,""));
-    // int [][] maze ={{1,1,1,1},
-    //                 {1,1,1,1},
-    //                 {1,1,1,1},
-    //                 {1,1,1,1}
-    //                };
-    // boolean [][] visited = new boolean[maze.length][maze[0].length];
-    // floodFill(0,0,maze,visited,"");
-    // System.out.print(Encodings("123",0,""));
-    int n = 3;
-    int m = 3;
-    int[][] vis = new int[n][m];
-    System.out.println(floodFill_Jumps(0,0,vis,""));
-}
-
 public static void knightTour()
 {
     int [][] board = new int[8][8];
@@ -1034,56 +1080,6 @@ public static void knightTour()
         }
         System.out.println();
     }
-
-}
-
-public static void CoinChange()
-{
-    int[] coins = {2,3,5,7};
-    System.out.println(coinChange_Permutation_01(coins,10,""));
-    // System.out.println(coinChange_Combination_01(coins,0,10,""));
-    // System.out.println(coinChange_Combination_Single_01(coins,0,10,""));
-    boolean [] vis = new boolean[coins.length];
-    // System.out.println(coinChange_Permutation_Subseq_01(coins,0,10,vis,""));
-    // System.out.println(coinChange_Combination_Single_Subseq_01(coins,0,10,""));
-    // System.out.println(coinChange_Combination_Subseq_01(coins,0,10,""));
-    // System.out.println(coinChange_Permutation_Single_Subseq_01(coins,0,10,vis,""));
-    System.out.println(coinChange_Permutation_Subseq_01(coins,0,10,""));
-
-}
-
-public static void QueenPnC()
-{
-    // boolean [] box = new boolean[6];
-    boolean [][] box = new boolean[4][4];
-    int tnq = 4;
-    // System.out.println(queenCombination(box,0,0,tnq,""));
-    // System.out.println(queenPermutation(box,0,tnq,""));
-    System.out.println(queenCombination2D(box,0,0,tnq,""));
-    // System.out.println(queenPermutation2D(box,0,tnq,""));
-
-
-}
-
-public static void Nqueens()
-{
-    boolean [][] box = new boolean[4][4];
-    int tnq = 4;
-    // System.out.println(Nqueen_Combination_01(box,0,0,tnq,""));
-    // System.out.println(Nqueen_Permutataion_01(box,0,tnq,""));
-    int n = box.length;
-    int m = box[0].length;
-
-    rowA = new boolean[n];
-    colA = new boolean[m];
-    diagA = new boolean[n+m-1];
-    adiagA = new boolean[n+m-1];
-    // System.out.println(Nqueen_Combination_02(n,0,0,tnq,""));
-    // System.out.println(Nqueen_Permutation_02(n,0,tnq,""));
-    // System.out.println(Nqueen_03(n,0,tnq,""));
-    // System.out.println(Nqueen_03_Subseq(n,0,tnq,""));
-    System.out.println(Nqueen_Bits(n,0,tnq,""));
-
 
 }
 
@@ -1119,7 +1115,7 @@ public static void solve()
 
 }
 
-public static void main(String [] args)
+public static void main(String[] args)
 {
     solve();
 }
