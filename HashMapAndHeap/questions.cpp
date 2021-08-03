@@ -86,7 +86,7 @@ vector<int> topKFrequent(vector<int> &nums, int k)
         map[ele]++;
 
     // (freq,val)
-    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int> >> pq;
+    priority_queue<vector<int>, vector<vector<int> >, greater<vector<int> > > pq;
     //vec ke pehle index pe default comparator likha hua hai so freq ko 0th index mei pass krenge
 
     for (auto &key : map)
@@ -111,3 +111,52 @@ vector<int> topKFrequent(vector<int> &nums, int k)
     }
     return ans;
 }
+
+//Leetcode 380 -> Insert Delete Get Random O(1)
+class RandomizedSet
+{
+public:
+    unordered_map<int, int> map;
+    vector<int> list;
+    /** Initialize your data structure here. */
+    RandomizedSet()
+    {
+    }
+
+    //Inserts a value to the set. Returns true if the set did not already contain the specified element
+    bool insert(int val)
+    {
+        if (map.find(val) != map.end())
+            return false;
+
+        list.push_back(val);
+        map[val] = list.size() - 1;
+
+        return true;
+    }
+
+    // Removes a value from the set. Returns true if the set contained the specified element
+    bool remove(int val)
+    {
+        if (map.find(val) == map.end())
+            return false;
+
+        int idx = map[val];
+        int lidx = list.size() - 1;
+
+        list[idx] = list[lidx];
+        map[list[lidx]] = idx;
+
+        list.pop_back();
+        map.erase(val);
+
+        return true;
+    }
+
+    // Get a random element from the set
+    int getRandom()
+    {
+        int idx = rand() % list.size();
+        return list[idx];
+    }
+};
