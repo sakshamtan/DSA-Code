@@ -337,4 +337,97 @@ class RandomizedSet {
         return list.get(idx);
     }
 }
+
+//Leetcode 895 -> Maximum Frequency Stack
+class FreqStack {
+    
+    HashMap<Integer,Integer> map;
+    ArrayList<Stack<Integer>> freqMap;
+    int maxFreq = 0;
+
+    public FreqStack() 
+    {
+        map = new HashMap<>();
+        freqMap = new ArrayList<>();
+        
+        freqMap.add(new Stack<>());
+    }
+    
+    public void push(int val)  //O(1)
+    {
+        map.put(val,map.getOrDefault(val,0) + 1);
+        maxFreq = Math.max(maxFreq,map.get(val));
+        
+        if(maxFreq == freqMap.size())
+            freqMap.add(new Stack<>());
+        
+        freqMap.get(map.get(val)).add(val); // freq vaale index vaale stack mei push
+    }
+    
+    public int pop() //O(1)
+    {
+        int rv = freqMap.get(maxFreq).pop();
+        if(freqMap.get(maxFreq).size() == 0)
+        {
+            freqMap.remove(maxFreq);
+            maxFreq--;
+        }
+        
+        map.put(rv,map.get(rv) -1);
+        if(map.get(rv) == 0)
+            map.remove(rv);
+        
+        return rv;
+    }
+}
+
+//Leetcode 895 -> PriorityQueue Solution
+class FreqStack {
+    class pair{
+        int val = 0;
+        int freq = 0;
+        int idx = 0;
+        
+        pair(int val,int freq,int idx)
+        {
+            this.val = val;
+            this.freq = freq;
+            this.idx = idx;
+        }
+    }
+    
+    HashMap<Integer,Integer> map;
+    PriorityQueue<pair> pq;
+    int idx = 0;
+
+    public FreqStack() 
+    {
+        map = new HashMap<>();
+        pq = new PriorityQueue<>((a,b)->{
+            if(a.freq == b.freq)
+                return b.idx - a.idx;
+            
+            return b.freq - a.freq;
+        });
+        
+        idx = 0;
+    }
+    
+    public void push(int val) // logn
+    {
+        map.put(val,map.getOrDefault(val,0)+1);
+        pq.add(new pair(val,map.get(val),idx++));
+    }
+    
+    public int pop()  //logn
+    {
+        pair p = pq.remove();
+        map.put(p.val,map.get(p.val)-1);
+        
+        if(map.get(p.val) == 0)
+            map.remove(p.val);
+        
+        return p.val;
+    }
+}
 }
