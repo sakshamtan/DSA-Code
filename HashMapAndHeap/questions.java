@@ -596,4 +596,49 @@ public ListNode mergeKLists(ListNode[] lists)
     }
     return dummy.next;
 }
+
+//Leetcode 632 -> Smallest Range Covering Elements from K Lists
+public int[] smallestRange(List<List<Integer>> nums) 
+{
+    int n = nums.size();
+        
+    //(r,c) pushed in the pq 1D coordinates nhi daal paaye as n and m is varying(n != m)
+    PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->{
+        int r1 = a[0], c1 = a[1];
+        int r2 = b[0], c2 = b[1];
+            
+        return nums.get(r1).get(c1) - nums.get(r2).get(c2);
+        // minPQ based on values of nums
+    });
+        
+    int maxValue = -(int)1e9;
+    for(int i = 0; i < n; i++)
+    {
+        pq.add(new int[]{i,0}); // adding first col into pq
+        maxValue = Math.max(maxValue,nums.get(i).get(0));
+    }
+        
+    int sp = -1, ep = -1, range = (int)1e9;
+    while(pq.size() == n) // jab n se kam log ho jaaye means ek list khtm ho jaaye to iterations rok deni hai
+    {
+        int[] re = pq.remove();
+        int r = re[0], c = re[1];
+        int val = nums.get(r).get(c);
+            
+        if(maxValue - val < range)
+        {
+            sp = val;
+            ep = maxValue;
+            range = maxValue - val;
+        }
+            
+        c++;
+        if(c < nums.get(r).size())
+        {
+            pq.add(new int[]{r,c});
+            maxValue = Math.max(maxValue,nums.get(r).get(c));
+        }
+    }
+    return new int[]{sp,ep};
+} 
 }
