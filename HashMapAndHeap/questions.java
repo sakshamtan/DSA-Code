@@ -529,4 +529,71 @@ public int swimInWater(int[][] grid)
     }
     return time;
 }
+
+//Leetcode 295 -> Find Median From Data Stream
+class MedianFinder {
+    PriorityQueue<Integer> minPQ;
+    PriorityQueue<Integer> maxPQ;
+
+    // initialize your data structure here
+    public MedianFinder() 
+    {
+        minPQ = new PriorityQueue<>();
+        maxPQ = new PriorityQueue<>((a,b)->{
+            return b - a;
+        });
+    }
+    
+    public void addNum(int num) // NlogN
+    {
+        if(maxPQ.size() == 0 || num <= maxPQ.peek())
+            maxPQ.add(num);
+        else
+            minPQ.add(num);
+        
+        if(maxPQ.size() - minPQ.size() == -1)
+            maxPQ.add(minPQ.remove());
+        if(maxPQ.size() - minPQ.size() == 2)
+            minPQ.add(maxPQ.remove());
+        
+    }
+    
+    public double findMedian() //O(1)
+    {
+        if(maxPQ.size() == minPQ.size())
+            return (maxPQ.peek() + minPQ.peek()) / 2.0;
+        else
+            return maxPQ.peek() * 1.0;
+    }
+}
+
+//Leetcode 23 -> Merge K sorted Lists (By using Priority Queue)
+public ListNode mergeKLists(ListNode[] lists) 
+{
+    PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b)->{
+        return a.val - b.val;
+    });
+        
+    ListNode dummy = new ListNode(-1);
+    ListNode prev = dummy;
+        
+    for(int i = 0; i < lists.length;i++)
+    {
+        if(lists[i] != null)
+            pq.add(lists[i]);
+    }
+            
+        
+    while(pq.size() != 0)
+    {
+        ListNode rn = pq.remove();
+            
+        prev.next = rn;
+        prev = prev.next;
+            
+        if(rn.next != null)
+            pq.add(rn.next);
+    }
+    return dummy.next;
+}
 }

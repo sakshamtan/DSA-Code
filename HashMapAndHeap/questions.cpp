@@ -214,3 +214,40 @@ public:
         return p.val;
     }
 };
+
+//Leetcode 23 -> Merge K Sorted Lists(By using PriorityQueue)
+class comp
+{
+public:
+    bool operator()(const ListNode *a, const ListNode *b) const
+    {
+        return a->val > b->val;
+    }
+};
+
+ListNode *mergeKLists(vector<ListNode *> lists)
+{
+    priority_queue<ListNode *, vector<ListNode *>, comp> pq;
+
+    ListNode *dummy = new ListNode(-1);
+    ListNode *prev = dummy;
+
+    for (int i = 0; i < lists.size(); i++)
+    {
+        if (lists[i] != nullptr)
+            pq.push(lists[i]);
+    }
+
+    while (pq.size() != 0)
+    {
+        ListNode* rn = pq.top();
+        pq.pop();
+
+        prev->next = rn;
+        prev = prev->next;
+
+        if (rn->next != nullptr)
+            pq.push(rn->next);
+    }
+    return dummy->next;
+}
