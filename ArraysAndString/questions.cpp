@@ -25,3 +25,22 @@ void rotateByK(vector<int>& arr,int r)
     reverse(arr,0,n-r-1);
 
 }
+
+//Max Sum in the Configuration -> GFG
+int max_sum(vector<int>& arr,int n)
+{
+    int sum = 0, sumWithIndex = 0;
+    for(int i = 0; i < n; i++)
+    {
+        sum += arr[i];
+        sumWithIndex += i * arr[i];
+    }
+
+    int maxAns = sumWithIndex;
+    for(int i = 1; i < n; i++)
+    {
+        sumWithIndex = sumWithIndex - sum + arr[i - 1] * n;
+        maxAns = max(maxAns,sumWithIndex);
+    } 
+    return maxAns;
+}

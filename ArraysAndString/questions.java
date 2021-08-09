@@ -60,6 +60,21 @@ public static void segregateZeroAndOne(int[] arr)
     }
 }
 
+//One pass O(N) Inplace solution
+public static void segregateZeroOneAndTwo(int[] arr)
+{
+    int n = arr.length, pt1 = -1, pt2 = n-1, itr = 0;
+    while(itr <= pt2)
+    {
+        if(arr[itr] == 0)
+            swap(arr,++pt1,itr++);
+        else if(arr[itr] == 2)
+            swap(arr,pt2--,itr);
+        else
+            itr++;
+    }
+}
+
 //Leetcode 462 -> Minimum Moves to Equal Array Elements II
 public int findMedian(int[] arr)
 {
