@@ -31,6 +31,35 @@ public static void rotateByK(int[] arr,int r)
 
 } 
 
+//+ve and -ve regions maintain krte huye chlenge array mei
+public static void segregatePositiveAndNegative(int[] arr)
+{
+    int ptr = -1;
+    int itr = 0;
+    int n = arr.length;
+    while(itr < n)
+    {
+        if(arr[itr] < 0)
+            swap(arr,++ptr,itr);
+        
+        itr++;
+    }
+}
+
+public static void segregateZeroAndOne(int[] arr)
+{
+    int ptr = -1;
+    int n = arr.length;
+    int itr = 0;
+    while(itr < n)
+    {
+        if(arr[itr] == 0)
+            swap(arr,++ptr,itr);
+        
+        itr++;
+    }
+}
+
 //Leetcode 462 -> Minimum Moves to Equal Array Elements II
 public int findMedian(int[] arr)
 {
