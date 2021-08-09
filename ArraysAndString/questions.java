@@ -99,4 +99,18 @@ public int minMoves2(int[] nums)
     }
     return moves;
 }
+
+//Leetcode 11 -> Container with Most Water
+public int maxArea(int[] height) 
+{
+    int n = height.length, i = 0, j = n-1;
+    int maxArea = 0;
+        
+    while(i < j)
+    {
+        int w = j - i;
+        maxArea = height[i] < height[j] ?  Math.max(maxArea,w * height[i++]) : Math.max(maxArea,w * height[j--]);
+    }
+    return maxArea;
+}
 }
