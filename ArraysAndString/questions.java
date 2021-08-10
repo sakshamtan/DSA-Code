@@ -194,4 +194,36 @@ public int lengthOfLongestSubstringTwoDistinct(String s)
     }
     return len;
 }
+
+//Leetcode 76 -> Minimum Window Substring
+public String minWindow(String s, String t) 
+{
+    int ns = s.length(), nt = t.length();
+    if(ns < nt)
+        return "";
+        
+    int si = 0, ei = 0, count = nt, len = (int)1e9, gsi = 0;
+    int[] freq = new int[128];
+    for(int i = 0; i < t.length(); i++)
+        freq[t.charAt(i)]++;
+        
+    while(ei < ns)
+    {
+        if(freq[s.charAt(ei++)]-- > 0)
+            count--;
+            
+        while(count == 0)
+        {
+            if(ei - si < len)
+            {
+                len = ei - si;
+                gsi = si;
+            }
+            
+            if(freq[s.charAt(si++)]++ == 0)
+            count++;
+        }
+    }
+    return len == (int)1e9 ? "" : s.substring(gsi,gsi + len);
+}
 }
