@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 
-
 using namespace std;
 
 void reverse(vector<int>& arr,int i,int j)
