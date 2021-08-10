@@ -171,4 +171,27 @@ public String longestSubstring(String s)
     return s.substring(ssi,sei);  // returning the longest such substring
 }
 
+//Leetcode 159 -> Longest Substring with At Most Distinct Characters
+public int lengthOfLongestSubstringTwoDistinct(String s) 
+{
+    int n = s.length(), si = 0, ei = 0, count = 0, len = 0;
+    if(n <= 2)
+        return n;
+
+    int[] freq = new int[128];
+
+    while(ei < n)
+    {
+        if(freq[s.charAt(ei++)]++ == 0)
+        count++;
+
+        while(count > 2)
+        {
+            if(freq[s.charAt(si++)]-- == 1)
+            count--;
+        }
+        len = Math.max(len,ei - si);
+    }
+    return len;
+}
 }
