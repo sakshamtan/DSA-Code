@@ -113,4 +113,62 @@ public int maxArea(int[] height)
     }
     return maxArea;
 }
+
+//Leetcode 3 -> Longest Substring Without Repeating Characters
+public int lengthOfLongestSubstring(String s) 
+{
+    int n = s.length(), si = 0, ei = 0, count = 0, len = 0;
+    if(n <= 1)
+        return n;
+    int[] freq = new int[128];
+        
+    while(ei < n)
+    {
+        if(freq[s.charAt(ei++)]++ > 0)
+            count++;
+            
+        while(count != 0)
+        {
+            if(freq[s.charAt(si++)]-- > 1)
+                count--;
+        }
+            
+        len = Math.max(len,ei - si);
+    }
+    return len;
+}
+
+//Follow Up Now return the longest Substring without repeating characters
+public String longestSubstring(String s) 
+{
+    int n = s.length(), si = 0, ei = 0, count = 0, len = 0;
+    if(n <= 1)
+        return n;
+    int[] freq = new int[128];
+
+    int ssi = 0, sei = 0; // substring starting index and ending index  
+    while(ei < n)
+    {
+        if(freq[s.charAt(ei)] == 1)
+            count++;
+        freq[s.charAt(ei)]++;
+        ei++;
+            
+        while(count != 0)
+        {
+            if(freq[s.charAt(si)] == 2)
+                count--;
+            freq[s.cahrAt(si)]--;
+            si++;
+        }
+        if(ei - si > len)
+        {
+            len = ei - si;
+            ssi = si;
+            sei = ei;
+        }  
+    }
+    return s.substring(ssi,sei);  // returning the longest such substring
+}
+
 }
