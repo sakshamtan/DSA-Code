@@ -171,7 +171,7 @@ public String longestSubstring(String s)
     return s.substring(ssi,sei);  // returning the longest such substring
 }
 
-//Leetcode 159 -> Longest Substring with At Most Distinct Characters
+//Leetcode 159 -> Longest Substring with At Most Distinct Characters(Locked)
 public int lengthOfLongestSubstringTwoDistinct(String s) 
 {
     int n = s.length(), si = 0, ei = 0, count = 0, len = 0;
