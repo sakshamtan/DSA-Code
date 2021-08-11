@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class questions{
 
@@ -225,5 +227,93 @@ public String minWindow(String s, String t)
         }
     }
     return len == (int)1e9 ? "" : s.substring(gsi,gsi + len);
+}
+
+//Smallest Distict Window -> GFG
+public static String smallestWindowOfItself(String str)
+{
+    int n = str.length(), si = 0, ei = 0, count = 0, len = n;
+
+    if(n <= 1)
+        return str;
+
+    int[] freq = new int[128];
+    for(int i = 0; i < str.length(); i++)
+    {
+        if(freq[str.charAt(i)] == 0)
+        {
+            count++;
+            freq[str.charAt(i)] = 1;
+        }
+    }
+    
+    int ssi = 0;
+    while(ei < n)
+    {
+        if(freq[str.charAt(ei++)]-- > 0)
+            count--;
+
+        while(count == 0)
+        {
+            if(ei - si < len)
+            {
+                len = ei - si;
+                ssi = si;
+            }
+
+            if(freq[str.charAt(si++)]++ == 0)
+                count++;
+        }
+    }
+    return str.substring(ssi,ssi + len);
+}
+
+//Leetcode 340 -> Longest Substring with at most K distinct Characters
+public int lengthOfLongestSubstringKDistinct(String s,int k)
+{
+    int n = s.length(), si = 0, ei = 0, count = 0, len = 0;
+    if(n <= k)
+        return n;
+
+    int[] freq = new int[128];
+
+    while(ei < n)
+    {
+        if(freq[s.charAt(ei++)]++ == 0)
+        count++;
+
+        while(count > k)  // k instead of 2 everywhere
+        {
+            if(freq[s.charAt(si++)]-- == 1)
+            count--;
+        }
+        len = Math.max(len,ei - si);
+    }
+    return len;
+}
+
+//Leetcode 1456 -> Maximum Number of Vowels in a Substring of Given Length
+public boolean isVowel(Character ch)
+{
+    return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+}
+
+//Leetcode function    
+public int maxVowels(String s, int k) 
+{
+    int n = s.length(), si = 0, ei = 0, vowelCount = 0, maxVowelCount = 0;
+    while(ei < n)
+    {
+        if(isVowel(s.charAt(ei++)))
+            vowelCount++;
+            
+        if(ei - si == k)
+        {
+            maxVowelCount = Math.max(maxVowelCount,vowelCount);
+            if(isVowel(s.charAt(si++)))
+                vowelCount--;
+        }
+    }
+    return maxVowelCount;
 }
 }
