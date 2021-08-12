@@ -458,6 +458,7 @@ public int findMaxConsecutiveOnes(int[] arr)
     return len;
 }
 
+//si ko direct ei pe bhi jump krwa skte hai as soon as ei encounters a '0'
 public int findMaxConsecutiveOnes_02(int[] arr) 
 {
     int n = arr.length, si = 0, ei = 0, len = 0;
