@@ -477,6 +477,7 @@ public int findMaxConsecutiveOnes_02(int[] arr)
 public int findMaxConsecutiveOnes(int[] arr) 
 {
     int n = arr.length, si = 0, ei = 0, len = 0, count = 0;
+    
     while(ei < n)
     {
         if(arr[ei++] == 0)
