@@ -472,4 +472,43 @@ public int findMaxConsecutiveOnes_02(int[] arr)
     }
     return len;
 }
+
+//Leetcode 487 -> Max Consecutive Ones II (one 0 is allowed to be flipped so one 0 is allowed in the window)
+public int findMaxConsecutiveOnes(int[] arr) 
+{
+    int n = arr.length, si = 0, ei = 0, len = 0, count = 0;
+    while(ei < n)
+    {
+        if(arr[ei++] == 0)
+            count++;
+
+        while(count == 2)
+        {
+            if(arr[si++] == 0)
+                count--;
+        }
+        len = Math.max(len,ei - si);
+    }
+    return len;
+}
+
+//Leetcode 1004 -> Max Consecutive Ones III(At most K 0's are allowed to be flipped)
+public int longestOnes(int[] arr, int k) 
+{
+    int n = arr.length, si = 0, ei = 0, len = 0, count = 0;
+
+    while(ei < n)
+    {
+        if(arr[ei++] == 0)
+            count++;
+            
+        while(count > k)
+        {
+            if(arr[si++] == 0)
+                count--;
+        }
+        len = Math.max(len,ei - si);
+    }
+    return len;
+}
 }
