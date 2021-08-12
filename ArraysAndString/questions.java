@@ -316,4 +316,81 @@ public int maxVowels(String s, int k)
     }
     return maxVowelCount;
 }
+
+//Leetcode 992 -> Subarrays with K Different Integers
+//returns no of subarrays with at most k distinct integers
+public int subarrayWithatMostKDistinct(int[] arr,int k)
+{
+    HashMap<Integer,Integer> freq = new HashMap<>();
+    int n = arr.length, si = 0, ei = 0, ans = 0;
+    while(ei < n)
+    {
+        freq.put(arr[ei],freq.getOrDefault(arr[ei],0) + 1);
+        ei++;
+            
+        while(freq.size() > k)
+        {
+            freq.put(arr[si],freq.get(arr[si]) - 1);
+            
+            if(freq.get(arr[si]) == 0)
+                freq.remove(arr[si]);
+                
+            si++;
+        }
+        ans += ei - si;
+    }
+    return ans;
+}
+
+//Using Array of 20001 size instead of HashMap -> (Better chlta hai ye vaala)
+public int subarrayWithatMostKDistinct_02(int[] arr,int k)
+{
+    int[] freq = new int[20000 + 1];
+    int n = arr.length, si = 0, ei = 0,count = 0, ans = 0;
+    while(ei < n)
+    {
+        if(freq[arr[ei++]]++ == 0)
+            count++;
+            
+        while(count > k)
+        {
+            if(freq[arr[si++]]-- == 1)
+                count--;
+        }
+        ans += ei - si;
+    }
+    return ans;
+}
+
+//Leetcode function
+public int subarraysWithKDistinct(int[] nums, int k) 
+{
+    return subarrayWithatMostKDistinct(nums,k) - subarrayWithatMostKDistinct(nums,k-1);
+}
+
+//Leetcode 1248 -> Number of Nice Subarrays (No of subarrays containing exactly k odd no.s)
+// Returns no of subarrays containing at most k odd no.s
+public int atMostKodd(int[] arr,int k)
+{
+    int n = arr.length, si = 0, ei = 0, count = 0, ans = 0;
+        
+    while(ei < n)
+    {
+        if((arr[ei++] & 1) != 0)
+            count++;
+            
+        while(count > k)
+        {
+            if((arr[si++] & 1) != 0)
+                count--;
+        }
+        ans += ei - si;
+    }
+    return ans;
+}
+
+public int numberOfSubarrays(int[] nums, int k) 
+{
+    return atMostKodd(nums,k) - atMostKodd(nums,k-1);
+}
 }
