@@ -389,6 +389,7 @@ public int atMostKodd(int[] arr,int k)
     return ans;
 }
 
+//Leetcode function
 public int numberOfSubarrays(int[] nums, int k) 
 {
     return atMostKodd(nums,k) - atMostKodd(nums,k-1);
@@ -412,5 +413,28 @@ public int totalFruit(int[] fruits)
         len = Math.max(len,ei - si);
     }
     return len;
+}
+
+//Leetcode 930 -> Binary SubArrays with Sum
+public int atMostSum(int[] arr,int tar)
+{
+    int n = arr.length, si = 0, ei = 0, sum = 0, count = 0;
+        
+    while(ei < n)
+    {
+        sum += arr[ei++];
+            
+        while(sum > tar)
+            sum -= arr[si++];
+            
+        count += ei - si;
+    }
+    return count;
+}
+
+//Leetcode function
+public int numSubarraysWithSum(int[] nums, int goal) 
+{
+    return atMostSum(nums,goal) - (goal != 0 ? atMostSum(nums,goal-1) : 0);
 }
 }
