@@ -393,4 +393,24 @@ public int numberOfSubarrays(int[] nums, int k)
 {
     return atMostKodd(nums,k) - atMostKodd(nums,k-1);
 }
+
+//Leetcode 904 -> Fruit into Basket -> (Length of Longest subarray with at most 2 unique integers)
+public int totalFruit(int[] fruits) 
+{
+    int n = fruits.length, si = 0, ei = 0, count = 0, len = 0;
+    int[] freq = new int[40000 + 1];
+        
+    while(ei < n)
+    {
+        if(freq[fruits[ei++]]++ == 0)
+            count++;
+            
+        while(count > 2)
+            if(freq[fruits[si++]]-- == 1)
+                count--;
+            
+        len = Math.max(len,ei - si);
+    }
+    return len;
+}
 }
