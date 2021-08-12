@@ -416,6 +416,7 @@ public int totalFruit(int[] fruits)
 }
 
 //Leetcode 930 -> Binary SubArrays with Sum
+// Same approach -> AtMost tar sum vaale subarrays ka count nikaal lia
 public int atMostSum(int[] arr,int tar)
 {
     int n = arr.length, si = 0, ei = 0, sum = 0, count = 0;
@@ -436,5 +437,38 @@ public int atMostSum(int[] arr,int tar)
 public int numSubarraysWithSum(int[] nums, int goal) 
 {
     return atMostSum(nums,goal) - (goal != 0 ? atMostSum(nums,goal-1) : 0);
+}
+
+//Leetcode 485 -> Max Consecutive Ones
+public int findMaxConsecutiveOnes(int[] arr) 
+{
+    int n = arr.length, si = 0, ei = 0, count = 0,len = 0;
+        
+    while(ei < n)
+    {
+        if(arr[ei++] == 0)
+            count++;
+            
+        while(count == 1)
+            if(arr[si++] == 0)
+                count--;
+            
+        len = Math.max(len,ei - si);
+    }
+    return len;
+}
+
+public int findMaxConsecutiveOnes_02(int[] arr) 
+{
+    int n = arr.length, si = 0, ei = 0, len = 0;
+        
+    while(ei < n)
+    {
+        if(arr[ei++] == 0)
+            si = ei;
+
+        len = Math.max(len,ei - si);
+    }
+    return len;
 }
 }
