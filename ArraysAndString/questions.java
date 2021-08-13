@@ -653,6 +653,7 @@ public int[] maxSlidingWindow_01(int[] arr, int k)
         
     int n = arr.length,idx = 0;
     int[] ans = new int[n - k + 1];
+
     for(int i = 0; i < n; i++)
     {
         while(pq.size() != 0 && pq.peek() <= i - k)
@@ -661,6 +662,29 @@ public int[] maxSlidingWindow_01(int[] arr, int k)
         pq.add(i);
         if(i >= k - 1)
             ans[idx++] = arr[pq.peek()];
+    }
+    return ans;
+}
+
+//Using Deque -> O(N) time and O(N) space
+public int[] maxSlidingWindow(int[] arr, int k) 
+{
+    LinkedList<Integer> deque = new LinkedList<>();
+    int n = arr.length,idx = 0;
+    int[] ans = new int[n - k + 1];
+
+    for(int i = 0; i < n; i++)
+    {
+        while(deque.size() != 0 && deque.getFirst() <= i - k)
+            deque.removeFirst();
+            
+        while(deque.size() != 0 && arr[deque.getLast()] <= arr[i])
+            deque.removeLast();
+            
+        deque.addLast(i);
+        
+        if(i >= k - 1)
+            ans[idx++] = arr[deque.getFirst()];
     }
     return ans;
 }
