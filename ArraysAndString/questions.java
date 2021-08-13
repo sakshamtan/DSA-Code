@@ -642,4 +642,26 @@ public int findMaxLength(int[] arr)
     }
     return len;
 }
+
+//Leetcode 239 -> Maximum Sliding Window
+// Using PQ -> NlogN time and N space
+public int[] maxSlidingWindow_01(int[] arr, int k) 
+{
+    PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->{
+        return arr[b] - arr[a];
+    });
+        
+    int n = arr.length,idx = 0;
+    int[] ans = new int[n - k + 1];
+    for(int i = 0; i < n; i++)
+    {
+        while(pq.size() != 0 && pq.peek() <= i - k)
+            pq.remove();
+            
+        pq.add(i);
+        if(i >= k - 1)
+            ans[idx++] = arr[pq.peek()];
+    }
+    return ans;
+}
 }
