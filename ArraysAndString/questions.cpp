@@ -63,7 +63,7 @@ vector<int> maxSlidingWindow(vector<int>& arr, int k)
         deque.push_back(i);
         
         if(i >= k - 1)
-            ans.push_back([deque.front()]);
+            ans.push_back(arr[deque.front()]);
     }
     return ans;
 }
