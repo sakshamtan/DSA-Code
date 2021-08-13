@@ -642,5 +642,4 @@ public int findMaxLength(int[] arr)
     }
     return len;
 }
-
 }
