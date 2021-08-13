@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.HashMap;
 
 public class questions{
 
@@ -509,6 +510,91 @@ public int longestOnes(int[] arr, int k)
                 count--;
         }
         len = Math.max(len,ei - si);
+    }
+    return len;
+}
+
+//Leetcode 974 -> Subarray Sums Divisible By K
+public int subarraysDivByK(int[] arr, int k) 
+{
+    int[] rem = new int[k];
+    int n = arr.length, ei = 0, sum = 0, ans = 0;
+        
+    rem[0] = 1; // jiska rem 0 hai vo already divisible hai
+    while(ei < n)
+    {
+        sum += arr[ei++];
+            
+        int r = (sum % k + k) % k;
+            
+        ans += rem[r];  // pehle rem ki pichli freq add and then rem ko update
+        rem[r]++;
+        
+    }
+    return ans;    
+}
+
+//Length of longest subarray having sum divisible by k using Array
+public int subarraysDivByK_length(int[] arr, int k) 
+{
+    int[] rem = new int[k];
+    Arrays.fill(rem,-2);
+    int n = arr.length, ei = 0, sum = 0, len = 0;
+        
+    rem[0] = -1; // jiska rem 0 hai vo already divisible hai
+    while(ei < n)
+    {
+        sum += arr[ei];
+        
+        int r = (sum % k + k) % k;
+        
+        if(rem[r] == -2) // sirf pehli baar update krna hai ei as tabhi longest length mil skti hai
+            rem[r] = ei;
+        else
+            len = Math.max(len,ei - rem[r]);
+
+        ei++;
+    }
+    return len;
+}
+
+//Now using HashMap instead of freq array
+public int subarraysDivByK_map(int[] arr, int k) 
+{
+    HashMap<Integer,Integer> rem = new HashMap<>();
+    int n = arr.length, ei = 0, sum = 0, ans = 0;
+        
+    rem.put(0,1); // jiska rem 0 hai vo already divisible hai
+    while(ei < n)
+    {
+        sum += arr[ei++];
+            
+        int r = (sum % k + k) % k;
+            
+        ans += rem.getOrDefault(r,0);  // pehle rem ki pichli freq add and then rem ko update
+        rem.put(r,rem.getOrDefault(r,0)+1);
+        
+    }
+    return ans;    
+}
+
+//Length of longest subarray having sum divisible by k using HashMap
+public int subarraysDivByK_length_map(int[] arr, int k) 
+{
+    HashMap<Integer,Integer> rem = new HashMap<>();
+    int n = arr.length, ei = 0, sum = 0, len = 0;
+        
+    rem.put(0,-1); // jiska rem 0 hai vo already divisible hai
+    while(ei < n)
+    {
+        sum += arr[ei];
+        
+        int r = (sum % k + k) % k;
+        
+        rem.putIfAbsent(r,ei); // first time update krega bs
+
+        len = Math.max(len,ei - rem[r]);
+        ei++;
     }
     return len;
 }
