@@ -598,4 +598,49 @@ public int subarraysDivByK_length_map(int[] arr, int k)
     }
     return len;
 }
+
+//No of SubArrays with equal 1's and 0's (GFG) -> 0 ko -1 se replace krdia and jb sum 0 aayega to equal no of 0's and 1's honge
+public int countSubarrWithEqualZeroAndOne(int[] arr, int n)
+{
+    HashMap<Integer,Integer> map = new HashMap<>();
+    map.put(0,1);
+        
+    int ei = 0,sum = 0, ans = 0;
+    while(ei < n)
+    {
+        int val = arr[ei++];
+        sum += val;
+            
+        if(val == 0)
+        sum += -1;
+            
+        ans += map.getOrDefault(sum,0);
+        map.put(sum,map.getOrDefault(sum,0)+1);
+    
+    }
+    return ans;
+}
+
+//Leetcode 525 -> Contiguos Array -> Now return the length of longest subarray having equal no of 0's and 1's
+public int findMaxLength(int[] arr) 
+{
+    HashMap<Integer,Integer> map = new HashMap<>();
+    map.put(0,-1);
+        
+    int n = arr.length, ei = 0, len = 0,sum = 0;
+    while(ei < n)
+    {
+        int val = arr[ei];
+        sum += val;
+            
+        if(val == 0)
+            sum += -1;
+            
+        map.putIfAbsent(sum,ei);
+        len = Math.max(len,ei - map.get(sum));
+        ei++;
+    }
+    return len;
+}
+
 }
