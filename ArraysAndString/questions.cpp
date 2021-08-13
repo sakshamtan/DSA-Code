@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <list>
 
 using namespace std;
 
@@ -42,4 +43,27 @@ int max_sum(vector<int>& arr,int n)
         maxAns = max(maxAns,sumWithIndex);
     } 
     return maxAns;
+}
+
+//Leetcode 239 -> Maximum Sliding Window
+vector<int> maxSlidingWindow(vector<int>& arr, int k) 
+{
+    list<int> deque;
+    int n = arr.size();
+    vector<int> ans;
+
+    for(int i = 0; i < n; i++)
+    {
+        while(deque.size() != 0 && deque.front() <= i - k)
+            deque.pop_front();
+            
+        while(deque.size() != 0 && arr[deque.back()] <= arr[i])
+            deque.pop_back();
+            
+        deque.push_back(i);
+        
+        if(i >= k - 1)
+            ans.push_back([deque.front()]);
+    }
+    return ans;
 }
