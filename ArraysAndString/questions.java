@@ -690,4 +690,57 @@ public int[] maxSlidingWindow(int[] arr, int k)
     }
     return ans;
 }
+
+//Kadanes Algorithm
+// -ve arr ke liye 0 ans dega [-2,-4,-5,-9] gSum = 0
+public int KadanesAlgo_01(int[] arr)
+{
+    int gSum = 0, cSum = 0;
+    for(int ele : arr)
+    {
+        cSum += ele;
+        if(cSum > gSum)
+            gSum = cSum;
+
+        if(cSum <= 0)
+            cSum = 0;
+    }
+    return gSum;
+}
+
+//-ve arr ke liye sbse chotta -ve ans dega [-2,-4,-5,-9] gSum = -2
+public int KadanesAlgo_02(int[] arr)
+{
+    int gSum = -(int)1e9, cSum = 0;
+    for(int ele : arr)
+    {
+        cSum = Math.max(ele, cSum + ele);
+        gSum = Math.max(cSum,gSum);
+    }
+    return gSum;
+}
+
+//Now to return the subArray with largest sum -> starting and ending indexes store
+public int KadanesAlgo_01_SubArray(int[] arr)
+{
+    int gSum = 0, cSum = 0, gsi = 0, gei = 0, csi = 0;  // csi -> current starting index
+    for(int i = 0; i < arr.length; i++)
+    {
+        cSum += arr[i];
+        if(cSum > gSum)
+        {
+            gSum = cSum;
+
+            gsi = csi;
+            gei = i;
+        }
+
+        if(cSum <= 0)
+        {
+            cSum = 0;
+            csi = i + 1;
+        }
+    }
+    return gSum;
+}
 }
