@@ -778,4 +778,27 @@ public int kConcatenationMaxSum(int[] arr, int k)
     }
     return (int)((prevSum + (k-2) * (sum - prevSum)) % mod);
 }
+
+//x , s2, s3 alag se nikaal lia and direct formula apply
+public int kConcatenationMaxSum_02(int[] arr, int k) 
+{
+    int kadanesSum = KadanesAlgo(arr,1);
+    if(k == 1)
+        return kadanesSum;
+        
+    long prefixSum = 0, suffixSum = 0, maxPrefixSum = 0, maxSuffixSum = 0, arraySum = 0;
+    int n = arr.length;
+    for(int i = 0, j = n - 1; i < n; i++,j--)
+    {
+        prefixSum += arr[j];
+        suffixSum += arr[i];
+        arraySum += arr[i];
+            
+        maxPrefixSum = Math.max(maxPrefixSum,prefixSum);
+        maxSuffixSum = Math.max(maxSuffixSum,suffixSum);
+    }
+
+    arraySum = arraySum < 0 ? 0 : arraySum % mod;
+    return (int) Math.max(kadanesSum,maxPrefixSum + maxSuffixSum + ((k-2) * arraySum) % mod) % mod;        
+}
 }
