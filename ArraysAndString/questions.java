@@ -823,7 +823,7 @@ public int maximumSumRectangle(int R, int C, int arr[][])
 }
 
 //Now to print the subMatrix / rectangle that has maximum sum
-pubic int[] KadanesAlgo_Generic(int[] arr)
+public int[] KadanesAlgo_Generic(int[] arr)
 {
     int cSum = 0, gSum = -(int)1e9, gsi = 0, csi = 0, gei = 0;
     for(int i = 0; i < arr.length; i++)
