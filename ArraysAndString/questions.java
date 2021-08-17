@@ -937,4 +937,46 @@ public int numSubmatrixSumTarget(int[][] matrix, int target)
     }
     return count;
 }
+
+//Leetcode 363 -> Max Sum No Larger than K
+public int kadanesAlgoWithSumUnderK(int[] arr,int k)
+{
+    int gsum = -(int)1e9, csum = 0;
+    for(int ele : arr)
+    {
+        csum += ele;
+        csum = Math.max(csum,ele);
+        gsum = Math.max(gsum,csum);
+            
+        if(gsum >= k)
+            return gsum;
+    }
+    return gsum;
+}
+
+public int maxSumSubmatrix(int[][] arr, int k) 
+{
+    int n = arr.length, m = arr[0].length;
+    int maxRes = 0;
+        
+    for(int fixedRow = 0; fixedRow < n; fixedRow++)
+    {
+        int[] prefixColArray = new int[m];
+        for(int row = fixedRow; row < n; row++)
+        {
+            for(int col = 0; col < m; col++)
+                prefixColArray[col] += arr[row][col];
+                
+            int sum = kadanesAlgoWithSumUnderK(prefixColArray,k);
+            
+            if(sum == k)
+                return sum;
+            else if(sum < k)
+                maxRes = Math.max(maxRes,sum);
+                
+            // ?????
+        }
+    }
+    return maxRes;
+}
 }
