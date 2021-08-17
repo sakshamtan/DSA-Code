@@ -1553,4 +1553,21 @@ public boolean isSymmetric(TreeNode root)
 {
     return isMirror(root,root); 
 }
+
+//Leetcode 1448 -> Count Good Nodes in Binary Tree
+public int solve(TreeNode root,int curMaxVal)
+{
+    if(root == null)
+        return 0;
+        
+    curMaxVal = Math.max(curMaxVal,root.val); // curMaxVal = Current Path maximum Value
+        
+    return ((root.val >= curMaxVal)  ? 1 : 0) + solve(root.left,curMaxVal) + solve(root.right,curMaxVal);
+}
+
+//Leetcode function
+public int goodNodes(TreeNode root) 
+{
+    return solve(root,-(int)1e9);
+}
 }
