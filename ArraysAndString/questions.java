@@ -883,4 +883,58 @@ public int maximumSumRectangle_02(int R, int C, int arr[][])
 
     return maxSum;
 }
+
+//Leetcode 781 -> Rabbits in Forrest
+public int numRabbits(int[] arr) 
+{
+    int[] map = new int[999 - 0 + 1];
+    int ans = 0;
+    for(int ele : arr)
+    {
+        if(map[ele] == 0)
+            ans += ele + 1;
+            
+        map[ele]++;
+        if(map[ele] == ele + 1)
+            map[ele] = 0;
+    }
+    return ans;
+}
+
+//Leetcode 560 -> Subarray Sum Equals k -> Return no of subarrays that sum to target
+public int subarraySum(int[] arr, int tar) 
+{
+    HashMap<Integer,Integer> map = new HashMap<>();
+    map.put(0,1);
+        
+    int count = 0, sum = 0;
+        
+    for(int ele : arr)
+    {
+        sum += ele;
+        count += map.getOrDefault(sum - tar,0);
+        
+        map.put(sum,map.getOrDefault(sum,0) + 1);
+    }
+    return count;
+}
+
+//Leetcode 1074 -> Number of SubMatrices That Sum to K -> Uses Leetcode 560 (Leetcode 560 ka bs 2D version hai)
+public int numSubmatrixSumTarget(int[][] matrix, int target) 
+{
+    int n = matrix.length, m = matrix[0].length, count = 0;
+        
+    for(int fixedRow = 0; fixedRow < n; fixedRow++)
+    {
+        int[] prefixColArray = new int[m];
+        for(int row = fixedRow; row < n; row++)
+        {
+            for(int col = 0; col < m; col++)
+                prefixColArray[col] += matrix[row][col];
+            
+            count += subarraySum(prefixColArray,target);
+        }
+    }
+    return count;
+}
 }
