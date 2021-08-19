@@ -65,7 +65,7 @@ public static void segregateZeroAndOne(int[] arr)
     }
 }
 
-//One pass O(N) Inplace solution
+//One pass O(N) Inplace solution (same as Leetcode 75 -> Sort Colours)
 public static void segregateZeroOneAndTwo(int[] arr)
 {
     int n = arr.length, pt1 = -1, pt2 = n-1, itr = 0;
