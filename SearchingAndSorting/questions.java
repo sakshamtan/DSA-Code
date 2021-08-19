@@ -69,4 +69,23 @@ public int[] searchRange(int[] arr, int data)
 {
     return new int[]{firstIndex(arr,data),lastIndex(arr,data)};
 }
+
+//Leetcode 35 -> Search Insert Position
+public int searchInsert(int[] arr, int data) 
+{
+    int n = arr.length, si = 0, ei = n-1;
+    while(si <= ei)
+    {
+        int mid = (si + ei) / 2;
+            
+        if(arr[mid] <= data)
+            si = mid + 1;
+        else
+            ei = mid-1;
+    }
+        
+    int lastIndex = si - 1;
+    int insertPos = si;
+    return (lastIndex >= 0 && arr[lastIndex] == data) ? lastIndex : insertPos;
+}
 }
