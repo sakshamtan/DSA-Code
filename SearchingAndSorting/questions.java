@@ -204,4 +204,45 @@ public boolean search(int[] arr, int target)
     }
     return false;
 }
+
+//Leetcode 153 -> Find Minimum in Rotated Sorted Array -> Find the pivot ele
+public int findMin(int[] arr) 
+{
+    int n = arr.length, si = 0, ei = n - 1;
+    if(arr[si] <= arr[ei])
+        return arr[si];
+        
+    while(si < ei)
+    {
+        int mid = (si + ei) / 2;
+            
+        if(arr[mid] < arr[ei])
+            ei = mid;
+        else if(arr[si] <= arr[mid])
+            si = mid + 1;
+    }
+    return arr[si];
+}
+
+//Leetcode 154 -> Find Minimum in Sorted Array II -> Now duplicate values are allowed
+public int findMin(int[] arr) 
+{
+    int si = 0, ei = arr.length-1;
+        
+    if(arr[si] < arr[ei])
+        return arr[si];
+        
+    while(si < ei)
+    {
+        int mid = (si + ei) / 2;
+            
+        if(arr[mid] < arr[ei])
+            ei = mid;
+        else if(arr[mid] > arr[ei])
+            si = mid+1;
+        else
+            ei--;
+    }
+    return arr[si];
+}
 }
