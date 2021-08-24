@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
@@ -152,7 +153,7 @@ int nearestElement(vector<int> &arr, int data)
 }
 
 //Leetcode 74 -> Search a 2D matrix
-bool searchMatrix(vector<vector<int>> &matrix, int target)
+bool searchMatrix(vector<vector<int> > &matrix, int target)
 {
     int n = matrix.size(), m = matrix[0].size(), si = 0, ei = n * m - 1;
 
@@ -172,7 +173,7 @@ bool searchMatrix(vector<vector<int>> &matrix, int target)
 }
 
 //Leetcode 240 -> Search a 2D Matrix II
-bool searchMatrix(vector<vector<int>> &matrix, int target)
+bool searchMatrix(vector<vector<int> > &matrix, int target)
 {
     int n = matrix.size(), m = matrix[0].size(), r = n - 1, c = 0;
 
@@ -209,7 +210,7 @@ vector<int> twoSum(vector<int> &arr, int target)
 }
 
 //Now return all the possible unique pairs that add upto target
-vector<vector<int>> twoSum_AllPairs(vector<int> &arr, int target, int si, int ei)
+vector<vector<int> > twoSum_AllPairs(vector<int> &arr, int target, int si, int ei)
 {
     vector<vector<int> > ans;
     while (si < ei)
@@ -235,7 +236,7 @@ vector<vector<int>> twoSum_AllPairs(vector<int> &arr, int target, int si, int ei
 }
 
 //Leetcode 15 -> 3Sum -> Uses TwoSumAllPairs
-void prepareAns(vector<vector<int>> &smallAns, vector<vector<int>> &ans, int fixedEle)
+void prepareAns(vector<vector<int> > &smallAns, vector<vector<int> > &ans, int fixedEle)
 {
     for (vector<int> arr : smallAns)
     {
@@ -247,12 +248,12 @@ void prepareAns(vector<vector<int>> &smallAns, vector<vector<int>> &ans, int fix
     }
 }
 
-vector<vector<int>> threeSum(vector<int> &arr, int target, int si, int ei)
+vector<vector<int> > threeSum(vector<int> &arr, int target, int si, int ei)
 {
     vector<vector<int> > ans;
     for (int i = si; i < ei;)
     {
-        vector<vector<int>> smallAns = twoSum_AllPairs(arr, target - arr[i], i + 1, ei);
+        vector<vector<int> > smallAns = twoSum_AllPairs(arr, target - arr[i], i + 1, ei);
         prepareAns(smallAns, ans, arr[i]);
         i++;
         while (i < ei && arr[i] == arr[i - 1])
@@ -271,12 +272,12 @@ vector<vector<int> > threeSum(vector<int> &arr)
 
 //Leetcode 18 -> 4Sum
 //Uses 3Sum (which in turn uses 2Sum) and prepareAns
-vector<vector<int>> fourSum(vector<int> &arr, int target, int si, int ei)
+vector<vector<int> > fourSum(vector<int> &arr, int target, int si, int ei)
 {
-    vector<vector<int>> ans;
+    vector<vector<int> > ans;
     for (int i = si; i < ei;)
     {
-        vector<vector<int>> smallAns = threeSum(arr, target - arr[i], i + 1, ei);
+        vector<vector<int> > smallAns = threeSum(arr, target - arr[i], i + 1, ei);
         prepareAns(smallAns, ans, arr[i]);
         i++;
         while (i < ei && arr[i] == arr[i - 1])
@@ -291,4 +292,73 @@ vector<vector<int>> fourSum(vector<int> &arr, int target)
     int n = arr.size();
     sort(arr.begin(), arr.end());
     return fourSum(arr, target, 0, n - 1);
+}
+
+//Generic function for kSum
+vector<vector<int>> kSum(vector<int> &arr, int target, int k, int si, int ei)
+{
+    if (k == 2)
+        return twoSum_AllPairs(arr, target, si, ei);
+
+    vector<vector<int>> ans;
+    for (int i = si; i < ei;)
+    {
+        vector<vector<int> > smallAns = kSum(arr, target - arr[i], k - 1, i + 1, ei);
+        prepareAns(smallAns, ans, arr[i]);
+        i++;
+        while (i < ei && arr[i] == arr[i - 1])
+            i++;
+    }
+
+    return ans;
+}
+
+//Return all the pairs that add upto target one ele should be from nums1 and the other from nums2
+int twoSumCount(vector<int>& nums1,vector<int>& nums2,int target)
+{
+    unordered_map<int,int> map;
+    for(int ele : nums1)
+        map[ele]++;  // freq of ele in nums1 array
+
+    int count = 0;
+    for(int ele : nums2)
+    {
+        if(map.find(target - ele) != map.end())
+            count += map[target - ele];
+    }
+
+    return count;
+}
+
+//Leetcode 454 -> FourSum II -> Done similarly as twoSumCount
+int fourSumCount(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, vector<int>& nums4) 
+{
+    unordered_map<int,int> map;
+
+    for(int e1 : nums1)
+        for(int e2 : nums2)
+            map[e1+e2]++;
+
+    int count = 0, target = 0;
+    for(int e3 : nums3)
+        for(int e4 : nums4)
+            if(map.find(target - (e3 + e4)) != map.end())
+            count += map[target - (e3 + e4)];
+
+    return count;
+}
+
+int fourSumCount_02(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, vector<int>& nums4)
+{
+    vector<int> A;
+    vector<int> B;
+    for(int e1 : nums1)
+        for(int e2 : nums2)
+            A.push_back(e1 + e2);
+    
+    for(int e3 : nums3)
+        for(int e4 : nums4)
+            B.push_back(e3 + e4);
+
+    return twoSumCount(A,B,0);
 }
