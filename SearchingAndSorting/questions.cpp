@@ -189,3 +189,106 @@ bool searchMatrix(vector<vector<int>> &matrix, int target)
     }
     return false;
 }
+
+//Leetcode 167 -> Two Sum II
+vector<int> twoSum(vector<int> &arr, int target)
+{
+    int si = 0, ei = arr.size() - 1;
+
+    while (si < ei)
+    {
+        int sum = arr[si] + arr[ei];
+        if (sum == target)
+            return {si + 1, ei + 1};
+        if (sum < target)
+            si++;
+        else
+            ei--;
+    }
+    return {};
+}
+
+//Now return all the possible unique pairs that add upto target
+vector<vector<int>> twoSum_AllPairs(vector<int> &arr, int target, int si, int ei)
+{
+    vector<vector<int> > ans;
+    while (si < ei)
+    {
+        int sum = arr[si] + arr[ei];
+        if (sum == target)
+        {
+            ans.push_back({arr[si], arr[ei]});
+
+            si++;
+            ei--;
+            while (si < ei && arr[si] == arr[si - 1]) // si and ei ko unique ele pe pohocha dia
+                si++;
+            while (si < ei && arr[ei] == arr[ei + 1])
+                ei--;
+        }
+        else if (sum < target)
+            si++;
+        else
+            ei--;
+    }
+    return ans;
+}
+
+//Leetcode 15 -> 3Sum -> Uses TwoSumAllPairs
+void prepareAns(vector<vector<int>> &smallAns, vector<vector<int>> &ans, int fixedEle)
+{
+    for (vector<int> arr : smallAns)
+    {
+        vector<int> ar;
+        ar.push_back(fixedEle);
+        for (int ele : arr)
+            ar.push_back(ele);
+        ans.push_back(ar);
+    }
+}
+
+vector<vector<int>> threeSum(vector<int> &arr, int target, int si, int ei)
+{
+    vector<vector<int> > ans;
+    for (int i = si; i < ei;)
+    {
+        vector<vector<int>> smallAns = twoSum_AllPairs(arr, target - arr[i], i + 1, ei);
+        prepareAns(smallAns, ans, arr[i]);
+        i++;
+        while (i < ei && arr[i] == arr[i - 1])
+            i++;
+    }
+    return ans;
+}
+
+//Leetcode function
+vector<vector<int> > threeSum(vector<int> &arr)
+{
+    int n = arr.size();
+    sort(arr.begin(), arr.end());
+    return threeSum(arr, 0, 0, n - 1);
+}
+
+//Leetcode 18 -> 4Sum
+//Uses 3Sum (which in turn uses 2Sum) and prepareAns
+vector<vector<int>> fourSum(vector<int> &arr, int target, int si, int ei)
+{
+    vector<vector<int>> ans;
+    for (int i = si; i < ei;)
+    {
+        vector<vector<int>> smallAns = threeSum(arr, target - arr[i], i + 1, ei);
+        prepareAns(smallAns, ans, arr[i]);
+        i++;
+        while (i < ei && arr[i] == arr[i - 1])
+            i++;
+    }
+    return ans;
+}
+
+//Leetcode function
+vector<vector<int>> fourSum(vector<int> &arr, int target)
+{
+    int n = arr.size();
+    sort(arr.begin(), arr.end());
+    return fourSum(arr, target, 0, n - 1);
+}
