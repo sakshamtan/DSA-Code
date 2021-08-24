@@ -245,4 +245,22 @@ public int findMin(int[] arr)
     }
     return arr[si];
 }
+
+//Leetcode 167 -> Two Sum II - Input Array is Sorted
+public int[] twoSum(int[] arr, int target) 
+{
+    int si = 0, ei = arr.length-1;
+    
+    while(si < ei)
+    {
+        int sum = arr[si] + arr[ei];
+        if(sum == target)
+            return new int[]{si+1,ei+1};
+        if(sum < target)
+            si++;
+        else
+            ei--;
+    }
+    return new int[0];
+}
 }

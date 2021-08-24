@@ -152,7 +152,7 @@ int nearestElement(vector<int> &arr, int data)
 }
 
 //Leetcode 74 -> Search a 2D matrix
-bool searchMatrix(vector<vector<int> > &matrix, int target)
+bool searchMatrix(vector<vector<int>> &matrix, int target)
 {
     int n = matrix.size(), m = matrix[0].size(), si = 0, ei = n * m - 1;
 
