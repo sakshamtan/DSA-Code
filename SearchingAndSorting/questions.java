@@ -263,4 +263,42 @@ public int[] twoSum(int[] arr, int target)
     }
     return new int[0];
 }
+
+//Leetcode 658 -> Find K Closest Elements
+public int insertPosition(int[] arr,int data)
+{
+    int n = arr.length, si = 0, ei = n-1;
+    while(si <= ei)
+    {
+        int mid = (si + ei) / 2;
+        if(arr[mid] <= data)
+            si = mid+1;
+        else
+            ei = mid-1;
+    }
+    return si;  // last mei si insertPosition mei pohoch jaata hai
+}
+
+//Leetcode function
+public List<Integer> findClosestElements(int[] arr, int k, int x) 
+{
+    ArrayList<Integer> ans = new ArrayList<>();
+    for(int ele : arr)
+        ans.add(ele);
+        
+    int n = arr.length;
+    int idx = insertPosition(arr,x);
+        
+    int lr = Math.max(0,idx - k);
+    int rr = Math.min(n-1,idx + k);
+        
+    while((rr - lr) + 1 > k)
+    {
+        if(x - arr[lr] > arr[rr] - x)
+            lr++;
+        else 
+            rr--;
+    }
+    return ans.subList(lr,rr+1);
+}
 }
