@@ -362,3 +362,37 @@ int fourSumCount_02(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, 
 
     return twoSumCount(A,B,0);
 }
+
+//Leetcode 658 -> Find K Closest Elements
+int insertPosition(vector<int>& arr,int data)
+{
+    int n = arr.size(), si = 0, ei = n-1;
+    while(si <= ei)
+    {
+        int mid = (si + ei) / 2;
+        if(arr[mid] <= data)
+            si = mid+1;
+        else
+            ei = mid-1;
+    }
+    return si;  // last mei si insertPosition mei pohoch jaata hai
+}
+
+//Leetcode function
+vector<int> findClosestElements(vector<int>& arr, int k, int x) 
+{        
+    int n = arr.size();
+    int idx = insertPosition(arr,x);
+        
+    int lr = max(0,idx - k);
+    int rr = min(n-1,idx + k);
+        
+    while((rr - lr) + 1 > k)
+    {
+        if(x - arr[lr] > arr[rr] - x)
+            lr++;
+        else 
+            rr--;
+    }
+    return {arr.begin() + lr,arr.begin() + rr + 1};
+}

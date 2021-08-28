@@ -291,14 +291,21 @@ public List<Integer> findClosestElements(int[] arr, int k, int x)
         
     int lr = Math.max(0,idx - k);
     int rr = Math.min(n-1,idx + k);
-        
-    while((rr - lr) + 1 > k)
+    
+    if(x <= arr[0])
+        return ans.subList(0,k);
+    else if(x >= arr[n-1])
+        return ans.subList(n-k,n);
+    else
     {
-        if(x - arr[lr] > arr[rr] - x)
-            lr++;
-        else 
-            rr--;
+        while((rr - lr) + 1 > k)
+        {
+            if(x - arr[lr] > arr[rr] - x)
+                lr++;
+            else 
+                rr--;
+        }
+        return ans.subList(lr,rr+1);
     }
-    return ans.subList(lr,rr+1);
 }
 }
