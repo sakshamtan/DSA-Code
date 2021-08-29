@@ -377,7 +377,7 @@ public int minEatingSpeed(int[] piles, int h)
 }
 
 //Leetcode 1011 -> Capacity to Ship Packages Within D days
- public boolean isPossibleToShip(int[] weights,int capacity,int days)
+public boolean isPossibleToShip(int[] weights,int capacity,int days)
 {
     int d = 1, totalWeightPerDay = 0;
     for(int w : weights)
@@ -412,6 +412,44 @@ public int shipWithinDays(int[] weights, int days)
     {
         int capacity = (si + ei) / 2;
         if(!isPossibleToShip(weights,capacity,days))
+            si = capacity + 1;
+        else
+            ei = capacity;
+    }
+    return si;
+}
+
+//Method 2 -> Now range 1 se 1e7 tk rakhenge 
+public boolean isPossibleToShip_02(int[] weights,int capacity,int days)
+{
+    int d = 1, totalWeightPerDay = 0;
+    for(int w : weights)
+    {
+        if(w > capacity)   // agr present weight capacity se bada hogya to hum usko carry nhi kr skte
+            return false;
+        totalWeightPerDay += w;
+        if(totalWeightPerDay > capacity)
+        {
+            d++;
+            totalWeightPerDay = w;   
+        }
+            
+        if(d > days)
+            return false;
+    }
+        
+    return true;        
+}
+
+//Leetcode function
+public int shipWithinDays_02(int[] weights, int days) 
+{
+    int si = 1, ei = (int)1e7;  
+        
+    while(si < ei)
+    {
+        int capacity = (si + ei) / 2;
+        if(!isPossibleToShip_02(weights,capacity,days))
             si = capacity + 1;
         else
             ei = capacity;
