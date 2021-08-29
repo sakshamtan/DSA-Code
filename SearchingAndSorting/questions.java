@@ -308,4 +308,42 @@ public List<Integer> findClosestElements(int[] arr, int k, int x)
         return ans.subList(lr,rr+1);
     }
 }
+
+//Leetcode 300 -> Longest Increasing Subsequence
+public int insertPosition(ArrayList<Integer> arr,int data)
+{
+    int si = 0, ei = arr.size()-1;
+    while(si <= ei)
+    {
+        int mid = (si + ei) / 2;
+        if(arr.get(mid) <= data)
+            si = mid+1;
+        else
+            ei = mid-1;
+    }
+
+    int insertPos = si;
+    int lastIndex = si-1;
+        
+    return lastIndex >= 0 && arr.get(lastIndex) == data ? lastIndex : insertPos; // if Present then its lastIndex if not then insertPosition
+}
+
+//Leetcode function
+public int lengthOfLIS(int[] nums)
+{
+    int n = nums.length;
+    if(n <= 1)
+        return n;
+        
+    ArrayList<Integer> list = new ArrayList<>();
+    for(int ele : nums)
+    {
+        int loc = insertPosition(list,ele);
+        if(loc == list.size())
+            list.add(ele);
+        else
+            list.set(loc,ele);
+    }
+    return list.size();
+}
 }
