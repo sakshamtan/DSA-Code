@@ -346,4 +346,76 @@ public int lengthOfLIS(int[] nums)
     }
     return list.size();
 }
+
+//Leetcode 875 -> Koko Eating Bananas
+public boolean isPossibleToEat(int[] arr,int hour,int eatingSpeed)
+{
+    int hr = 0;
+    for(int i = arr.length-1; i >= 0; i--)
+    {
+        hr += Math.ceil(arr[i] / (eatingSpeed * 1.0));
+        if(hr > hour)
+            return false;
+    }
+    return true;
+}
+
+//Leetcode function
+public int minEatingSpeed(int[] piles, int h) 
+{
+    int si = 1, ei = (int)1e9;
+    
+    while(si < ei)
+    {
+        int eatingSpeed = (si + ei) / 2;
+        if(!isPossibleToEat(piles,h,eatingSpeed))
+            si = eatingSpeed + 1;   // speed kam hai to speed badaani hai
+        else
+            ei = eatingSpeed;  // nhi to speed kam krke dekhna hai aur chotta ans mil jaaye to
+    }
+    return si;
+}
+
+//Leetcode 1011 -> Capacity to Ship Packages Within D days
+ public boolean isPossibleToShip(int[] weights,int capacity,int days)
+{
+    int d = 1, totalWeightPerDay = 0;
+    for(int w : weights)
+    {
+        totalWeightPerDay += w;
+        if(totalWeightPerDay > capacity)
+        {
+            d++;
+            totalWeightPerDay = w;   
+        }
+            
+        if(d > days)
+            return false;
+    }
+        
+    return true;        
+}
+
+//Leetcode function
+public int shipWithinDays(int[] weights, int days) 
+{
+    int maxEle = 0, sum = 0;
+    for(int w : weights)
+    {
+        maxEle = Math.max(maxEle,w);
+        sum += w;
+    }
+            
+    int si = maxEle, ei = sum;
+        
+    while(si < ei)
+    {
+        int capacity = (si + ei) / 2;
+        if(!isPossibleToShip(weights,capacity,days))
+            si = capacity + 1;
+        else
+            ei = capacity;
+    }
+    return si;
+}
 }
