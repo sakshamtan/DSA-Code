@@ -61,7 +61,7 @@ public static void Count_of_ON_bits_03(int n)
     System.out.print(count);
 }
 
-//Leetcode 231.
+//Leetcode 231 -> Power of Two
 public static boolean PowerofTwo(int n)
 {
     if(n > 0)
@@ -89,7 +89,6 @@ public static boolean PowerofFour(int n)
     }
     return false;
 }
-
 
 // Leetcode 136 -> to print unique element in array where rest values are repeated twice.
 public static int single_Number(int []arr)
@@ -135,11 +134,7 @@ public static void Print_bits(int n)
             System.out.print(1);
         }
     }
-}
-
-
-    
-        
+}   
 
 public static void main(String[] args)
 {
@@ -153,5 +148,4 @@ public static void main(String[] args)
    single_Number(arr);
 
 }
-
 }
