@@ -96,8 +96,7 @@ public static String modifyDifferenceASCII(String str)
 }
   
 public static void Compress1(String str)
-{
-        
+{     
     for (int i = 0; i < str.length()-1; i++)
     {
         if (str.charAt(i) != str.charAt(i+1))
@@ -111,7 +110,7 @@ public static void Compress1(String str)
 public static void Compress2(String str)
 {
     int count = 1;
-    for (int i = 0; i < str.length()-1; i++)
+    for(int i = 0; i < str.length()-1; i++)
     {
         if(str.charAt(i) != str.charAt(i+1))
         {
@@ -141,9 +140,7 @@ public static void printSubseq(String str)//Using bits.
         {
             int mask = 1 << j;
             if ((i & mask) != 0) 
-            {
-            System.out.print(str.charAt(str.length() - 1 - j));
-            }
+                System.out.print(str.charAt(str.length() - 1 - j));
         }
         System.out.println();
     }
