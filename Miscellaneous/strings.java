@@ -59,9 +59,9 @@ public static String toggleCharsCase(String str)
         if (ch >= 'a' && ch <= 'z') // if case is lower
             ch = (char)(ch - 'a' + 'A'); // convert to upper case. also (ch - 32) would work same.
         else
-            ch =  (char)(ch + 'a' - 'A'); // to lower case // (ch + 32) would also work same.
+            ch = (char)(ch - 'A' + 'a'); // to lower case // (ch + 32) would also work same.
     
-            sb.setCharAt(i,ch);
+        sb.setCharAt(i,ch);
     }
     return sb.toString();
 }
@@ -152,17 +152,17 @@ public static void printSubseq(String str)//Using bits.
 public static void main(String[] args)    
 {
         
-    // Scanner scn = new Scanner(System.in);
-    // System.out.println("Enter a string:");
-    // String str = scn.nextLine();
+    Scanner scn = new Scanner(System.in);
+    System.out.println("Enter a string:");
+    String str = scn.nextLine();
     // printChar(str);
     // printSubstring(str);
     // System.out.println(isPalindrome(str));
     // printAllPalindromicSubstrings(str);
-    // System.out.println(toggleCharsCase(str));
+    System.out.println(toggleCharsCase(str));
     // System.out.println(modifyASCII(str));
     // System.out.println(modifyDifferenceASCII(str));
     // Compress2(str);
-    printSubseq(str);
+    // printSubseq(str);
 }    
 }
