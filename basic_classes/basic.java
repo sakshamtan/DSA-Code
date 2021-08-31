@@ -1,36 +1,38 @@
-public class basic {//rev
-    public static void isPrime(int n)
-    {
-        int div = 2;
-        while(div * div <= n)
-        {
-            if (n % div == 0)
-            {
-                break;
-            }
-            div++;
-        }
-        if (div * div > n)
-        {
-            System.out.print("Prime");
-        }
-        else
-        System.out.print("Not Prime");
+public class basic {
 
-    }
-    public static void Nth_fibo_series(int n)
+public static void isPrime(int n)
+{
+    int div = 2;
+    while(div * div <= n)
     {
+        if (n % div == 0)
+        {
+            break;
+        }
+        div++;
+    }
+
+    if (div * div > n)
+    {
+        System.out.print("Prime");
+    }
+    else
+    System.out.print("Not Prime");
+}
+
+public static void Nth_fibo_series(int n)
+{
     int a = 0;
     int b = 1;
+
     for(int i = 0; i < n; i++)
     {
         System.out.println(a);
         int c = a + b;
         a = b;
         b = c;
-      }
-
     }
+}
 
 public static int digits(int n)
 {
@@ -75,7 +77,6 @@ public static int rotate (int n , int r)
     int sdigits = n / div;
 
     return fdigits * mul + sdigits;
-
 }
 
 public static void inverseOfNo(int n) //pep-foundation-online.
@@ -94,13 +95,11 @@ public static void inverseOfNo(int n) //pep-foundation-online.
       
     }
   System.out.println(inv);
- }
-
+}
 
 public static void main(String[]args)
-    {
-        // isPrime(5);
-        Nth_fibo_series(5);
-
-    }
+{
+    // isPrime(5);
+    Nth_fibo_series(5);
+}
 }
