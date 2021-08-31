@@ -85,14 +85,13 @@ public static void inverseOfNo(int n) //pep-foundation-online.
     int inv = 0;
     while (n != 0)
     {
-      int od = n % 10;
-      int id = op;
-      int ip = od;
-      inv += id * (int)Math.pow(10,ip-1);
+        int od = n % 10;
+        int id = op;
+        int ip = od;
+        inv += id * (int)Math.pow(10,ip-1);
       
-      n /= 10;
-      op++;
-      
+        n /= 10;
+        op++;
     }
   System.out.println(inv);
 }
