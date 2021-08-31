@@ -83,7 +83,7 @@ public static void special_Triangle(int rows)//online foundation Q17.
    nst++;
    nsp -= 2;
    System.out.println();
-   }         
+    }         
 }
 
 public static void special_Hourglass(int rows)//online foundation Q18.
@@ -115,8 +115,6 @@ public static void special_Hourglass(int rows)//online foundation Q18.
         }
         System.out.println();
     }
-    
-
 }
 
 public static void main(final String[] args)
