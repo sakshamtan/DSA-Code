@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
-void display(vector<vector<int> > &arr)
+
+void display(vector<vector<int>> &arr)
 {
     for (int i = 0; i < arr.size(); i++)
     {
@@ -13,7 +15,7 @@ void display(vector<vector<int> > &arr)
     }
 }
 
-void input(vector<vector<int> > &arr)
+void input(vector<vector<int>> &arr)
 {
     for (int i = 0; i < arr.size(); i++)
     {
@@ -24,7 +26,7 @@ void input(vector<vector<int> > &arr)
     }
 }
 
-void waveH(vector<vector<int> > &arr)
+void waveH(vector<vector<int>> &arr)
 {
     for (int row = 0; row < arr.size(); row++)
     {
@@ -44,7 +46,7 @@ void waveH(vector<vector<int> > &arr)
     cout << endl;
 }
 
-void waveV(vector<vector<int> > &arr)
+void waveV(vector<vector<int>> &arr)
 {
     for (int col = 0; col < arr[0].size(); col++)
     {
@@ -64,7 +66,7 @@ void waveV(vector<vector<int> > &arr)
     cout << endl;
 }
 
-void exitPoint(vector<vector<int> > &arr)
+void exitPoint(vector<vector<int>> &arr)
 {
     int dir = 0;
     int r = 0;
@@ -111,7 +113,7 @@ void exitPoint(vector<vector<int> > &arr)
     }
 }
 
-void spiralPrint(vector<vector<int> > &arr)
+void spiralPrint(vector<vector<int>> &arr)
 {
     int minc = 0;
     int minr = 0;
@@ -150,7 +152,7 @@ void spiralPrint(vector<vector<int> > &arr)
     }
 }
 
-void transpose(vector<vector<int> > &arr)
+void transpose(vector<vector<int>> &arr)
 {
     for (int i = 0; i < arr.size(); i++)
     {
@@ -160,7 +162,8 @@ void transpose(vector<vector<int> > &arr)
         }
     }
 }
-void swapR(vector<vector<int> > &arr)
+
+void swapR(vector<vector<int>> &arr)
 {
     int r1 = 0;
     int r2 = arr.size() - 1;
@@ -171,7 +174,8 @@ void swapR(vector<vector<int> > &arr)
         r2--;
     }
 }
-void swapC(vector<vector<int> > &arr)
+
+void swapC(vector<vector<int>> &arr)
 {
     int c1 = 0;
     int c2 = arr[0].size() - 1;
@@ -185,6 +189,7 @@ void swapC(vector<vector<int> > &arr)
         c2--;
     }
 }
+
 void rotate_90(vector<vector<int> > &arr, bool isClockwise)
 {
     transpose(arr);
