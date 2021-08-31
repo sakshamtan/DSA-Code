@@ -1,23 +1,40 @@
 public class basic {
 
-public static void isPrime(int n)
+public static boolean isPrime(int n)
 {
-    int div = 2;
-    while(div * div <= n)
-    {
-        if (n % div == 0)
-        {
-            break;
-        }
-        div++;
-    }
+    if(n <= 1)  // 1 is neither prime nor composite
+    return false;
 
-    if (div * div > n)
+    for(int i = 2; i * i <= n; i++)
     {
-        System.out.print("Prime");
+        if(n % i == 0)
+        return false;
     }
-    else
-    System.out.print("Not Prime");
+    return true;
+}
+
+//Leetcode 204 -> Count Primes
+public int countPrimes(int n) 
+{
+    boolean[] isPrime = new boolean[n];
+    for (int i = 2; i < n; i++) 
+        isPrime[i] = true;
+   
+   
+   for (int i = 2; i * i < n; i++) 
+    {
+        if (!isPrime[i]) continue;
+        for (int j = i * i; j < n; j += i)  // ek i ke saare multiples till n false mark as vo bhi prime nhi honge
+        {
+            isPrime[j] = false;
+        }
+    }
+     
+    int count = 0;
+    for (int i = 2; i < n; i++) 
+        if (isPrime[i]) count++;
+
+    return count;
 }
 
 public static void Nth_fibo_series(int n)
@@ -58,7 +75,7 @@ public static void print_digits(int n)
     }
 }
 
-public static int rotate (int n , int r)
+public static int rotate(int n , int r)
 {
     int digit = digits(n);
     r %= digit;
