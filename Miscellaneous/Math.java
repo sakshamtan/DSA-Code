@@ -1,4 +1,4 @@
-public class Math{
+public class Math {
 
 public static boolean isPrime(int n)
 {
