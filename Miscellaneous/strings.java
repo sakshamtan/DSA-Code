@@ -159,8 +159,8 @@ public static void main(String[] args)
     // printSubstring(str);
     // System.out.println(isPalindrome(str));
     // printAllPalindromicSubstrings(str);
-    System.out.println(toggleCharsCase(str));
-    // System.out.println(modifyASCII(str));
+    // System.out.println(toggleCharsCase(str));
+    System.out.println(modifyASCII(str));
     // System.out.println(modifyDifferenceASCII(str));
     // Compress2(str);
     // printSubseq(str);
