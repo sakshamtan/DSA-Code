@@ -5,7 +5,7 @@ public static boolean isPrime(int n)
     if(n <= 1)  // 1 is neither prime nor composite
     return false;
 
-    for(int i = 2; i * i <= n; i++)
+    for(int i = 2; i * i <= n; i++)  // sqrt tk kisi no. ke unique factors milne hote hai to mil jaate hai
     {
         if(n % i == 0)
         return false;
@@ -75,7 +75,7 @@ public static void print_digits(int n)
     }
 }
 
-public static int rotate(int n , int r)
+public static int rotate(int n, int r)
 {
     int digit = digits(n);
     r %= digit;
