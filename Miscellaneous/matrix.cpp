@@ -190,7 +190,7 @@ void swapC(vector<vector<int>> &arr)
     }
 }
 
-void rotate_90(vector<vector<int> > &arr, bool isClockwise)
+void rotate_90(vector<vector<int>> &arr, bool isClockwise)
 {
     transpose(arr);
     if (isClockwise)
