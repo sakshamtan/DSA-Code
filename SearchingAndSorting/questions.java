@@ -488,3 +488,31 @@ public static double maximumAreaCake(int[] radius,int guests)
     }
     return si;
 }
+
+//Leetcode 774 -> Minimize Max Distance to Gas Distance(Lintcode 848)
+public boolean isItCorrectPenalty(int[] arr,double distance,int k)
+{
+    int noOfGasStation = 0, n = arr.length;
+    for(int i = 1; i < n; i++)
+    {
+        noOfGasStation += (arr[i] - arr[i-1]) / distance;
+        if(noOfGasStation > k)
+            return false;
+    }
+    return true;
+}
+
+//Leetcode function
+public double minmaxGasDist(int[] stations, int k) 
+{
+    double si = 0.0, ei = 1e9;
+    while((ei - si) > 1e-6)
+    {
+        double distance = (si + ei) / 2;
+        if(!isItCorrectPenalty(stations,distance,k))
+            si = distance + 1e-6;
+        else
+            ei = distance;
+    }
+    return si;
+}
