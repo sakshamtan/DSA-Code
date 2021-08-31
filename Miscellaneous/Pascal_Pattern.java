@@ -1,6 +1,8 @@
-import java.util.Scacd nner;//rev
-public class Pascal_Pattern{
+import java.util.Scacd nner;
+public class Pascal_Pattern {
+
 public static Scanner scn = new Scanner(System.in);
+
 public static void NumberDiamond(final int rows) 
 {
     int nst = 1;
@@ -8,14 +10,13 @@ public static void NumberDiamond(final int rows)
     for (int r = 1; r <= rows; r++) 
     {
         for (int csp = 1; csp <= nsp; csp++) 
-        {
             System.out.print(" ");
-        }
+
         int ele = r;
-        if (r > (rows + 1) / 2) {
+        if (r > (rows + 1) / 2) 
             ele = rows - r + 1;
-        }
-        for (int cst = 1; cst <= nst; cst++)
+    
+        for(int cst = 1; cst <= nst; cst++)
         {
             System.out.print(ele);
             if (cst <= nst / 2)
@@ -23,16 +24,18 @@ public static void NumberDiamond(final int rows)
             else
                 ele--;
         }
-        if (r <= rows / 2) {
+        if (r <= rows / 2) 
+        {
             nst += 2;
             nsp--;
-        } else {
+        }
+        else
+        {
             nst -= 2;
             nsp++;
         }
         System.out.println();
     }
-
 }
 
 public static void pascalTriangle(final int rows)
