@@ -152,7 +152,7 @@ void spiralPrint(vector<vector<int>> &arr)
     }
 }
 
-void transpose(vector<vector<int>> &arr)
+void transpose_inPlace(vector<vector<int>> &arr)
 {
     for (int i = 0; i < arr.size(); i++)
     {
@@ -192,7 +192,7 @@ void swapC(vector<vector<int>> &arr)
 
 void rotate_90(vector<vector<int>> &arr, bool isClockwise)
 {
-    transpose(arr);
+    transpose_inPlace(arr);
     if (isClockwise)
     {
         swapC(arr);
@@ -203,13 +203,47 @@ void rotate_90(vector<vector<int>> &arr, bool isClockwise)
     }
 }
 
+//Leetcode 1572 -> Matrix Diagonal Sum
+int diagonalSum(vector<vector<int>> &mat)
+{
+    int sum = 0;
+    int n = mat.size();
+
+    for (int i = 0, j = 0; i < n; i++, j++)
+        sum += mat[i][j];
+
+    for (int i = 0, j = n - 1; j >= 0; i++, j--)
+        sum += mat[i][j];
+
+    if (n % 2 != 0)
+        sum = sum - mat[n / 2][n / 2];
+
+    return sum;
+}
+
+//Leetcode 867 -> Transpose Matrix -> inPlace swpa krke nhi kr skte hai matrix mei n,m equal nhi hai
+vector<vector<int>> transpose(vector<vector<int>> &matrix)
+{
+    int n = matrix.size(), m = matrix[0].size();
+    vector<vector<int> > ans(m, vector<int>(n, 0)); // n*m matrix ka transpose m*n dimensions ka bnega (yaha memory ka error aarha tha)
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            ans[j][i] = matrix[i][j];
+        }
+    }
+    return ans;
+}
+
 int main(int args, char **argv)
 {
-    cout << "please enter row and column numbers:";
-    int n, m;
-    cin >> n >> m;
-    vector<vector<int> > arr(n, vector<int>(m, 0));
-    input(arr);
+    // cout << "please enter row and column numbers:";
+    // int n, m;
+    // cin >> n >> m;
+    // vector<vector<int> > arr{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+    // input(arr);
     // display(arr);
     // transpose(arr);
     // waveH(arr);
@@ -218,7 +252,7 @@ int main(int args, char **argv)
     // spiralPrint(arr);
     // swapR(arr);
     // swapC(arr);
-    rotate_90(arr, false);
+    // rotate_90(arr, false);
     display(arr);
 
     return 0;
