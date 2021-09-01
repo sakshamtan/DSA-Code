@@ -1,4 +1,5 @@
-#include <iostream> //rev
+#include <iostream> 
+
 using namespace std;
 
 //F-> function (n-1) ke saare dec. no.s print krdega hume bs nth no. print krna hai.
