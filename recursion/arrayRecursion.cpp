@@ -90,7 +90,7 @@ int lastIndex(vector<int> &arr, int data, int vidx)
 
 //jaate huye count krne hai elements. Base case mei new arr -> arr[counts so far]
 //Vaapis aate huye new arr mei check krke arr[csf] pr vidx daalna jb data ke equal ho.
-Vector<int> allIndex(vector<int> &arr, int data, int vidx, int csf)
+vector<int> allIndex(vector<int> &arr, int data, int vidx, int csf)
 {
     if (vidx == arr.size())
     {
