@@ -1103,6 +1103,7 @@ public static void wordbreak()
     System.out.println(WordBreak_02(ques,len,0,words,""));                     
 
 }
+
 public static void solve()
 {
     // basic();
@@ -1112,7 +1113,6 @@ public static void solve()
     // QueenPnC();
     Nqueens();
     // wordbreak();
-
 }
 
 public static void main(String[] args)

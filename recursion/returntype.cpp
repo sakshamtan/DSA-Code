@@ -4,9 +4,6 @@
 
 using namespace std;
 
-//BASIC==================================================================================
-
-
 //F -> "abc" mei "bc" ke subseq function le aayega humko ek baar "a" add krna hai aur ek baar nhi krna.
 vector<string> subseq(string str)
 {
@@ -70,7 +67,14 @@ vector<string> keyPad(string str)
 return myAns;
 }
 
-//MAZEPATH=============================================================================
+void Basic()
+{
+    vector<string> ans = keyPad("111");
+    for(string s : ans)
+    cout<<s<<endl;
+}
+
+//MazePath
 
 //F->Faith-> (1,0),(0,1) and (1,1) se saare raste function jaanta hai humko bs vaha tk jaane ka kaam krna hai(returntype)
 vector<string> mazePath_HVD(int sr,int sc,int er,int ec)
@@ -137,7 +141,16 @@ vector<string> MazePath_Jump(int sr,int sc,int er,int ec)
     return myAns;
 }
 
-//FLOODFILL=========================================================================================
+void mazePath()
+{
+    vector<string>ans = MazePath_Jump(0,0,2,2);
+    // vector<string>ans = mazePath_HVD(0,0,2,2);
+    for(string s:ans)
+    cout<<s<<" ";
+}
+
+
+//FloodFill
 //Using isSafe funct. (voidtype)
 bool isSafe(int x,int y,int er,int ec,vector<vector<bool>>&board)
 {
@@ -169,27 +182,11 @@ int floodFill(int sr,int sc,int er,int ec,vector<vector<bool> > &board,string an
     return count;
 }
 
-//=======================================================================================
-void Basic()
-{
-    vector<string> ans = keyPad("111");
-    for(string s : ans)
-    cout<<s<<endl;
-}
-void mazePath()
-{
-    vector<string>ans = MazePath_Jump(0,0,2,2);
-    // vector<string>ans = mazePath_HVD(0,0,2,2);
-    for(string s:ans)
-    cout<<s<<" ";
-}
-
 void floodFill()
 {
     vector<vector<bool> > board(3,vector<bool>(3,false));
     cout<<floodFill(0,0,2,2,board,"");
 }
-
 
 void solve()
 {
@@ -197,6 +194,7 @@ void solve()
     // mazePath();
     // floodFill();
 }
+
 int main()
 {
     solve();

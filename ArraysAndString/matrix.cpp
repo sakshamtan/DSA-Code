@@ -222,7 +222,7 @@ int diagonalSum(vector<vector<int>> &mat)
 }
 
 //Leetcode 867 -> Transpose Matrix -> inPlace swpa krke nhi kr skte hai matrix mei n,m equal nhi hai
-vector<vector<int>> transpose(vector<vector<int>> &matrix)
+vector<vector<int> > transpose(vector<vector<int>> &matrix)
 {
     int n = matrix.size(), m = matrix[0].size();
     vector<vector<int> > ans(m, vector<int>(n, 0)); // n*m matrix ka transpose m*n dimensions ka bnega (yaha memory ka error aarha tha)
@@ -233,6 +233,47 @@ vector<vector<int>> transpose(vector<vector<int>> &matrix)
         {
             ans[j][i] = matrix[i][j];
         }
+    }
+    return ans;
+}
+
+//Leetcode 54 -> Spiral Matrix
+vector<int> spiralOrder(vector<vector<int>> &matrix)
+{
+    int n = matrix.size(), m = matrix[0].size();
+    int minr = 0, minc = 0, maxr = n - 1, maxc = m - 1;
+    int tne = n * m;
+    vector<int> ans;
+
+    while (tne > 0)
+    {
+        for (int i = minc; i <= maxc && tne > 0; i++)
+        {
+            ans.push_back(matrix[minr][i]);
+            tne--;
+        }
+        minr++;
+
+        for (int i = minr; i <= maxr && tne > 0; i++)
+        {
+            ans.push_back(matrix[i][maxc]);
+            tne--;
+        }
+        maxc--;
+
+        for (int i = maxc; i >= minc && tne > 0; i--)
+        {
+            ans.push_back(matrix[maxr][i]);
+            tne--;
+        }
+        maxr--;
+
+        for (int i = maxr; i >= minr && tne > 0; i--)
+        {
+            ans.push_back(matrix[i][minc]);
+            tne--;
+        }
+        minc++;
     }
     return ans;
 }
