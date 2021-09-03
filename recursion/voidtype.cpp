@@ -70,7 +70,7 @@ int Encoding(string str, int idx, string asf)
     char ch = str[idx];
     if (ch == '0')
         return 0;
-        
+
     int count = 0;
     count += Encoding(str, idx + 1, asf + string(1, (ch - '0') + ('a' - 1))); //for correct mapping as a = 1 and not 0.
     if (idx < str.length() - 1)
@@ -92,6 +92,7 @@ int permutations_01(string str, string ans)
         cout << ans << endl;
         return 1;
     }
+
     int count = 0;
     for (int i = 0; i < str.length(); i++)
     {
@@ -110,8 +111,9 @@ int permutations_Unique(string str, string ans)
         cout << ans << endl;
         return 1;
     }
+
     int count = 0;
-    vector<bool> vis(26, 0); //means 26 size and default false.
+    vector<bool> vis(26, false); //means 26 size and default false.
     for (int i = 0; i < str.length(); i++)
     {
         char ch = str[i];
@@ -123,6 +125,15 @@ int permutations_Unique(string str, string ans)
         }
     }
     return count;
+}
+
+void basicQues()
+{
+    // cout << subseq_01("abc", "") << endl;
+    // cout<<keyPad("111","")<<endl;
+    // cout<<Encoding("123",0,"");
+    cout<<permutations_01("aba","") << endl;
+    cout<<permutations_Unique("aba","") << endl;
 }
 
 //MazePath
@@ -305,6 +316,20 @@ pathPair floodFillLongestPath_jumps(int sr, int sc, int er, int ec)
     return ans;
 }
 
+void mazePath()
+{
+    // cout<<MazePath_HVD(0,0,2,2,"");
+    // cout<<MazePath_Jump(0,0,3,3,"");
+    int n = 3;
+    int m = 3;
+    vis.resize(n, vector<int>(m, 0)); //vis ko dobaara resize(initialise krne ke liye)
+    // cout<<floodFill_WithJumps(0,0,2,2,"")<<endl;
+    // pathPair finAns = floodFillShortestPath_jumps(0,0,2,2);
+    // cout<<finAns.path<<" -> "<<finAns.len;
+    pathPair finAns = floodFillLongestPath_jumps(0, 0, 2, 2);
+    cout << finAns.path << " -> " << finAns.len;
+}
+
 //CoinChange
 
 //Har level pr saare options dene hai taaki saare arrangements aa jaaye using any no. of coins any times.
@@ -485,7 +510,22 @@ int coinChange_Permutation_Single_Subseq_01(vector<int> &coins, vector<bool> &vi
     return count;
 }
 
-//QueenCombinationAndPermutation======================================================================
+void CoinChange()
+{
+    vector<int> coins = {2, 3, 5, 7};
+    int tar = 10;
+    vector<bool> vis(coins.size(), false);
+    // cout<<coinChange_Permutation_01(coins,tar,"")<<endl;
+    // cout<<coinChange_Combination_01(coins,0,tar,"")<<endl;
+    // cout<<coinChange_Combination_Single_01(coins,0,tar,"")<<endl;
+    // cout<<coinChange_Permutation_Single_01(coins,vis,tar,"")<<endl;
+    // cout<<coinChange_Combination_Single_Subseq_01(coins,0,tar,"")<<endl;
+    // cout<<coinChange_Combination_Subseq_01(coins,0,tar,"")<<endl;
+    // cout<<coinChange_Permutation_Subseq_01(coins,0,tar,"")<<endl;
+    cout << coinChange_Permutation_Single_Subseq_01(coins, vis, 0, tar, "") << endl;
+}
+
+//QueenCombinationAndPermutation
 
 //q1->q2->q3 proper order of queens.Consider it as a case of coinChange with 1 on every cell of the box and tar = tnq.
 //It is same as coinChangeCombination-single coin.
@@ -591,7 +631,23 @@ int queenPermutation_2D(vector<vector<bool> > &box, int idx, int qpsf, int tnq, 
     return count;
 }
 
-//Nqueens===============================================================================================
+void QueenPnC()
+{
+    // int n = 6;
+    int n = 4;
+    int m = 4;
+    // int tnq = 3;
+    int tnq = 4;
+    // vector<bool> box(n,false);
+    vector<vector<bool> > box(n, vector<bool>(m, false));
+
+    // cout<<queenCombination_1D(box,0,0,tnq,"")<<endl;
+    // cout<<queenPermutation_1D(box,0,0,tnq,"")<<endl;
+    // cout<<queenCombination_2D(box,0,0,tnq,"")<<endl;
+    // cout<<queenPermutation_2D(box,0,0,tnq,"")<<endl;
+}
+
+//Nqueens
 
 bool isSafeToPlaceQueen(vector<vector<bool> > &box, int r, int c)
 {
@@ -825,7 +881,33 @@ int Nqueen_Bits(int n, int r, int tnq, string ans)
     return count;
 }
 
-//Sudoku=======================================================================
+
+void Nqueens()
+{
+    int n = 4;
+    int m = 4;
+    int tnq = 4;
+
+    vector<vector<bool> > box(n, vector<bool>(m, false));
+
+    // cout<<Nqueen_Combination_01(box,0,0,tnq,"")<<endl;
+    // cout<<Nqueen_Permutation_01(box,0,tnq,"")<<endl;
+
+    row.resize(n, false);
+    col.resize(m, false);
+    diag.resize(n + m - 1, false);
+    Adiag.resize(n + m - 1, false);
+    //resize() funct to re-initialize(vector ka size dena as it has already been declared above) the arrays.
+
+    // cout<<Nqueen_Combination_02(n,0,0,tnq,"")<<endl;
+    // cout<<Nqueen_Permutation_02(n,0,tnq,"")<<endl;
+    // cout<<Nqueen_03(n,0,tnq,"")<<endl;
+    // cout<<Nqueen_03_Subseq(n,0,tnq,"")<<endl;
+    cout << Nqueen_Bits(n, 0, tnq, "") << endl;
+}
+
+//Sudoku
+
 vector<vector<int> > board =
     {{3, 0, 0, 0, 0, 0, 0, 0, 0},
      {5, 2, 0, 0, 0, 0, 0, 0, 0},
@@ -970,7 +1052,29 @@ int SudokuSolver_Best(int vidx, vector<int> &loc)
     return count;
 }
 
-//Cryptarithmetic=====================================================================================
+void Sudoku()
+{
+    vector<int> loc;
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (board[i][j] == 0)
+                loc.push_back(i * 9 + j);
+            else
+            {
+                int mask = (1 << board[i][j]);
+                rowA[i] ^= mask;
+                colA[j] ^= mask;
+                matA[i / 3][j / 3] ^= mask;
+            }
+        }
+    }
+    // cout<<SudokuSolver(0,loc)<<endl;
+    cout << SudokuSolver_Best(0, loc) << endl;
+}
+
+//Cryptarithmetic
 
 string s1 = "send";
 string s2 = "more";
@@ -1047,7 +1151,7 @@ void crypto()
     cout << cryptoSolver(str, 0) << endl;
 }
 
-//Crossword==========================================================================================
+//Crossword
 
 vector<vector<char> > box = {{'+', '-', '+', '+', '+', '+', '+', '+', '+', '+'},
                              {'+', '-', '+', '+', '+', '+', '+', '+', '+', '+'},
@@ -1204,106 +1308,6 @@ bool crossWord(vector<string> &words, int idx)
     return false;
 }
 
-void basicQues()
-{
-    cout << subseq_01("abc", "") << endl;
-    // cout<<keyPad("111","")<<endl;
-    // cout<<Encoding("123",0,"");
-    // cout<<permutations_01(string str,string ans)
-    // cout<<permutations_Unique("aba","");
-}
-
-void mazePath()
-{
-    // cout<<MazePath_HVD(0,0,2,2,"");
-    // cout<<MazePath_Jump(0,0,3,3,"");
-    int n = 3;
-    int m = 3;
-    vis.resize(n, vector<int>(m, 0)); //vis ko dobaara resize(initialise krne ke liye)
-    // cout<<floodFill_WithJumps(0,0,2,2,"")<<endl;
-    // pathPair finAns = floodFillShortestPath_jumps(0,0,2,2);
-    // cout<<finAns.path<<" -> "<<finAns.len;
-    pathPair finAns = floodFillLongestPath_jumps(0, 0, 2, 2);
-    cout << finAns.path << " -> " << finAns.len;
-}
-
-void CoinChange()
-{
-    vector<int> coins = {2, 3, 5, 7};
-    int tar = 10;
-    vector<bool> vis(coins.size(), false);
-    // cout<<coinChange_Permutation_01(coins,tar,"")<<endl;
-    // cout<<coinChange_Combination_01(coins,0,tar,"")<<endl;
-    // cout<<coinChange_Combination_Single_01(coins,0,tar,"")<<endl;
-    // cout<<coinChange_Permutation_Single_01(coins,vis,tar,"")<<endl;
-    // cout<<coinChange_Combination_Single_Subseq_01(coins,0,tar,"")<<endl;
-    // cout<<coinChange_Combination_Subseq_01(coins,0,tar,"")<<endl;
-    // cout<<coinChange_Permutation_Subseq_01(coins,0,tar,"")<<endl;
-    cout << coinChange_Permutation_Single_Subseq_01(coins, vis, 0, tar, "") << endl;
-}
-
-void QueenPnC()
-{
-    // int n = 6;
-    int n = 4;
-    int m = 4;
-    // int tnq = 3;
-    int tnq = 4;
-    // vector<bool> box(n,false);
-    vector<vector<bool> > box(n, vector<bool>(m, false));
-
-    // cout<<queenCombination_1D(box,0,0,tnq,"")<<endl;
-    // cout<<queenPermutation_1D(box,0,0,tnq,"")<<endl;
-    // cout<<queenCombination_2D(box,0,0,tnq,"")<<endl;
-    // cout<<queenPermutation_2D(box,0,0,tnq,"")<<endl;
-}
-
-void Nqueens()
-{
-    int n = 4;
-    int m = 4;
-    int tnq = 4;
-
-    vector<vector<bool> > box(n, vector<bool>(m, false));
-
-    // cout<<Nqueen_Combination_01(box,0,0,tnq,"")<<endl;
-    // cout<<Nqueen_Permutation_01(box,0,tnq,"")<<endl;
-
-    row.resize(n, false);
-    col.resize(m, false);
-    diag.resize(n + m - 1, false);
-    Adiag.resize(n + m - 1, false);
-    //resize() funct to re-initialize(vector ka size dena as it has already been declared above) the arrays.
-
-    // cout<<Nqueen_Combination_02(n,0,0,tnq,"")<<endl;
-    // cout<<Nqueen_Permutation_02(n,0,tnq,"")<<endl;
-    // cout<<Nqueen_03(n,0,tnq,"")<<endl;
-    // cout<<Nqueen_03_Subseq(n,0,tnq,"")<<endl;
-    cout << Nqueen_Bits(n, 0, tnq, "") << endl;
-}
-
-void Sudoku()
-{
-    vector<int> loc;
-    for (int i = 0; i < 9; i++)
-    {
-        for (int j = 0; j < 9; j++)
-        {
-            if (board[i][j] == 0)
-                loc.push_back(i * 9 + j);
-            else
-            {
-                int mask = (1 << board[i][j]);
-                rowA[i] ^= mask;
-                colA[j] ^= mask;
-                matA[i / 3][j / 3] ^= mask;
-            }
-        }
-    }
-    // cout<<SudokuSolver(0,loc)<<endl;
-    cout << SudokuSolver_Best(0, loc) << endl;
-}
-
 void crossWord()
 {
     vector<string> words = {"agra", "norway", "england", "gwalior"};
@@ -1320,14 +1324,14 @@ void crossWord()
 
 void solve()
 {
-    // basicQues();
+    basicQues();
     // mazePath();
     // CoinChange();
     // QueenPnC();
     // Nqueens();
     // Sudoku();
     // crypto();
-    crossWord();
+    // crossWord();
 }
 
 int main()

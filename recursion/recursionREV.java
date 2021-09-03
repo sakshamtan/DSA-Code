@@ -136,7 +136,7 @@ public static int print_nokiaKeyPad(String ques, String asf)//voidtype version
 }
 
 // static String[] words = {".","abc","def","ghi","jkl","mno","pqr","st","uvwx","yz","<>","@&","*%"};
-public static int print_nokiaKeyPad_02 (String ques, String asf)//10 means 1-0 and '10'
+public static int print_nokiaKeyPad_02(String ques, String asf)//10 means 1-0 and '10'
 {
     if (ques.length() == 0)
     {
