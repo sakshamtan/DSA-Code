@@ -97,7 +97,7 @@ void permute_(vector<int> &arr, int count, vector<bool> &vis)
         }
     }
 }
-vector<vector<int> > permute(vector<int> &nums)
+vector<vector<int>> permute(vector<int> &nums)
 {
     vector<bool> vis(nums.size(), false);
     permute_(nums, 0, vis);
@@ -105,7 +105,7 @@ vector<vector<int> > permute(vector<int> &nums)
 }
 
 //Leetcode 47 better optimized approach
-vector<vector<int> > res;
+vector<vector<int>> res;
 vector<int> smallAns;
 void permute(vector<int> &arr, int count, vector<bool> &vis)
 {

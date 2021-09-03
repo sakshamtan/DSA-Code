@@ -1,21 +1,19 @@
-
+public class questions{
 //Leetcode 51 -> NQueens
-class Solution {
-    boolean [][] chess;
-    boolean [] colA,diagA,adiagA;
-    List<List<String>> res = new ArrayList<>();
+boolean [][] chess;
+boolean [] colA,diagA,adiagA;
+List<List<String>> res = new ArrayList<>();
     
     
-    public List<List<String>> solveNQueens(int n) 
-    {
-        colA = new boolean[n];
-        diagA = new boolean[n+n-1];
-        adiagA = new boolean[n+n-1];
-        chess = new boolean[n][n];
-        Nqueen(n,0,n);
-        return res;
-        
-    }
+public List<List<String>> solveNQueens(int n)     
+{
+    colA = new boolean[n];
+    diagA = new boolean[n+n-1];
+    adiagA = new boolean[n+n-1];
+    chess = new boolean[n][n];
+    Nqueen(n,0,n);
+    return res;        
+}
 
 public void Nqueen(int n,int r,int tnq)
 {
@@ -57,6 +55,5 @@ public void Nqueen(int n,int r,int tnq)
             adiagA[r-c+n-1] = false; 
         }
     }
-    return;
 }
 }
