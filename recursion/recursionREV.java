@@ -217,9 +217,7 @@ public static int printBoardPaths(int src,int dest, String psf)
     for (int dice = 1; dice <= 6; dice++)
     {
         if (src + dice <= dest)
-        {
-        count += printBoardPaths(src + dice,dest, psf + dice);
-        }
+            count += printBoardPaths(src + dice,dest, psf + dice);
     }
     return count;
 }
@@ -238,13 +236,12 @@ public static int printBoardPathsOpeningwith1and6(int src,int dest, String psf)
         count += printBoardPathsOpeningwith1and6(1,dest,psf + 1);
         count += printBoardPathsOpeningwith1and6(1,dest,psf + 6);
     }
-    else{
+    else
+    {
         for (int dice = 1; dice <= 6; dice++)
         {
             if (src + dice <= dest)
-            {
-            count += printBoardPathsOpeningwith1and6(src + dice,dest, psf + dice);
-            }
+                count += printBoardPathsOpeningwith1and6(src + dice,dest, psf + dice);
         }
     }
     return count;
@@ -264,17 +261,18 @@ public static int printBoardPathsWithLadders(int src, int dest, int [] ladders, 
         count += printBoardPathsWithLadders(1,dest,ladders,psf + 1);
         count += printBoardPathsWithLadders(1,dest,ladders,psf + 6);
     }
+
     else if (ladders[src] != 0)//ladders se chadhkr dice nhi chalte isliye dice vaale loop se pehle.
     {
         count += printBoardPathsWithLadders(ladders[src],dest,ladders,psf + "[" + src + "->" + ladders[src] + "]");
     }
-    else {
+
+    else 
+    {
         for (int dice = 1; dice <= 6; dice++)
         {
             if (src + dice <= dest)
-            {
-            count += printBoardPathsWithLadders(src + dice,dest,ladders,psf + dice);
-            }
+                count += printBoardPathsWithLadders(src + dice,dest,ladders,psf + dice);
         }
     }
     return count; 
@@ -288,6 +286,7 @@ public static void BoardwithSNL(int src, int dest, int [] snl, int [] moves, int
         System.out.println("WIN");
         return;
     }
+
     if (mvidx == moves.length)
     {
         System.out.println(src);
@@ -301,7 +300,9 @@ public static void BoardwithSNL(int src, int dest, int [] snl, int [] moves, int
         else 
         BoardwithSNL(src,dest,snl,moves,mvidx+1);//nhi khulli gitti to moves chlte rhenge 
     }
-    else {
+
+    else 
+    {
         if (snl[src] != 0)
         BoardwithSNL(snl[src],dest,snl,moves,mvidx);//snake ya ladder pr jaakr dice nhi chlte.
         else{
@@ -325,17 +326,14 @@ public static int MazePath_01(int sr, int sc, int er, int ec, String psf)//horiz
 
     int count = 0;
     if (sr + 1 <= er)
-    {
-    count += MazePath_01(sr+1,sc,er,ec,psf + "V");
-    }
+        count += MazePath_01(sr+1,sc,er,ec,psf + "V");
+    
     if (sc + 1 <= ec)
-    {
-    count += MazePath_01(sr,sc+1,er,ec,psf + "H");
-    }
+        count += MazePath_01(sr,sc+1,er,ec,psf + "H");
+    
     if (sr + 1 <= er && sc + 1 <= ec)
-    {
-    count += MazePath_01(sr+1,sc+1,er,ec,psf +"D");
-    }
+        count += MazePath_01(sr+1,sc+1,er,ec,psf +"D");
+
     return count;
 }
 
@@ -353,10 +351,12 @@ public static int MazePath_MM(int sr,int sc,int er,int ec,String psf)
     {
         count += MazePath_MM(sr+jump,sc,er,ec,psf + "V" + jump);
     }
+
     for (int jump = 1; jump <= ec-sc; jump++)
     {
         count += MazePath_MM(sr,sc+jump,er,ec,psf + "H" + jump);
     }
+
     for (int jump = 1; jump <= er-sr && jump <= ec-sc; jump++)
     {
         count += MazePath_MM(sr+jump,sc+jump,er,ec,psf + "D" + jump);
@@ -383,6 +383,7 @@ public static void floodFill(int sr,int sc,int [][] maze,boolean [][] visited,St
     visited[sr][sc] = false; //taaki vo path ke cells dusre paths mei bhi aa paaye.
 
 }
+
 public static boolean isSafe(int sr,int sc,int [][] maze)
 {
     if (sr > maze.length-1 || sc > maze[0].length-1)
@@ -416,9 +417,9 @@ public static int floodFill_Jumps(int sr,int sc,int[][] vis,String psf)
             count += floodFill_Jumps(r,c,vis,psf + jump + dirS[d]);
         }
     }
+    
     vis[sr][sc] = 0;
     return count;
-
 }
 
 static int[] xMove = {2,1,-1,-2,-2,-1,1,2};
@@ -428,9 +429,8 @@ public static boolean KnightsTour(int sr,int sc,int[][] board,int steps)
     board[sr][sc] = steps;
         
     if(steps == 63)//63 is the last step of knight in 8*8 board.
-    {
-    return true;
-    }
+        return true;
+    
 
     for(int d = 0; d < xMove.length;d++)
     {

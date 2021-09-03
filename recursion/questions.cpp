@@ -6,43 +6,32 @@
 using namespace std;
 
 //Leetcode 17 -> Letter Combinations of a Phone Number
-vector<string> codes = {" ", " ", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-vector<string> letterCombinations(string digits)
+vector<string> codes{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+vector<string> nokiaKeypad(string digits, int idx)
 {
-    vector<string> ans;
-    if (digits.length() == 0)
-    {
-        return ans;
-    }
-    ans = helper(digits);
-    return ans;
-}
-
-vector<string> helper(string digits)
-{
-    if (digits.length() == 0)
-    {
-        vector<string> base;
-        base.push_back("");
-        return base;
-    }
-
-    char ch = digits[0];
-    vector<string> recAns = helper(digits.substr(1));
+    if (idx == digits.length())
+        return {""};
+        
+    char dig = digits[idx];
     vector<string> myAns;
-    int chi = ch - '0';
-    if (chi >= 2 && chi <= 9)
+
+    vector<string> recAns = nokiaKeypad(digits, idx + 1);
+    for (string rstr : recAns)
     {
-        string code = codes[chi];
-        for (int i = 0; i < code.length(); i++)
-        {
-            for (string rstr : recAns)
-            {
-                myAns.push_back(code[i] + rstr);
-            }
-        }
+        string word = codes[dig - '0'];
+        for (char ch : word)
+            myAns.push_back(ch + rstr);
     }
     return myAns;
+}
+
+//Leetcode function
+vector<string> letterCombinations(string digits)
+{
+    if (digits.length() == 0)
+        return {};
+
+    return nokiaKeypad(digits, 0);
 }
 
 //Leetcode 46 -> permute in an array with duplicate ans allowed.
@@ -97,7 +86,7 @@ void permute_(vector<int> &arr, int count, vector<bool> &vis)
         }
     }
 }
-vector<vector<int>> permute(vector<int> &nums)
+vector<vector<int> > permute(vector<int> &nums)
 {
     vector<bool> vis(nums.size(), false);
     permute_(nums, 0, vis);
@@ -105,7 +94,7 @@ vector<vector<int>> permute(vector<int> &nums)
 }
 
 //Leetcode 47 better optimized approach
-vector<vector<int>> res;
+vector<vector<int> > res;
 vector<int> smallAns;
 void permute(vector<int> &arr, int count, vector<bool> &vis)
 {
@@ -130,7 +119,7 @@ void permute(vector<int> &arr, int count, vector<bool> &vis)
 }
 
 //Leetcode function
-vector<vector<int>> permuteUnique(vector<int> &nums)
+vector<vector<int> > permuteUnique(vector<int> &nums)
 {
     sort(nums.begin(), nums.end());
     vector<bool> vis(nums.size(), false);

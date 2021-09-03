@@ -156,16 +156,8 @@ bool isSafe(int x, int y, int er, int ec, vector<vector<bool> > &board)
         return false;
     return true;
 }
-vector<vector<int> > direction{{0, 1}, {
-                                           -1,
-                                           1,
-                                       },
-                               {-1, 0},
-                               {-1, -1},
-                               {0, -1},
-                               {1, -1},
-                               {1, 0},
-                               {1, 1}};
+
+vector<vector<int> > direction{{0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}};
 vector<string> dir{"R", "1", "U", "2", "L", "3", "D", "4"};
 int floodFill(int sr, int sc, int er, int ec, vector<vector<bool> > &board, string ans)
 {
