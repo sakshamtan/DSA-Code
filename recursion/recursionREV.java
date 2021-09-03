@@ -49,7 +49,6 @@ public static ArrayList<String> nokiaKeypad_01(String str)
             char chcode = code.charAt(i);
             myAns.add(chcode + rstr);
         }
-
     }
     return myAns;
 }

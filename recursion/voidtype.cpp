@@ -41,6 +41,7 @@ int keyPad(string ques, string ans)
     {
         count += keyPad(ques.substr(1), ans + word[i]);
     }
+    
     if (ques[0] != 0 && ques.length() > 1)
     {
         int idx = (ch - '0') * 10 + (ques[1] - '0');
