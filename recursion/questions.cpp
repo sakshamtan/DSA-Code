@@ -11,7 +11,7 @@ vector<string> nokiaKeypad(string digits, int idx)
 {
     if (idx == digits.length())
         return {""};
-        
+
     char dig = digits[idx];
     vector<string> myAns;
 
@@ -35,82 +35,91 @@ vector<string> letterCombinations(string digits)
 }
 
 //Leetcode 46 -> permute in an array with duplicate ans allowed.
-vector<vector<int> > res;
-vector<int> smallAns;
-void permute_(vector<int> &arr, int count, vector<bool> &vis)
+void permute_(vector<int> &arr, int idx, vector<int> &smallAns, vector<vector<int> > &res, vector<bool> &vis)
 {
-    if (count == arr.size())
+    if (idx == arr.size())
     {
         res.push_back(smallAns);
         return;
     }
+
     for (int i = 0; i < arr.size(); i++)
     {
         if (!vis[i])
         {
             vis[i] = true;
             smallAns.push_back(arr[i]);
-            permute_(arr, count + 1, vis);
+            permute_(arr, idx + 1, smallAns, res, vis);
             smallAns.pop_back();
             vis[i] = false;
         }
     }
 }
 
+//Leetcode function
 vector<vector<int> > permute(vector<int> &nums)
 {
     vector<bool> vis(nums.size(), false);
-    permute_(nums, 0, vis);
+    vector<int> smallAns;
+    vector<vector<int> > res;
+    permute_(nums, 0, smallAns, res, vis);
+
     return res;
 }
 
 //Leetcode 47 -> permute_Unique
-vector<vector<int> > res;
-vector<int> smallAns;
-void permute_(vector<int> &arr, int count, vector<bool> &vis)
+void permuteUnique_(vector<int> &arr, int idx, vector<bool> &vis, vector<int> &smallAns, vector<vector<int> > &res)
 {
-    if (count == arr.size())
+    if (idx == arr.size())
     {
         res.push_back(smallAns);
         return;
     }
+
+    unordered_set<int> set;
+
     for (int i = 0; i < arr.size(); i++)
     {
-        if (!vis[i])
+        if (!vis[i] && set.find(arr[i]) == set.end())
         {
             vis[i] = true;
             smallAns.push_back(arr[i]);
-            permute_(arr, count + 1, vis);
-            smallAns.pop_back();
+            set.insert(arr[i]);
+            permuteUnique_(arr, idx + 1, vis, smallAns, res);
             vis[i] = false;
+            smallAns.pop_back();
         }
     }
 }
-vector<vector<int> > permute(vector<int> &nums)
+
+//Leetcode function
+vector<vector<int> > permuteUnique(vector<int> &nums)
 {
+    vector<int> smallAns;
     vector<bool> vis(nums.size(), false);
-    permute_(nums, 0, vis);
+    vector<vector<int>> res;
+
+    permuteUnique_(nums, 0, vis, smallAns, res);
     return res;
 }
 
 //Leetcode 47 better optimized approach
-vector<vector<int> > res;
-vector<int> smallAns;
-void permute(vector<int> &arr, int count, vector<bool> &vis)
+void permuteUnique_(vector<int> &arr, int idx, vector<bool> &vis, vector<int> &smallAns, vector<vector<int> > &res)
 {
-    if (count == arr.size())
+    if (idx == arr.size())
     {
         res.push_back(smallAns);
         return;
     }
-    int prev = -(int)1e8;
+
+    int prev = -11;  // -10 to +10 range of data is given
     for (int i = 0; i < arr.size(); i++)
     {
         if (!vis[i] && prev != arr[i])
         {
             vis[i] = true;
             smallAns.push_back(arr[i]);
-            permute(arr, count + 1, vis);
+            permuteUnique_(arr, idx + 1, vis, smallAns, res);
             smallAns.pop_back();
             vis[i] = false;
             prev = arr[i];
@@ -119,16 +128,19 @@ void permute(vector<int> &arr, int count, vector<bool> &vis)
 }
 
 //Leetcode function
-vector<vector<int> > permuteUnique(vector<int> &nums)
+vector<vector<int>> permuteUnique(vector<int> &nums)
 {
-    sort(nums.begin(), nums.end());
     vector<bool> vis(nums.size(), false);
-    permute(nums, 0, vis);
+    vector<int> smallAns;
+    vector<vector<int>> res;
+
+    sort(nums.begin(), nums.end());
+    permuteUnique_(nums, 0, vis, smallAns, res);
     return res;
 }
 
 //Leetcode 39 -> Combination Sum
-void coinChange_Combi_Infi(vector<int> &arr, int tar, int idx, vector<int> &ans, vector<vector<int> > &res)
+void coinChange_Combi_Infi(vector<int> &arr, int tar, int idx, vector<int> &ans, vector<vector<int>> &res)
 {
     if (tar == 0)
     {
@@ -147,10 +159,10 @@ void coinChange_Combi_Infi(vector<int> &arr, int tar, int idx, vector<int> &ans,
 }
 
 //Leetcode function
-vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+vector<vector<int> > combinationSum(vector<int> &candidates, int target)
 {
     vector<int> ans;
-    vector<vector<int>> res;
+    vector<vector<int> > res;
     coinChange_Combi_Infi(candidates, target, 0, ans, res);
     return res;
 }
