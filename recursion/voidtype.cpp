@@ -66,9 +66,11 @@ int Encoding(string str, int idx, string asf)
         cout << asf << endl;
         return 1;
     }
+
     char ch = str[idx];
     if (ch == '0')
         return 0;
+        
     int count = 0;
     count += Encoding(str, idx + 1, asf + string(1, (ch - '0') + ('a' - 1))); //for correct mapping as a = 1 and not 0.
     if (idx < str.length() - 1)

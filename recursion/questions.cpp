@@ -147,10 +147,10 @@ void coinChange_Combi_Infi(vector<int> &arr, int tar, int idx, vector<int> &ans,
 }
 
 //Leetcode function
-vector<vector<int> > combinationSum(vector<int> &candidates, int target)
+vector<vector<int>> combinationSum(vector<int> &candidates, int target)
 {
     vector<int> ans;
-    vector<vector<int> > res;
+    vector<vector<int>> res;
     coinChange_Combi_Infi(candidates, target, 0, ans, res);
     return res;
 }
