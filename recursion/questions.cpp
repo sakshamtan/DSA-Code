@@ -97,7 +97,7 @@ vector<vector<int> > permuteUnique(vector<int> &nums)
 {
     vector<int> smallAns;
     vector<bool> vis(nums.size(), false);
-    vector<vector<int>> res;
+    vector<vector<int> > res;
 
     permuteUnique_(nums, 0, vis, smallAns, res);
     return res;
@@ -112,7 +112,7 @@ void permuteUnique_(vector<int> &arr, int idx, vector<bool> &vis, vector<int> &s
         return;
     }
 
-    int prev = -11;  // -10 to +10 range of data is given
+    int prev = -11; // -10 to +10 range of data is given
     for (int i = 0; i < arr.size(); i++)
     {
         if (!vis[i] && prev != arr[i])
@@ -128,11 +128,11 @@ void permuteUnique_(vector<int> &arr, int idx, vector<bool> &vis, vector<int> &s
 }
 
 //Leetcode function
-vector<vector<int>> permuteUnique(vector<int> &nums)
+vector<vector<int> > permuteUnique(vector<int> &nums)
 {
     vector<bool> vis(nums.size(), false);
     vector<int> smallAns;
-    vector<vector<int>> res;
+    vector<vector<int> > res;
 
     sort(nums.begin(), nums.end());
     permuteUnique_(nums, 0, vis, smallAns, res);
@@ -140,7 +140,7 @@ vector<vector<int>> permuteUnique(vector<int> &nums)
 }
 
 //Leetcode 39 -> Combination Sum
-void coinChange_Combi_Infi(vector<int> &arr, int tar, int idx, vector<int> &ans, vector<vector<int>> &res)
+void coinChange_Combi_Infi(vector<int> &arr, int tar, int idx, vector<int> &ans, vector<vector<int> > &res)
 {
     if (tar == 0)
     {
@@ -164,5 +164,48 @@ vector<vector<int> > combinationSum(vector<int> &candidates, int target)
     vector<int> ans;
     vector<vector<int> > res;
     coinChange_Combi_Infi(candidates, target, 0, ans, res);
+    return res;
+}
+
+//Leetcode 78 -> Subsets -> CoinChangeCombinationSingle for loop method
+void subsets_01(vector<int> &arr, int idx, vector<int> &smallAns, vector<vector<int> > &res)
+{
+    if (idx >= arr.size())
+        return;
+
+    for (int i = idx; i < arr.size(); i++)
+    {
+
+        smallAns.push_back(arr[i]);
+        res.push_back(smallAns);
+        subsets_01(arr, i + 1, smallAns, res);
+        smallAns.pop_back();
+    }
+}
+
+//using subsequence method -> nci method is better as height of tree is lesser in that case
+void subsets_02(vector<int> &arr, int idx, vector<int> &smallAns, vector<vector<int>> &res)
+{
+    if (idx >= arr.size())
+    {
+        res.push_back(smallAns);
+        return;
+    }
+
+    smallAns.push_back(arr[idx]);
+    subsets_01(arr, idx + 1, smallAns, res);
+    smallAns.pop_back();
+
+    subsets_01(arr, idx + 1, smallAns, res);
+}
+
+//Leetcode function
+vector<vector<int> > subsets(vector<int> &nums)
+{
+    vector<int> smallAns;
+    vector<vector<int>> res;
+    res.push_back({});
+    subsets_01(nums, 0, smallAns, res);
+
     return res;
 }
