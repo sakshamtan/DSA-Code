@@ -443,7 +443,7 @@ public static boolean KnightsTour(int sr,int sc,int[][] board,int steps)
             if(res) return true;
         }
     }
-    
+
     board[sr][sc] = -1;
     return false;
 }
@@ -486,13 +486,14 @@ public static void pathSet()
 
 //Har level pr saare options dene hai taaki saare arrangements aa jaaye using any no. of coins any times.
 //F-> tar 8,7,5,3 se function ko permu bnane aate hai hume bs 2,3,5,7 se unke respective targets tk pohochana hai.
-public static int coinChange_Permutation_01(int [] coins,int tar,String ans)//using multiple coins.
+public static int coinChange_Permutation_01(int[] coins,int tar,String ans)//using multiple coins.
 {
     if(tar == 0)
     {
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     for(int i = 0; i < coins.length;i++)
     {
@@ -506,15 +507,16 @@ public static int coinChange_Permutation_01(int [] coins,int tar,String ans)//us
 
 //F-> Bs apne present idx se aage vaale indexes pr call lagani hai har level pr yaani idx se lekr end tk taaki sirf combinations aaye.
 //for eg 2 can call/use 3,5,7 and 3 can call/use 5,7 and 5 can only call/use 7 on that certain level.
-public static int coinChange_Combination_01(int [] coins,int idx,int tar,String ans)//using multiple coins.
+public static int coinChange_Combination_01(int[] coins,int idx,int tar,String ans)//using multiple coins.
 {
     if(tar == 0)
     {
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
-    for(int i = idx;i < coins.length;i++)//idx se lekr arr ke end tk ki call lagani hai
+    for(int i = idx;i < coins.length; i++)//idx se lekr arr ke end tk ki call lagani hai
     {
         if(tar - coins[i] >= 0)
         {
@@ -532,6 +534,7 @@ public static int coinChange_Combination_Single_01(int [] coins,int idx,int tar,
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     for(int i = idx; i < coins.length;i++)
     {
@@ -544,13 +547,14 @@ public static int coinChange_Combination_Single_01(int [] coins,int idx,int tar,
 }
 
 // using vis arr in normal voidtype recursion so that one coin is used only once in each call.
-public static int coinChange_Permutation_Single_01(int [] coins,int tar,boolean [] vis,String ans)
+public static int coinChange_Permutation_Single_01(int[] coins,int tar,boolean[] vis,String ans)
 {
     if(tar == 0)
     {
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     for(int i = 0; i < coins.length;i++)
     {
@@ -566,7 +570,7 @@ public static int coinChange_Permutation_Single_01(int [] coins,int tar,boolean 
 
 //Subseq method -> ek baar coin use krne ki call lagana and ek baar coin nhi use krne ki call lagana.
 //Combination using single coin only.
-public static int coinChange_Combination_Single_Subseq_01(int [] coins,int idx,int tar,String ans)
+public static int coinChange_Combination_Single_Subseq_01(int[] coins,int idx,int tar,String ans)
 {
     if(tar == 0 || idx >= coins.length)
     {
@@ -577,6 +581,7 @@ public static int coinChange_Combination_Single_Subseq_01(int [] coins,int idx,i
         }
         return 0;
     }
+
     int count = 0;
     if(tar - coins[idx] >= 0)
     count += coinChange_Combination_Single_Subseq_01(coins,idx+1,tar-coins[idx],ans + coins[idx]);
@@ -589,7 +594,7 @@ public static int coinChange_Combination_Single_Subseq_01(int [] coins,int idx,i
 }
 
 //Combination using multiple coins.
-public static int coinChange_Combination_Subseq_01(int [] coins,int idx,int tar,String ans)
+public static int coinChange_Combination_Subseq_01(int[] coins,int idx,int tar,String ans)
 {
     if(tar == 0 || idx >= coins.length)
     {
@@ -600,6 +605,7 @@ public static int coinChange_Combination_Subseq_01(int [] coins,int idx,int tar,
         }
         return 0;
     }
+
     int count = 0;
     if(tar - coins[idx] >= 0)
     count += coinChange_Combination_Subseq_01(coins,idx,tar-coins[idx],ans + coins[idx]);
@@ -612,7 +618,7 @@ public static int coinChange_Combination_Subseq_01(int [] coins,int idx,int tar,
 }
 
 //Permutation using multiple coins.
-public static int coinChange_Permutation_Subseq_01(int [] coins,int idx,int tar,String ans)
+public static int coinChange_Permutation_Subseq_01(int[] coins,int idx,int tar,String ans)
 {
     if(tar == 0 || idx >= coins.length)
     {
@@ -623,6 +629,7 @@ public static int coinChange_Permutation_Subseq_01(int [] coins,int idx,int tar,
         }
         return 0;
     }
+
     int count = 0;
     if(tar - coins[idx] >= 0)
     count += coinChange_Permutation_Subseq_01(coins,0,tar-coins[idx],ans + coins[idx]);
@@ -634,7 +641,7 @@ public static int coinChange_Permutation_Subseq_01(int [] coins,int idx,int tar,
 }
 
 //permu using sinle coin so just using vis arr in the above code.
-public static int coinChange_Permutation_Single_Subseq_01(int [] coins,int idx,int tar,boolean [] vis,String ans)
+public static int coinChange_Permutation_Single_Subseq_01(int[] coins,int idx,int tar,boolean[] vis,String ans)
 {
     if(tar == 0 || idx >= coins.length)
     {
@@ -645,6 +652,7 @@ public static int coinChange_Permutation_Single_Subseq_01(int [] coins,int idx,i
         }
         return 0;
     }
+
     int count = 0;
     if(!vis[idx] && tar - coins[idx] >= 0)
     {
@@ -652,6 +660,7 @@ public static int coinChange_Permutation_Single_Subseq_01(int [] coins,int idx,i
         count += coinChange_Permutation_Single_Subseq_01(coins,0,tar - coins[idx],vis,ans + coins[idx]);
         vis[idx] = false;
     }
+
     count += coinChange_Permutation_Single_Subseq_01(coins,idx+1,tar,vis,ans);
     
     return count;
@@ -663,7 +672,7 @@ public static void CoinChange()
     System.out.println(coinChange_Permutation_01(coins,10,""));
     // System.out.println(coinChange_Combination_01(coins,0,10,""));
     // System.out.println(coinChange_Combination_Single_01(coins,0,10,""));
-    boolean [] vis = new boolean[coins.length];
+    boolean[] vis = new boolean[coins.length];
     // System.out.println(coinChange_Permutation_Subseq_01(coins,0,10,vis,""));
     // System.out.println(coinChange_Combination_Single_Subseq_01(coins,0,10,""));
     // System.out.println(coinChange_Combination_Subseq_01(coins,0,10,""));
