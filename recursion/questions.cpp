@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <unordered_set> //hashset.
+#include <unordered_set> 
 #include <algorithm>     //for using sort function.
 
 using namespace std;
