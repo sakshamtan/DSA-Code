@@ -260,6 +260,7 @@ pathPair floodFillShortestPath_jumps(int sr, int sc, int er, int ec)
         pathPair p("", 0);
         return p;
     }
+    
     vis[sr][sc] = 1;
     pathPair ans("", 1e8);
     for (int jump = 1; jump <= max(er, ec); jump++)
