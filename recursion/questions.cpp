@@ -184,7 +184,7 @@ void subsets_01(vector<int> &arr, int idx, vector<int> &smallAns, vector<vector<
 }
 
 //using subsequence method -> nci method is better as height of tree is lesser in that case
-void subsets_02(vector<int> &arr, int idx, vector<int> &smallAns, vector<vector<int>> &res)
+void subsets_02(vector<int> &arr, int idx, vector<int> &smallAns, vector<vector<int> > &res)
 {
     if (idx >= arr.size())
     {
@@ -203,9 +203,40 @@ void subsets_02(vector<int> &arr, int idx, vector<int> &smallAns, vector<vector<
 vector<vector<int> > subsets(vector<int> &nums)
 {
     vector<int> smallAns;
-    vector<vector<int>> res;
+    vector<vector<int> > res;
     res.push_back({});
     subsets_01(nums, 0, smallAns, res);
 
+    return res;
+}
+
+//Leetcode 90 -> Subsets II -> Duplicate sets not allowed
+void subsetsDupli(vector<int> &arr, int idx, vector<int> &smallAns, vector<vector<int> > &res)
+{
+    // if(idx >= arr.size())
+    //     return;
+
+    int prev = -11;
+    for (int i = idx; i < arr.size(); i++)
+    {
+        if (prev == arr[i])
+            continue;
+
+        smallAns.push_back(arr[i]);
+        res.push_back(smallAns);
+        subsetsDupli(arr, i + 1, smallAns, res);
+        smallAns.pop_back();
+        prev = arr[i];
+    }
+}
+
+//Leetcode function
+vector<vector<int> > subsetsWithDup(vector<int> &nums)
+{
+    vector<int> smallAns;
+    vector<vector<int> > res;
+    res.push_back({});
+    sort(nums.begin(), nums.end());  // sort krlia and if prev == curr to call nhi maarenge
+    subsetsDupli(nums, 0, smallAns, res);
     return res;
 }
