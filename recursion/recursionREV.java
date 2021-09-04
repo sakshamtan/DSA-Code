@@ -443,9 +443,9 @@ public static boolean KnightsTour(int sr,int sc,int[][] board,int steps)
             if(res) return true;
         }
     }
+    
     board[sr][sc] = -1;
     return false;
-
 }
 
 public static void pathSet()
