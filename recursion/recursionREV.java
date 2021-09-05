@@ -686,18 +686,18 @@ public static void CoinChange()
 
 //q1->q2->q3 proper order of queens.Consider it as a case of coinChange with 1 on every cell of the box and tar = tnq.
 //It is same as coinChangeCombination-single coin.
-public static int queenCombination(boolean [] box,int idx,int qpsf,int tnq,String ans)
+public static int queenCombination(boolean[] box,int idx,int qpsf,int tnq,String ans)
 {
     if(qpsf == tnq)
     {
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     for(int i = idx; i < box.length;i++)
-    {
         count += queenCombination(box,i+1,qpsf+1,tnq,ans + "B" + i + "Q" + qpsf +" ");//to make ans of the form b0q0 b1q1 and so on.
-    }
+    
     return count;
 }
 
@@ -709,48 +709,49 @@ public static int queenPermutation(boolean [] box,int qpsf,int tnq,String ans)
         System.out.println(ans);
         return 1;
     }
+    
     int count = 0;
     for(int i = 0; i < box.length;i++)
     {
         if(!box[i])
         {
-        box[i] = true;
-        count += queenPermutation(box,qpsf+1,tnq,ans + "B" + i + "Q" + qpsf + " ");
-        box[i] = false;
+            box[i] = true;
+            count += queenPermutation(box,qpsf+1,tnq,ans + "B" + i + "Q" + qpsf + " ");
+            box[i] = false;
         }
-
     }
     return count;
 }
 
 //Same as 1D queenCombination just converting 2D arr of (4,4) to 1D arr of 16 length and changing the format of ans accordingly.
-public static int queenCombination2D(boolean [][] box,int idx,int qpsf,int tnq,String ans)
+public static int queenCombination2D(boolean[][] box,int idx,int qpsf,int tnq,String ans)
 {
     if(qpsf == tnq)
     {
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     int n = box.length;
-    for(int i = idx; i < n*n;i++)//considering (4,4) matrix as 1D arr of 16 length.
+    for(int i = idx; i < n*n; i++)//considering (4,4) matrix as 1D arr of 16 length.
     {
         int r = i / n; //calculating row coordinate from 1D array of 16 length.
         int c = i % n; //column coordinate based on the current "i".
         count += queenCombination2D(box,i + 1,qpsf+1,tnq,ans + "(" + r + "," + c + ")" + " ");
     }
     return count;
-
 }
 
 //same as permutation-1D just converting 2D array into 1D and changing the format of ans.
-public static int queenPermutation2D(boolean [][] box,int qpsf,int tnq,String ans)
+public static int queenPermutation2D(boolean[][] box,int qpsf,int tnq,String ans)
 {
     if(qpsf == tnq)
     {
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     int n = box.length;
     for(int i = 0; i < n*n; i++)
@@ -780,7 +781,7 @@ public static void QueenPnC()
 
 //Nqueen
 
-public static boolean isSafeToPlaceQueen(boolean [][] box,int r,int c)
+public static boolean isSafeToPlaceQueen(boolean[][] box,int r,int c)
 {
     int [][] dirA = {{0,-1},{-1,-1},{-1,0},{-1,1}};//for Combinations.
     // int [][] dirA = {{0,-1},{-1,-1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1}};//for permutations.
@@ -800,20 +801,20 @@ public static boolean isSafeToPlaceQueen(boolean [][] box,int r,int c)
         }
     }
     return true;
-
 }
 
 //QueenCombination2D + isSafeToPlaceQueen = Nqueen_01.
-public static int Nqueen_Combination_01(boolean [][] box,int idx,int qpsf,int tnq,String ans)
+public static int Nqueen_Combination_01(boolean[][] box,int idx,int qpsf,int tnq,String ans)
 {
     if(qpsf == tnq)
     {
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     int n = box.length;
-    for(int i = idx;i < n*n;i++) //using queenCombination2D code base.
+    for(int i = idx;i < n*n; i++) //using queenCombination2D 
     {
         int r = i / n;
         int c = i % n;
@@ -836,6 +837,7 @@ public static int Nqueen_Permutation_01(boolean[][] box,int qpsf,int tnq,String 
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     int n = box.length;
     for(int i = 0; i < n*n;i++)
@@ -983,11 +985,12 @@ public static int Nqueen_03_Subseq(int n,int r,int tnq,String ans)
     {
         if(tnq == 0)
         {
-        System.out.println(ans);
-        return 1;
+            System.out.println(ans);
+            return 1;
         }
-    return 0;
+        return 0;
     }
+    
     int count = 0;
     for(int c = 0; c < n; c++)
     {
