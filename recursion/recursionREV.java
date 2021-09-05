@@ -882,8 +882,9 @@ public static int Nqueen_Combination_02(int n,int idx,int qpsf,int tnq,String an
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
-    for(int i = idx;i < n*n;i++)
+    for(int i = idx;i < n*n; i++)
     {
         int r = i / n;
         int c = i % n;
@@ -913,6 +914,7 @@ public static int Nqueen_Permutation_02(int n,int qpsf,int tnq,String ans)
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     for(int i = 0; i < n * n;i++)
     {
@@ -997,7 +999,7 @@ public static int Nqueen_Bits(int n,int r,int tnq,String ans)
     return count;
 }
 
-//Useful when n > tnq but is generally slower than previous approach as the heigth of its tree is more.
+//Useful when n > tnq but is generally slower than previous approach as the height of its tree is more.
 public static int Nqueen_03_Subseq(int n,int r,int tnq,String ans)
 {
     if(r >= n || tnq == 0)
