@@ -168,8 +168,6 @@ public static int euler_02(int n, int level)
 
 }
 
-
-
 public static void main(String [] args)
 {
     // printDecreasing(5);
@@ -181,8 +179,5 @@ public static void main(String [] args)
     // System.out.println(Power_Better(5,2));
     // tower_Of_Hanoi("A","B","C",3);
     System.out.println(euler_01(5,0));
-
-
-
 }
 }
