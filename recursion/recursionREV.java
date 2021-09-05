@@ -422,32 +422,6 @@ public static int floodFill_Jumps(int sr,int sc,int[][] vis,String psf)
     return count;
 }
 
-static int[] xMove = {2,1,-1,-2,-2,-1,1,2};
-static int[] yMove = {1,2,2,1,-1,-2,-2,-1};
-public static boolean KnightsTour(int sr,int sc,int[][] board,int steps)
-{
-    board[sr][sc] = steps;
-        
-    if(steps == 63)//63 is the last step of knight in 8*8 board.
-        return true;
-    
-
-    for(int d = 0; d < xMove.length;d++)
-    {
-        int r = sr + xMove[d];
-        int c = sc + yMove[d];
-
-        if(r >= 0 && c >= 0 && r < 8 && c < 8 && board[r][c] == -1)
-        {
-            boolean res = KnightsTour(r,c,board,steps+1);
-            if(res) return true;
-        }
-    }
-
-    board[sr][sc] = -1;
-    return false;
-}
-
 public static void pathSet()
 {
     // System.out.print(printBoardPaths(0,10,""));
@@ -480,6 +454,51 @@ public static void pathSet()
     int m = 3;
     int[][] vis = new int[n][m];
     System.out.println(floodFill_Jumps(0,0,vis,""));
+}
+
+
+static int[] xMove = {2,1,-1,-2,-2,-1,1,2};
+static int[] yMove = {1,2,2,1,-1,-2,-2,-1};
+public static boolean KnightsTour(int sr,int sc,int[][] board,int steps)
+{
+    board[sr][sc] = steps;
+        
+    if(steps == 63)//63 is the last step of knight in 8*8 board.
+        return true;
+    
+
+    for(int d = 0; d < xMove.length;d++)
+    {
+        int r = sr + xMove[d];
+        int c = sc + yMove[d];
+
+        if(r >= 0 && c >= 0 && r < 8 && c < 8 && board[r][c] == -1)
+        {
+            boolean res = KnightsTour(r,c,board,steps+1);
+            if(res) return true;
+        }
+    }
+
+    board[sr][sc] = -1;
+    return false;
+}
+
+public static void knightTour()
+{
+    int [][] board = new int[8][8];
+    for(int [] a : board) 
+    Arrays.fill(a,-1);//function similar to single for loop to fill array(import arrays for this function.)
+
+    KnightsTour(0,0,board,0);
+
+    for(int[] a : board)
+    {
+        for(int ele : a)
+        {
+            System.out.print(ele + " ");
+        }
+        System.out.println();
+    }
 }
 
 //Coin Change
@@ -680,7 +699,6 @@ public static void CoinChange()
     System.out.println(coinChange_Permutation_Subseq_01(coins,0,10,""));
 
 }
-
 
 //QueenCombinationAndPermutation
 
@@ -959,6 +977,7 @@ public static int Nqueen_Bits(int n,int r,int tnq,String ans)
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     for(int c = 0;c < n;c++)
     {
@@ -990,7 +1009,7 @@ public static int Nqueen_03_Subseq(int n,int r,int tnq,String ans)
         }
         return 0;
     }
-    
+
     int count = 0;
     for(int c = 0; c < n; c++)
     {
@@ -1073,25 +1092,6 @@ public static int WordBreak_02(String ques,int len,int idx,HashSet<String> words
         }
     }
     return count;
-}
-
-public static void knightTour()
-{
-    int [][] board = new int[8][8];
-    for(int [] a : board) 
-    Arrays.fill(a,-1);//function similar to single for loop to fill array(import arrays for this function.)
-
-    KnightsTour(0,0,board,0);
-
-    for(int[] a : board)
-    {
-        for(int ele : a)
-        {
-            System.out.print(ele + " ");
-        }
-        System.out.println();
-    }
-
 }
 
 public static void wordbreak()
