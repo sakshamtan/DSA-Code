@@ -87,6 +87,26 @@ public static int Power_Better(int x,int n) //O(logn)
     return (n % 2 != 0 ? Ans * x : Ans);
 }
 
+//Leetcode 50 -> Pow(x,n)
+public double pow(double x,int n)
+{
+    if(n == 0)
+        return 1.0;
+        
+    double smallAns = pow(x,n/2);
+    smallAns *= smallAns;
+    return (n % 2) == 0 ? smallAns : smallAns * x;
+}
+
+//Leetcode function
+public double myPow(double x, int n) 
+{
+    if(n < 0)
+        return 1 / pow(x,n);
+        
+    return pow(x,n);
+}
+
 public static int fibo(int n)
 {
     if(n <= 1)
