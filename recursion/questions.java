@@ -56,4 +56,25 @@ public void Nqueen(int n,int r,int tnq)
         }
     }
 }
+
+//Leetcode 140 -> Word Break II -> Recursion se bhi pass ho rha hai but better optimized with dp
+public List<String> wordBreak(String s, List<String> wordDict) 
+{
+    List<String> ans = new ArrayList<>();
+    if(wordDict.contains(s))
+        ans.add(s);
+        
+    for(int i = 0; i < s.length(); i++)
+    {
+        String word = s.substring(0,i);
+        if(wordDict.contains(word))
+        {
+            List<String> recAns = wordBreak(s.substring(i),wordDict);
+            for(String sen : recAns)
+                ans.add(word + " " + sen);
+                
+        }
+    }
+    return ans;
+}
 }

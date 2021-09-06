@@ -372,4 +372,33 @@ public int wordBreak_dp(String s,List<String> dict)
     }
     return dp[s.length()-1];
 }
+
+//Leetcode 140 -> Word Break II -> Now return all the sentences that are possible
+HashMap<String,List<String>> map = new HashMap<>();  // hashMap se memoization laga li
+public List<String> wordBreak(String s, List<String> wordDict) 
+{
+    List<String> ans = new ArrayList<>();
+        
+    if(wordDict.contains(s))
+        ans.add(s);
+    
+    if(map.containsKey(s))
+        return map.get(s);
+        
+    for(int i = 0; i < s.length(); i++)
+    {
+        String word = s.substring(0,i);
+        if(wordDict.contains(word))
+        {
+            List<String> recAns = wordBreak(s.substring(i),wordDict);
+            for(String sen : recAns)
+            {
+                ans.add(word + " " + sen);
+            }
+        }
+    }
+        
+    map.put(s,ans);
+    return ans;
+}
 }
