@@ -309,4 +309,67 @@ public int palindromePartition(String s, int k)
 
     return palindromePartition_memo(s,k,0,dp,minChangeDP);        
 }
+
+//Leetcode 139 -> Word Break
+public boolean wordBreak_memo(String s,int len,HashSet<String> dict,HashMap<String,Boolean> map)
+{
+    if(dict.contains(s))
+    {
+        map.put(s,true);
+        return true;
+    }
+        
+    if(map.containsKey(s))
+        return map.get(s);
+        
+    for(int i = 1; i <= len && i <= s.length(); i++)
+    {
+        String word = s.substring(0,i);
+        if(dict.contains(word) && wordBreak_memo(s.substring(i),len,dict,map))
+        {
+            map.put(s,true);
+            return true;
+        }
+    }
+        
+    map.put(s,false);
+    return false;
+}
+
+//Leetcode function
+public boolean wordBreak(String s, List<String> wordDict) 
+{
+    HashMap<String,Boolean> map = new HashMap<>();
+    int len = 0;
+    HashSet<String> dict = new HashSet<>();
+    for(String str : wordDict)
+    {
+        dict.add(str);
+        len = Math.max(len,str.length());
+    }
+
+    return wordBreak_memo(s,len,dict,map);
+}
+
+//Now to return the no of possible sentences that can be formed
+public int wordBreak_dp(String s,List<String> dict)
+{
+    int[] dp = new int[s.length()];
+        
+    for(int i = 0; i < dp.length; i++)
+    {
+        for(int j = 0; j <= i; j++)
+        {
+            String word = s.substring(j,i+1);
+            if(dict.contains(word))
+            {
+                if(j > 0)
+                    dp[i] += dp[j-1];
+                else
+                    dp[i] += 1;
+            }
+        }
+    }
+    return dp[s.length()-1];
+}
 }

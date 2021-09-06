@@ -1064,6 +1064,7 @@ public static int WordBreak_01(String ques,int len,HashSet<String> words,String 
         System.out.println(ans);
         return 1;
     }
+
     int count = 0;
     for(int i = 0; i <= len && i <= ques.length();i++)
     {
@@ -1084,6 +1085,7 @@ public static int WordBreak_02(String ques,int len,int idx,HashSet<String> words
         System.out.println(ans);
         return 1;
     }
+    
     int count = 0;
     for(int i = idx;i - idx <= len && i <= ques.length();i++)//idx se aage iterate krna hai.
     {
