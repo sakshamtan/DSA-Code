@@ -122,6 +122,31 @@ public static int single_Number_02(int [] arr)
     return ans;
 }
 
+//Leetcode 260 -> Single Number III
+public int[] singleNumber(int[] nums) 
+{
+    int[] ans = new int[2];
+        
+    int val = 0;
+    for(int ele : nums)
+        val ^= ele;   // val mei ab dono unique no.s ka xor hoga.
+        
+    int d = (val & (-val));  // d will contain the last set bit of val
+        
+    int x = 0, y = 0;
+    for(int ele : nums)   // dividing all no.s into two sets such that har unique ele diff set mei aaye and single Number I vaal aconcept use ho jaaye
+    {
+        if((d & ele) != 0)
+            x ^= ele;  
+        else
+            y ^= ele;
+    }
+        
+    ans[0] = x;
+    ans[1] = y;
+    return ans;
+}
+
 public static void Print_bits(int n)
 {
     for (int i = 31; i >= 0; i--)
