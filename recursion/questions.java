@@ -108,7 +108,7 @@ public List<String> wordBreak(String s, List<String> wordDict)
             List<String> recAns = wordBreak(s.substring(i),wordDict);
             for(String sen : recAns)
                 ans.add(word + " " + sen);
-                
+                      
         }
     }
     return ans;

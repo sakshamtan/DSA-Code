@@ -1105,13 +1105,13 @@ int cryptoSolver(string str, int idx)
 
         if (x + y == z)
         {
-            cout << " " << x << "\n+" << y << "\n-------\n"
-                 << z << endl;
+            cout << " " << x << "\n+" << y << "\n-------\n" << z << endl;
             cout << endl;
             return 1;
         }
         return 0;
     }
+
     char ch = str[idx];
     int count = 0;
     for (int num = 0; num <= 9; num++) //str mei saare char ko no. assign krne ke saare options.
@@ -1170,13 +1170,13 @@ bool canplaceWordH(string word, int r, int c)
     int l = word.length();
     int m = box[0].size();
 
-    if (c == 0 && l < m) // left corner case.
+    if (c == 0 && l < m) // left case.
     {
         if (box[r][c + l] != '+')
             return false;
     }
 
-    else if (c + l == m) // right corner case.
+    else if (c + l == m) // right case.
     {
         if (box[r][c - 1] != '+')
             return false;
@@ -1190,7 +1190,7 @@ bool canplaceWordH(string word, int r, int c)
 
     for (int i = 0; i < word.length(); i++)
     {
-        if (c + i == box[0].size())
+        if (c + i == m)
             return false;
 
         if (box[r][c + i] != '-' && box[r][c + i] != word[i])
@@ -1225,13 +1225,13 @@ bool canplaceWordV(string word, int r, int c)
     int l = word.length();
     int n = box.size();
 
-    if (r == 0 && l < n) // left corner case.
+    if (r == 0 && l < n) // top case.
     {
         if (box[r + l][c] != '+')
             return false;
     }
 
-    else if (r + l == n) // right corner case.
+    else if (r + l == n) // bottom case.
     {
         if (box[r - 1][c] != '+')
             return false;
