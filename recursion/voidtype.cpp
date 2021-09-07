@@ -992,10 +992,10 @@ int SudokuSolver(int vidx, vector<int> &loc)
     return count;
 }
 
+//Leetcode 36 -> Valid Sudoku
 int rowA[9] = {0};
 int colA[9] = {0};
 int matA[3][3] = {0};
-// Leetcode 36
 bool isValidSudoku(vector<vector<char> > &board)
 {
     for (int i = 0; i < 9; i++)

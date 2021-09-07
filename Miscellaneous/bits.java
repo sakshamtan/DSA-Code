@@ -12,7 +12,7 @@ public static void OFF_ON_Kth_bit(int n, int k)
 //ON -> OFF and OFF -> OFF the kTh bit. (Similar to arr[i] = false;)
 public static void ON_OFF_Kth_bit(int n, int k)
 {
-    int rev_mask = ~(1<<k);
+    int rev_mask = ~(1<<k); // 1's complement 
     int SetBit = (n & rev_mask);
     System.out.println(Integer.toBinaryString(SetBit));
 }
@@ -145,7 +145,7 @@ public static void main(String[] args)
     // Count_of_ON_bits_03(57);
    // Print_bits(57);
     int [] arr = {1,1,2,2,3,3,4,4,5};
-   single_Number(arr);
+    single_Number(arr);
 
 }
 }
