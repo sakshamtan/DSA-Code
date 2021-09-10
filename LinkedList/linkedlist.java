@@ -134,8 +134,8 @@ private Node removeFirstNode()
 
     else
     {
-    this.head = this.head.next;
-    node.next = null;
+        this.head = this.head.next;
+        node.next = null;
     }
 
     this.elementCount--;
