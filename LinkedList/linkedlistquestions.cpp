@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-struct ListNode 
+struct ListNode
 {
     int val;
     ListNode *next;
@@ -12,44 +12,46 @@ struct ListNode
 };
 
 //Leetcode 876
-ListNode* middleNode(ListNode* head) // hamesha ceil value deta hai middle ki jab even length ho linked list ki.
+ListNode *middleNode(ListNode *head) // hamesha ceil value deta hai middle ki jab even length ho linked list ki.
 {
-    if(head == nullptr || head->next == nullptr) return head;
+    if (head == nullptr || head->next == nullptr)
+        return head;
 
     ListNode *slow = head;
     ListNode *fast = head;
-        
-    while (fast != nullptr && fast->next!=nullptr)
+
+    while (fast != nullptr && fast->next != nullptr)
     {
         slow = slow->next;
         fast = fast->next->next;
     }
 
-    return slow;       
+    return slow;
 }
 
 //Even length ll mei do middle hote hai pehle vaala floor and dusre vaala ceil. -> middleNode vaala question ho to ceil middle dena hota hai aur middleNode as a function use krna hota hai to floor middle dena hota hai even ll ke case mei
 // middle of linked list -> when to be used as a funtion -> it returns floor middle in the case of even length ll.
-ListNode* middleNode_02(ListNode* head)
+ListNode *middleNode_02(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr) return head;
+    if (head == nullptr || head->next == nullptr)
+        return head;
 
     ListNode *slow = head;
     ListNode *fast = head;
-        
-        while(fast->next != nullptr && fast->next->next != nullptr)
-        {
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        return slow;
-        
+
+    while (fast->next != nullptr && fast->next->next != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
 }
 
-//Leetcode 206 
-ListNode* reverseList(ListNode *head)
+//Leetcode 206
+ListNode *reverseList(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr) return head;
+    if (head == nullptr || head->next == nullptr)
+        return head;
 
     ListNode *prev = nullptr;
     ListNode *curr = head;
@@ -68,82 +70,82 @@ ListNode* reverseList(ListNode *head)
 }
 
 //reverseData -> pointers and data addresses nodes ki change kiye bina data reverse krna hai.
-void reverseData(ListNode* head)
+void reverseData(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr) return head;
+    if (head == nullptr || head->next == nullptr)
+        return head;
 
-    ListNode* mid = middleNode_02(head); // as a function use krna ho to middleNode_02 use krna hai hmesha.
-    ListNode* tHead = mid->next;
+    ListNode *mid = middleNode_02(head); // as a function use krna ho to middleNode_02 use krna hai hmesha.
+    ListNode *tHead = mid->next;
     mid->next = nullptr; // breaking list into two lists.
 
-   tHead = reverseList(tHead);//reversing second half of linked list.
-   ListNode* c1 = head;
-   ListNode* c2 = tHead;
+    tHead = reverseList(tHead); //reversing second half of linked list.
+    ListNode *c1 = head;
+    ListNode *c2 = tHead;
 
-   while(c1 != nullptr || c2 != nullptr) //swapping values of both halves of list.
-   {
-   int temp = c1.val;
-   c1.val = c2.val;
-   c2.val = temp;
+    while (c1 != nullptr || c2 != nullptr) //swapping values of both halves of list.
+    {
+        int temp = c1.val;
+        c1.val = c2.val;
+        c2.val = temp;
 
-   c1 = c1->next;
-   c2 = c2->next;
-   }
+        c1 = c1->next;
+        c2 = c2->next;
+    }
 
-   tHead = reverseList(tHead); //reversing the second half of the list again.
-   mid->next = tHead; // connecting both halves of list.
-
+    tHead = reverseList(tHead); //reversing the second half of the list again.
+    mid->next = tHead;          // connecting both halves of list.
 }
 
-//Leetcode 234 -> requires middleNode_02 and reverseList functions 
-bool isPalindrome(ListNode* head) 
+//Leetcode 234 -> requires middleNode_02 and reverseList functions
+bool isPalindrome(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr) //base case of leetcode.
-    return true;
-        
-    ListNode* mid = middleNode_02(head);//breaking list from middle.
-    ListNode* tHead = mid->next;
+    if (head == nullptr || head->next == nullptr) //base case of leetcode.
+        return true;
+
+    ListNode *mid = middleNode_02(head); //breaking list from middle.
+    ListNode *tHead = mid->next;
     mid->next = nullptr;
-        
-    tHead = reverseList(tHead);//reversing second half of list
-    ListNode* c1 = head;
-    ListNode* c2 = tHead;
+
+    tHead = reverseList(tHead); //reversing second half of list
+    ListNode *c1 = head;
+    ListNode *c2 = tHead;
     bool res = true;
-    while(c1 != nullptr && c2 != nullptr)
+    while (c1 != nullptr && c2 != nullptr)
     {
-        if(c1->val != c2->val)//condition to check palindrome.
+        if (c1->val != c2->val) //condition to check palindrome.
         {
-        res = false;
-        break;
+            res = false;
+            break;
         }
         c1 = c1->next;
         c2 = c2->next;
     }
-        
-    tHead = reverseList(tHead);//list ko dobaara shi bhi krna hota hai as structure mei change nhi kr skte ll ke.
+
+    tHead = reverseList(tHead); //list ko dobaara shi bhi krna hota hai as structure mei change nhi kr skte ll ke.
     mid->next = tHead;
 
-    return res;   
+    return res;
 }
 
 //Leetcode 143
-void reorderList(ListNode* head)
+void reorderList(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr) 
-    return;
+    if (head == nullptr || head->next == nullptr)
+        return;
 
-    ListNode* mid = middleNode_02(head);
-    ListNode* tHead = mid->next;
+    ListNode *mid = middleNode_02(head);
+    ListNode *tHead = mid->next;
     mid->next = nullptr;
 
     tHead = reverseList(tHead);
 
-    ListNode* c1 = head;
-    ListNode* c2 = tHead;
-    ListNode* f1 = nullptr;
-    ListNode* f2 = nullptr;
+    ListNode *c1 = head;
+    ListNode *c2 = tHead;
+    ListNode *f1 = nullptr;
+    ListNode *f2 = nullptr;
 
-    while(c1 != nullptr && c2 != nullptr)
+    while (c1 != nullptr && c2 != nullptr)
     {
         f1 = c1->next; //backup
         f2 = c2->next;
@@ -158,75 +160,76 @@ void reorderList(ListNode* head)
 
 // now Order the list i.e. 1->5->2->4 se 1->2->3->4 laana hai original list vaapis laani hai ==========
 
-ListNode* th1 = nullptr; //temporary head and tails of both linked lists.
-ListNode* tt1 = nullptr; //declared as global.taaki upar ke functions ke change neeche 
-ListNode* th2 = nullptr; //vaale function mei bhi reflect ho th1 th2 tt1 tt2 mei.
-ListNode* tt2 = nullptr;
-void addFirst(ListNode* node) //addFirst and addLast required for orderList function.
+ListNode *th1 = nullptr; //temporary head and tails of both linked lists.
+ListNode *tt1 = nullptr; //declared as global.taaki upar ke functions ke change neeche
+ListNode *th2 = nullptr; //vaale function mei bhi reflect ho th1 th2 tt1 tt2 mei.
+ListNode *tt2 = nullptr;
+void addFirst(ListNode *node) //addFirst and addLast required for orderList function.
 {
-    if(th1 == nullptr)
+    if (th1 == nullptr)
     {
         th1 = node;
         tt1 = node;
     }
-    else{
+    else
+    {
         node->next = th1;
         th1 = node;
     }
 }
 
-void addLast(ListNode* node)
+void addLast(ListNode *node)
 {
-    if(th2 == nullptr)
+    if (th2 == nullptr)
     {
         th2 = node;
         tt2 = node;
     }
-    else{
+    else
+    {
         tt2->next = node;
         tt2 = node;
     }
 }
 
-ListNode* orderList(ListNode* head)
+ListNode *orderList(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr)
-    return head;
+    if (head == nullptr || head->next == nullptr)
+        return head;
 
     int count = 0;
-    ListNode* curr = head;
-    while(curr != nullptr)
+    ListNode *curr = head;
+    while (curr != nullptr)
     {
-        ListNode* forw = curr->next;
+        ListNode *forw = curr->next;
         curr->next = nullptr; //breaking link in the original unordered list.
 
-        if(count == 0)
-        addLast(curr);
+        if (count == 0)
+            addLast(curr);
         else
-        addFirst(curr);
+            addFirst(curr);
 
         curr = forw;
-        count = (count+1) % 2;
-
+        count = (count + 1) % 2;
     }
     tt2->next = th1; //connecting both lists.
-    return th2; // new head of ordered list
+    return th2;      // new head of ordered list
 }
 
 //Leetcode 21 -> Merge two sorted Lists
-ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) 
+ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
 {
-    if(l1 == nullptr || l2 == nullptr) 
-        return l1 == nullptr ? l2:l1;
-        
-    ListNode* dummy = new ListNode(-1); //using dummy node method(easier syntax).
-    ListNode* prev = dummy;
-    ListNode* c1 = l1;
-    ListNode* c2 = l2;
-        
-    while(c1 != nullptr && c2 != nullptr)
+    if (l1 == nullptr || l2 == nullptr)
+        return l1 == nullptr ? l2 : l1;
+
+    ListNode *dummy = new ListNode(-1); //using dummy node method(easier syntax).
+    ListNode *prev = dummy;
+    ListNode *c1 = l1;
+    ListNode *c2 = l2;
+
+    while (c1 != nullptr && c2 != nullptr)
     {
-        if(c1->val > c2->val)
+        if (c1->val > c2->val)
         {
             prev->next = c2;
             c2 = c2->next;
@@ -238,111 +241,110 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
         }
         prev = prev->next;
     }
-    if(c1 == nullptr) // jab ek list pehle khtm ho jaaye and dusri bachi ho.
-    prev->next = c2;
-    else 
-    prev->next = c1;
-        
+    if (c1 == nullptr) // jab ek list pehle khtm ho jaaye and dusri bachi ho.
+        prev->next = c2;
+    else
+        prev->next = c1;
+
     return dummy->next;
-        
 }
 
 //Leetcode 148 -> SortList -> uses mergeTwoLists + middleNode
 //SortList divides LL into two sorted Lists and mergeTwoLists merges these two sorted lists.
-ListNode* sortList(ListNode* head)
+ListNode *sortList(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr)
-    return head;
+    if (head == nullptr || head->next == nullptr)
+        return head;
 
-    ListNode* mid = middleNode_02(head);
-    ListNode* nHead = mid->next;
+    ListNode *mid = middleNode_02(head);
+    ListNode *nHead = mid->next;
     mid->next = nullptr;
 
-    return mergeTwoLists(sortList(head),sortList(nHead));
+    return mergeTwoLists(sortList(head), sortList(nHead));
 }
 
 //Leetcode 23 -> merge K Sorted Lists
 // mergeKLists first half array mei se ek sorted list le aayega and second half se dusri sorted list le aayega hume bs ye dono lists merge krni hai.
 //Complexity -> n*klog(k) where k -> size of array and n -> avg size of linkedlist
-ListNode* mergeKLists_(vector<ListNode*>& lists,int si,int ei)
+ListNode *mergeKLists_(vector<ListNode *> &lists, int si, int ei)
 {
-    if(si == ei)
+    if (si == ei)
         return lists[si];
     int mid = (si + ei) / 2;
-        
-    ListNode* list1 = mergeKLists_(lists,si,mid);
-    ListNode* list2 = mergeKLists_(lists,mid+1,ei);
-        
-    return mergeTwoLists(list1,list2);
+
+    ListNode *list1 = mergeKLists_(lists, si, mid);
+    ListNode *list2 = mergeKLists_(lists, mid + 1, ei);
+
+    return mergeTwoLists(list1, list2);
 }
 
 //Leetcode function
-ListNode* mergeKLists(vector<ListNode*>& lists) 
+ListNode *mergeKLists(vector<ListNode *> &lists)
 {
-    if(lists.size() == 0)
+    if (lists.size() == 0)
         return nullptr;
-    return mergeKLists_(lists,0,lists.size()-1);
-    
+    return mergeKLists_(lists, 0, lists.size() - 1);
 }
 //O(n2) solution
-ListNode* mergeKLists_02(vector<ListNode*>& lists)
+ListNode *mergeKLists_02(vector<ListNode *> &lists)
 {
-    if(lists.size() == 0)
+    if (lists.size() == 0)
         return nullptr;
-    ListNode* refList = nullptr;
-    for(int i = 0;i < lists.size();i++)
+    ListNode *refList = nullptr;
+    for (int i = 0; i < lists.size(); i++)
     {
-        refList = mergeTwoLists(refList,lists[i]);
+        refList = mergeTwoLists(refList, lists[i]);
     }
     return refList;
 }
 
 //leetcode 141 -> using Floyd's cycle algorithm
-bool hasCycle(ListNode *head) 
+bool hasCycle(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr)
+    if (head == nullptr || head->next == nullptr)
         return false;
 
-    ListNode* slow = head;
-    ListNode* fast = head;
+    ListNode *slow = head;
+    ListNode *fast = head;
     while (fast != nullptr && fast->next != nullptr)
     {
         slow = slow->next;
         fast = fast->next->next;
-        if (slow == fast) break;
+        if (slow == fast)
+            break;
     }
-    return slow == fast;       
+    return slow == fast;
 }
 
 //leetcode 142 -> return node where cycle begins.
-ListNode *detectCycle(ListNode *head) 
+ListNode *detectCycle(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr)
+    if (head == nullptr || head->next == nullptr)
         return nullptr;
 
     ListNode *slow = head;
     ListNode *fast = head;
 
-    while(fast != nullptr && fast->next != nullptr) //hasCycle while loop.
+    while (fast != nullptr && fast->next != nullptr) //hasCycle while loop.
     {
         slow = slow->next;
         fast = fast->next->next;
-        if(slow == fast)
-        break;
+        if (slow == fast)
+            break;
     }
 
     if (slow == fast)
     {
-        slow = head;     //slow ko starting mei le aaye and fast to intersecting point pe hai hi fir same 
+        slow = head;         //slow ko starting mei le aaye and fast to intersecting point pe hai hi fir same
         while (slow != fast) //speed se chlaakr jaha meet krenge vo humaara required node hoga.As by equation (x == z) for r = 2.
         {
             slow = slow->next;
             fast = fast->next;
         }
-    return slow;
+        return slow;
     }
 
-    return nullptr;    
+    return nullptr;
 }
 
 // Insight of detect cycle ->
@@ -389,45 +391,45 @@ ListNode *detectCycle(ListNode *head)
 }
 
 //Leetcode 160 -> requires detectCycle
-ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
 {
-    if(headA == nullptr || headB == nullptr)
+    if (headA == nullptr || headB == nullptr)
         return nullptr;
 
-    ListNode* curr = headA;
-    ListNode* prev = nullptr;
-        
-    while(curr != nullptr) // loop to find tail
+    ListNode *curr = headA;
+    ListNode *prev = nullptr;
+
+    while (curr != nullptr) // loop to find tail
     {
         prev = curr;
-        curr = curr->next; 
+        curr = curr->next;
     }
-    prev->next = headB; //linking common tail and head of another ll to form a cycle.
-    ListNode* ans =  detectCycle(headA); //detectCycle required node de dega.
-    prev->next = nullptr; //dobaara structure shi krna hai ll ka so unlinking.  
+    prev->next = headB;                 //linking common tail and head of another ll to form a cycle.
+    ListNode *ans = detectCycle(headA); //detectCycle required node de dega.
+    prev->next = nullptr;               //dobaara structure shi krna hai ll ka so unlinking.
 
     return ans;
 }
 
 //Leetcode 19 -> remove Nth Node from end of the List
-ListNode* removeNthfromEnd(ListNode* head,int n)
+ListNode *removeNthfromEnd(ListNode *head, int n)
 {
-    if(n == 0 || head == nullptr)
-    return head;
+    if (n == 0 || head == nullptr)
+        return head;
 
-    ListNode* c1 = head;
-    ListNode* c2 = head;
+    ListNode *c1 = head;
+    ListNode *c2 = head;
 
-    while(n-- > 0) // n times c2 ko aage move krwa dia.
-    c2 = c2->next;
+    while (n-- > 0) // n times c2 ko aage move krwa dia.
+        c2 = c2->next;
 
-    if(c2 == nullptr) //first node ko hataane ka case seedha head ke next ko return krdo.
-    return head->next;
+    if (c2 == nullptr) //first node ko hataane ka case seedha head ke next ko return krdo.
+        return head->next;
 
-    while(c2->next != nullptr)
+    while (c2->next != nullptr)
     {
         c1 = c1->next; //same speed se dono pointers ko move krwana hai.
-        c2 = c2->next;// initial diff distance mei same rahega baad mei bhi.
+        c2 = c2->next; // initial diff distance mei same rahega baad mei bhi.
     }
 
     c1->next = c1->next->next; //removing required node.
@@ -435,28 +437,29 @@ ListNode* removeNthfromEnd(ListNode* head,int n)
 }
 
 //Leetcode 61 -> rotate list form right.
-ListNode* rotateRight(ListNode* head, int k) 
+ListNode *rotateRight(ListNode *head, int k)
 {
-    if(head == nullptr || head->next == nullptr || k == 0)
+    if (head == nullptr || head->next == nullptr || k == 0)
         return head;
 
     int len = 0;
-    ListNode* curr = head;
-    while(curr != nullptr) //linked list ki length nikaalne ke liye loop
+    ListNode *curr = head;
+    while (curr != nullptr) //linked list ki length nikaalne ke liye loop
     {
         curr = curr->next;
         len++;
     }
     k %= len; //if k > length to k ko range mei laane ke liye.
-    if(k == 0) return head;
- 
-    ListNode* c1 = head;
-    ListNode* c2 = head;
-        
-    while(k-- > 0) //same as above removeNthfromEnd code.
+    if (k == 0)
+        return head;
+
+    ListNode *c1 = head;
+    ListNode *c2 = head;
+
+    while (k-- > 0) //same as above removeNthfromEnd code.
         c2 = c2->next;
-        
-    while(c2->next != nullptr)
+
+    while (c2->next != nullptr)
     {
         c1 = c1->next;
         c2 = c2->next;
@@ -464,32 +467,32 @@ ListNode* rotateRight(ListNode* head, int k)
     c2->next = head;
     head = c1->next;
     c1->next = nullptr;
-        
+
     return head;
-    
 }
 
 //Leetcode 25 -> Reverse Nodes in K group
-ListNode* th = nullptr; // temporary Head and Tail
-ListNode* tt = nullptr;
-void addFirstNode(ListNode* node)
+ListNode *th = nullptr; // temporary Head and Tail
+ListNode *tt = nullptr;
+void addFirstNode(ListNode *node)
 {
-    if(th == nullptr)
+    if (th == nullptr)
     {
         th = node;
         tt = node;
     }
-    else{
+    else
+    {
         node->next = th;
         th = node;
     }
 }
 
-int lenOfLL(ListNode* head)
+int lenOfLL(ListNode *head)
 {
     int len = 0;
-    ListNode* curr = head;
-    while(curr != nullptr)
+    ListNode *curr = head;
+    while (curr != nullptr)
     {
         len++;
         curr = curr->next;
@@ -500,74 +503,76 @@ int lenOfLL(ListNode* head)
 //Aise tough questions ko addFirst + removeFirst + addLast mei break krne se question easy + readable ho jaate hai
 // And nullptr exception bach jaate hai kaafi.
 //Using addFirst and lenOfLL funciton -> O(1) space and O(n) time.
-ListNode* reverseKGroup(ListNode* head, int k)
+ListNode *reverseKGroup(ListNode *head, int k)
 {
-    if(head == nullptr || head-> next == nullptr || k == 1)
-    return head;
-    ListNode* oh = nullptr; // Original Head and Tail
-    ListNode* ot = nullptr;
+    if (head == nullptr || head->next == nullptr || k == 1)
+        return head;
+    ListNode *oh = nullptr; // Original Head and Tail
+    ListNode *ot = nullptr;
 
-    ListNode* curr = head;
+    ListNode *curr = head;
     int len = lenOfLL(head);
-    while(len >= k) // Last mei jb Len k se kam ho jaaye list ki to reverse nhi krna
+    while (len >= k) // Last mei jb Len k se kam ho jaaye list ki to reverse nhi krna
     {
         int tempK = k;
-        while(tempK -- > 0) // K times th and tl vaali list mei addFirst kr rhe hai node ko aage se remove krke list mei se.
+        while (tempK-- > 0) // K times th and tl vaali list mei addFirst kr rhe hai node ko aage se remove krke list mei se.
         {
-            ListNode* forw = curr->next;
+            ListNode *forw = curr->next;
             curr->next = nullptr;
             addFirstNode(curr);
             curr = forw;
         }
-       if(oh == nullptr)//th and tl vaali bni huyi list ko oh and ot mei add kr rhe hai har baar and pointers update kr rhe hai.
+        if (oh == nullptr) //th and tl vaali bni huyi list ko oh and ot mei add kr rhe hai har baar and pointers update kr rhe hai.
         {
-           oh = th;
-           ot = tt;
-        } 
-       else{
-           ot->next = th;
-           ot = tt;
+            oh = th;
+            ot = tt;
         }
-       th = nullptr; // Taaki ab nayi K length ki list bnaakr laaye th and tl next iteration mei
-       tt = nullptr;
+        else
+        {
+            ot->next = th;
+            ot = tt;
+        }
+        th = nullptr; // Taaki ab nayi K length ki list bnaakr laaye th and tl next iteration mei
+        tt = nullptr;
 
-       len -= k;
+        len -= k;
     }
     ot->next = curr; // last mei K ke multiple mei list nhi bache to bina reverse kre as it is add krdo.
     return oh;
-} 
+}
 
 //Leetcode 92 -> Reverse LinkedList II -> m se lekr n tk reverse krni hai list and return original head.
 //Done similar to above question bs idhr m se n tk addFirst vaala concept lga dia to reverse the list.
-ListNode* reverseBetween(ListNode* head, int m, int n)
+ListNode *reverseBetween(ListNode *head, int m, int n)
 {
-    if(head == nullptr || head->next == nullptr || m == n)
-    return head;
+    if (head == nullptr || head->next == nullptr || m == n)
+        return head;
 
-    ListNode* curr = head;
-    ListNode* prev = nullptr;
+    ListNode *curr = head;
+    ListNode *prev = nullptr;
 
     int idx = 1; // idx to check for m and n in the list
-    while(curr != nullptr)
+    while (curr != nullptr)
     {
-        while(idx >= m && idx <= n)
+        while (idx >= m && idx <= n)
         {
-            ListNode* forw = curr->next;
+            ListNode *forw = curr->next;
             curr->next = nullptr;
             addFirstNode(curr);
             curr = forw;
             idx++;
         }
-        
-        if(idx > n) // confirmed ki list reverse ho gyi hai is instance pr m se n tk.
+
+        if (idx > n) // confirmed ki list reverse ho gyi hai is instance pr m se n tk.
         {
-            if(prev != nullptr) // m to n group middle mei tha list ke.
+            if (prev != nullptr) // m to n group middle mei tha list ke.
             {
                 prev->next = th;
                 tt->next = curr;
                 return head;
             }
-            else{               // m to n group starting ya end mei tha list ke.
+            else
+            { // m to n group starting ya end mei tha list ke.
                 tt->next = curr;
                 return th;
             }
@@ -580,24 +585,24 @@ ListNode* reverseBetween(ListNode* head, int m, int n)
 }
 
 //Geeks for Geeks -> segregate odd even nodes in a linked list
-ListNode* SegregateOddEven(ListNode* head)
+ListNode *SegregateOddEven(ListNode *head)
 {
-    if(head == nullptr || head->next == nullptr)
-    return head;
+    if (head == nullptr || head->next == nullptr)
+        return head;
 
-    ListNode* even = new ListNode(-1); // dummy node for even ll.
-    ListNode* ep = even;
+    ListNode *even = new ListNode(-1); // dummy node for even ll.
+    ListNode *ep = even;
 
-    ListNode* odd = new ListNode(-1); // dummy node for odd ll.
-    ListNode* op = odd;
+    ListNode *odd = new ListNode(-1); // dummy node for odd ll.
+    ListNode *op = odd;
 
-    ListNode* curr = head;
-    while(curr != nullptr)
+    ListNode *curr = head;
+    while (curr != nullptr)
     {
-        if(curr->val % 2 == 0)
+        if (curr->val % 2 == 0)
         {
-        ep->next = curr;
-        ep = ep->next;
+            ep->next = curr;
+            ep = ep->next;
         }
         else
         {
@@ -612,34 +617,34 @@ ListNode* SegregateOddEven(ListNode* head)
 }
 
 //Leetcode 708 -> (premium question) -> insert node of insertVal into ll such that it remains sorted circular ll.
-ListNode* insert(ListNode* head,int insertVal)
+ListNode *insert(ListNode *head, int insertVal)
 {
-    ListNode* node = new ListNode(insertVal);
+    ListNode *node = new ListNode(insertVal);
 
-    if(head == nullptr)
+    if (head == nullptr)
     {
         node->next = node; // ek node ki hi cycle.
         return node;
     }
 
-    ListNode* prev = head;
-    ListNode* curr = head->next;
+    ListNode *prev = head;
+    ListNode *curr = head->next;
 
     bool connect = false;
-    while(curr != head) // ek complete circle ka ll ke loop.
+    while (curr != head) // ek complete circle ka ll ke loop.
     {
-        if(insertVal >= prev->val && insertVal <= curr->val)
-        connect = true;
-
-        else if(prev->val > curr->val)
-        {
-            if(insertVal > prev->val || insertVal < curr->val)
+        if (insertVal >= prev->val && insertVal <= curr->val)
             connect = true;
+
+        else if (prev->val > curr->val)
+        {
+            if (insertVal > prev->val || insertVal < curr->val)
+                connect = true;
         }
 
-        if(connect) 
-        break; //taaki prev and curr shi location pr rhe loop band hone ke baad.
-        
+        if (connect)
+            break; //taaki prev and curr shi location pr rhe loop band hone ke baad.
+
         prev = curr;
         curr = curr->next;
     }
@@ -649,15 +654,14 @@ ListNode* insert(ListNode* head,int insertVal)
     return head;
 }
 
-
 //Leetcode 138 -> deep copy linkedList -> copy data as well pointers(random pointers also)
-void copyNode(Node* head) //sirf new copied nodes add krdega same linkedlist mei.
+void copyNode(Node *head) //sirf new copied nodes add krdega same linkedlist mei.
 {
-    Node* curr = head;
-    while(curr != nullptr)
+    Node *curr = head;
+    while (curr != nullptr)
     {
-        Node* next = curr->next;
-        Node* node = new Node(curr->val);
+        Node *next = curr->next;
+        Node *node = new Node(curr->val);
 
         curr->next = node;
         node->next = next;
@@ -665,25 +669,25 @@ void copyNode(Node* head) //sirf new copied nodes add krdega same linkedlist mei
     }
 }
 
-void copyRandomPointers(Node* head) //random pointers set krke aayega newly(copied) created nodes mei.
+void copyRandomPointers(Node *head) //random pointers set krke aayega newly(copied) created nodes mei.
 {
-    Node* curr = head;
-    while(curr != nullptr)
+    Node *curr = head;
+    while (curr != nullptr)
     {
-        if(curr->random != nullptr) //nhi to nullpointer exception aa jaayega.
-        curr->next->random = curr->random->next; //newly created nodes ke random pointers ko set krdegi ye statement.
+        if (curr->random != nullptr)                 //nhi to nullpointer exception aa jaayega.
+            curr->next->random = curr->random->next; //newly created nodes ke random pointers ko set krdegi ye statement.
 
         curr = curr->next->next;
     }
 }
 
-Node* ExtractMyLL(Node* head) //copied ll extract krdega and puraani ll shi krdega.
+Node *ExtractMyLL(Node *head) //copied ll extract krdega and puraani ll shi krdega.
 {
-    Node* dummy = new Node(-1);
-    Node* prev = dummy;
-    Node* curr = head;
+    Node *dummy = new Node(-1);
+    Node *prev = dummy;
+    Node *curr = head;
 
-    while(curr != nullptr)
+    while (curr != nullptr)
     {
         prev->next = curr->next; //links
         curr->next = curr->next->next;
@@ -695,10 +699,10 @@ Node* ExtractMyLL(Node* head) //copied ll extract krdega and puraani ll shi krde
 }
 
 //Leetcode function
-Node* copyRandomList(Node* head) 
+Node *copyRandomList(Node *head)
 {
-    if(head == nullptr)
-    return head;
+    if (head == nullptr)
+        return head;
 
     copyNode(head);
     copyRandomPointers(head);
@@ -707,33 +711,33 @@ Node* copyRandomList(Node* head)
 }
 
 //Leetcode 237 -> delete node when directly node is given and head is not given.
-void deleteNode(ListNode* node) 
+void deleteNode(ListNode *node)
 {
-    if(node == nullptr)
+    if (node == nullptr)
         return;
 
-    ListNode* prev = nullptr;
-    while(node->next != nullptr)
+    ListNode *prev = nullptr;
+    while (node->next != nullptr)
     {
         node->val = node->next->val; //aage ki values pichle nodes mei daalte gye and last ka node free kr dia.
         prev = node;
-        node = node->next;    
+        node = node->next;
     }
-    prev->next = nullptr;//last node ko free krdia.    
+    prev->next = nullptr; //last node ko free krdia.
 }
 
 //Leetcode 206 -> Remove LinkedList elements equal to 'val'.
 //Done using extra space -> we created a new list and added all the elements whose val was not equal to 'val'.
-ListNode* removeElements(ListNode* head, int val) 
+ListNode *removeElements(ListNode *head, int val)
 {
-    if(head == nullptr)
+    if (head == nullptr)
         return head;
-    ListNode* dummy = new ListNode(-1);
-    ListNode* prev = dummy;
-    ListNode* curr = head;
-    while(curr != nullptr)
+    ListNode *dummy = new ListNode(-1);
+    ListNode *prev = dummy;
+    ListNode *curr = head;
+    while (curr != nullptr)
     {
-        if(curr->val != val)
+        if (curr->val != val)
         {
             prev->next = new ListNode(curr->val);
             prev = prev->next;
@@ -742,7 +746,3 @@ ListNode* removeElements(ListNode* head, int val)
     }
     return dummy->next;
 }
-
-
-
-
