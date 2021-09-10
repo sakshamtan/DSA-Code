@@ -14,7 +14,7 @@ public class linkedlist{
     private int elementCount = 0;
 
 
-// Basic Functions =============================================================================
+// Basic Functions
 
 public int size()
 {
@@ -45,7 +45,7 @@ public String toString()
     return sb.toString();
 }
 
-// Add(setters) Functions ===============================================
+// Add(setters) Functions
 
 private void addFirstNode(Node node)
 {
@@ -120,7 +120,7 @@ public void addAt(int val,int idx) throws Exception
     addNodeAt(node,idx);
 }
 
-// Remove Functions ==============================================================
+// Remove Functions
 
 private Node removeFirstNode()
 {
@@ -213,7 +213,7 @@ public int removeAt(int idx) throws Exception
     return rv;
 }
 
-// Get Functions==============================================================================
+// Getter Functions
 
 private Node getFirstNode()
 {
