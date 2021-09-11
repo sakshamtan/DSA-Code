@@ -158,7 +158,7 @@ void reorderList(ListNode *head)
     }
 }
 
-// now Order the list i.e. 1->5->2->4 se 1->2->3->4 laana hai original list vaapis laani hai ==========
+// now Order the list i.e. 1->5->2->4 se 1->2->3->4 laana hai original list vaapis laani hai
 
 ListNode *th1 = nullptr; //temporary head and tails of both linked lists.
 ListNode *tt1 = nullptr; //declared as global.taaki upar ke functions ke change neeche
@@ -241,6 +241,7 @@ ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
         }
         prev = prev->next;
     }
+    
     if (c1 == nullptr) // jab ek list pehle khtm ho jaaye and dusri bachi ho.
         prev->next = c2;
     else
