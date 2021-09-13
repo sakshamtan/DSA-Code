@@ -405,6 +405,7 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
         prev = curr;
         curr = curr->next;
     }
+    
     prev->next = headB;                 //linking common tail and head of another ll to form a cycle.
     ListNode *ans = detectCycle(headA); //detectCycle required node de dega.
     prev->next = nullptr;               //dobaara structure shi krna hai ll ka so unlinking.
