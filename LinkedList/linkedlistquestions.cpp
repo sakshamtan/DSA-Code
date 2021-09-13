@@ -241,7 +241,7 @@ ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
         }
         prev = prev->next;
     }
-    
+
     if (c1 == nullptr) // jab ek list pehle khtm ho jaaye and dusri bachi ho.
         prev->next = c2;
     else
@@ -405,7 +405,7 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
         prev = curr;
         curr = curr->next;
     }
-    
+
     prev->next = headB;                 //linking common tail and head of another ll to form a cycle.
     ListNode *ans = detectCycle(headA); //detectCycle required node de dega.
     prev->next = nullptr;               //dobaara structure shi krna hai ll ka so unlinking.
@@ -467,7 +467,7 @@ ListNode *rotateRight(ListNode *head, int k)
         c1 = c1->next;
         c2 = c2->next;
     }
-    
+
     c2->next = head;
     head = c1->next;
     c1->next = nullptr;
@@ -749,4 +749,21 @@ ListNode *removeElements(ListNode *head, int val)
         curr = curr->next;
     }
     return dummy->next;
+}
+
+//Leetcode 83 -> Remove Duplicates from Sorted List
+ListNode *deleteDuplicates(ListNode *head)
+{
+    if (head == nullptr || head->next == nullptr)
+        return head;
+    ListNode *curr = head;
+    while (curr != nullptr)
+    {
+        while (curr->next != nullptr && curr->val == curr->next->val)
+        {
+            curr->next = curr->next->next;
+        }
+        curr = curr->next;
+    }
+    return head;
 }
