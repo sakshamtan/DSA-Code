@@ -451,6 +451,7 @@ ListNode *rotateRight(ListNode *head, int k)
         curr = curr->next;
         len++;
     }
+
     k %= len; //if k > length to k ko range mei laane ke liye.
     if (k == 0)
         return head;
@@ -466,6 +467,7 @@ ListNode *rotateRight(ListNode *head, int k)
         c1 = c1->next;
         c2 = c2->next;
     }
+    
     c2->next = head;
     head = c1->next;
     c1->next = nullptr;
