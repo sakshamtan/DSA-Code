@@ -286,7 +286,8 @@ ListNode *mergeKLists(vector<ListNode *> &lists)
         return nullptr;
     return mergeKLists_(lists, 0, lists.size() - 1);
 }
-//O(n2) solution
+
+//O(n^2) solution
 ListNode *mergeKLists_02(vector<ListNode *> &lists)
 {
     if (lists.size() == 0)
