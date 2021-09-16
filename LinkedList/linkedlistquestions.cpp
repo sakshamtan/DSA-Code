@@ -670,7 +670,7 @@ Node *copyRandomList_01(Node *head)
     while (curr != nullptr)
     {
         prev->next = new Node(curr->val);
-        map[curr] = prev->next;  // a -> a' -> old vs new node
+        map[curr] = prev->next; // a -> a' -> old vs new node
         prev = prev->next;
         curr = curr->next;
     }
@@ -794,4 +794,35 @@ ListNode *deleteDuplicates(ListNode *head)
         curr = curr->next;
     }
     return head;
+}
+
+//Leetcode 82 -> Remove Duplicates from Sorted List II
+ListNode *deleteDuplicates(ListNode *head)
+{
+    if (head == nullptr || head->next == nullptr)
+        return head;
+
+    ListNode *dummy = new ListNode(-1);
+    ListNode *itr = dummy;
+    ListNode *curr = head->next;
+    itr->next = head; // potential unique element
+
+    while (curr != nullptr)
+    {
+        bool flag = false;
+        while (curr != nullptr && itr->next->val == curr->val)
+        {
+            flag = true; // to tell if the loop was run and we found duplicate ele before curr or not
+            curr = curr->next;
+        }
+
+        if (flag)
+            itr->next = curr;
+        else
+            itr = itr->next;
+
+        if (curr != nullptr)
+            curr = curr->next;
+    }
+    return dummy->next;
 }
