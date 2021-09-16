@@ -266,7 +266,7 @@ ListNode *sortList(ListNode *head)
 
 //Leetcode 23 -> merge K Sorted Lists
 // mergeKLists first half array mei se ek sorted list le aayega and second half se dusri sorted list le aayega hume bs ye dono lists merge krni hai.
-//Complexity -> n*klog(k) where k -> size of array and n -> avg size of linkedlist
+//Complexity -> n*log(k) where k -> size of array and n -> avg size of linkedlist
 ListNode *mergeKLists_(vector<ListNode *> &lists, int si, int ei)
 {
     if (si == ei)
@@ -287,7 +287,7 @@ ListNode *mergeKLists(vector<ListNode *> &lists)
     return mergeKLists_(lists, 0, lists.size() - 1);
 }
 
-//O(n^2) solution
+//O(n*k) solution
 ListNode *mergeKLists_02(vector<ListNode *> &lists)
 {
     if (lists.size() == 0)
@@ -577,7 +577,7 @@ ListNode *reverseBetween(ListNode *head, int m, int n)
                 return head;
             }
             else
-            { // m to n group starting ya end mei tha list ke.
+            { // m to n group starting mei tha list ke.
                 tt->next = curr;
                 return th;
             }
