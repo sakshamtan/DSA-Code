@@ -660,6 +660,33 @@ ListNode *insert(ListNode *head, int insertVal)
 }
 
 //Leetcode 138 -> deep copy linkedList -> copy data as well pointers(random pointers also)
+// Using extra space -> HashMap for mapping nodes of old vs new LL
+Node *copyRandomList_01(Node *head)
+{
+    unordered_map<Node *, Node *> map;
+    Node *curr = head;
+    Node *nH = new Node(-1);
+    Node *prev = nH;
+    while (curr != nullptr)
+    {
+        prev->next = new Node(curr->val);
+        map[curr] = prev->next;  // a -> a' -> old vs new node
+        prev = prev->next;
+        curr = curr->next;
+    }
+
+    Node *c1 = head;
+    Node *c2 = nH->next;
+    while (c1 != nullptr)
+    {
+        c2->random = map[c1->random];
+        c1 = c1->next;
+        c2 = c2->next;
+    }
+    return nH->next;
+}
+
+//Optimized method -> Without using extra space
 void copyNode(Node *head) //sirf new copied nodes add krdega same linkedlist mei.
 {
     Node *curr = head;
@@ -704,7 +731,7 @@ Node *ExtractMyLL(Node *head) //copied ll extract krdega and puraani ll shi krde
 }
 
 //Leetcode function
-Node *copyRandomList(Node *head)
+Node *copyRandomList_02(Node *head)
 {
     if (head == nullptr)
         return head;
