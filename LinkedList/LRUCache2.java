@@ -26,7 +26,7 @@ class LRUCache2 { // using arr of Node instead of HashMap
 public LRUCache(int capacity) 
 {
     this.capacity = capacity;
-    map = new Node[3001]; // Extra space is used as 3001 ka arr bnana hi hai but time is better.
+    this.map = new Node[3001]; // Extra space is used as 3001 ka arr bnana hi hai but time is better.
 }
 
 public void addFirstNode(Node node)
