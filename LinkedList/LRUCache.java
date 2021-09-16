@@ -12,7 +12,6 @@ class LRUCache {
             this.key = key;
             this.value = value;
         }
-
     }
 
     private int capacity = 0;
@@ -93,6 +92,7 @@ public void makeMostRecent(Node node)
     removeNode(node);
     addFirstNode(node);
 } 
+
 public int get(int key) 
 {
     if(!map.containsKey(key))
@@ -117,6 +117,7 @@ public void put(int key, int value)
             map.remove(this.tail.key);
             removeTailNode();   
         }
+        
         Node node = new Node(key,value);
         addFirstNode(node);
         map.put(key,node);
