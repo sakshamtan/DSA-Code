@@ -826,3 +826,32 @@ ListNode *deleteDuplicates(ListNode *head)
     }
     return dummy->next;
 }
+
+//Leetcode 2 -> Add Two Numbers
+ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
+{
+    if (l1 == nullptr || l2 == nullptr)
+        return l1 == nullptr ? l2 : l1;
+    ListNode *c1 = l1;
+    ListNode *c2 = l2;
+    ListNode *dummy = new ListNode(-1);
+    ListNode *itr = dummy;
+
+    int carry = 0;
+    while (c1 != nullptr || c2 != nullptr || carry != 0)
+    {
+        int sum = carry + (c1 != nullptr ? c1->val : 0) + (c2 != nullptr ? c2->val : 0);
+
+        int ld = sum % 10;
+        carry = sum / 10;
+
+        itr->next = new ListNode(ld);
+        itr = itr->next;
+
+        if (c1 != nullptr)
+            c1 = c1->next;
+        if (c2 != nullptr)
+            c2 = c2->next;
+    }
+    return dummy->next;
+}
