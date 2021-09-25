@@ -855,3 +855,32 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
     }
     return dummy->next;
 }
+
+//Leetcode 445 -> Add Two Numbers II -> reverse + Add Two Numbers(leetcode 2)
+ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
+{
+    if (l1 == nullptr || l2 == nullptr)
+        return l1 == nullptr ? l2 : l1;
+
+    ListNode *dummy = new ListNode(-1);
+    ListNode *prev = dummy;
+    ListNode *c1 = reverse(l1);
+    ListNode *c2 = reverse(l2);
+
+    int carry = 0;
+    while (c1 != nullptr || c2 != nullptr || carry != 0)
+    {
+        int sum = carry + (c1 != nullptr ? c1->val : 0) + (c2 != nullptr ? c2->val : 0);
+
+        int ld = sum % 10;
+        carry = (sum / 10);
+
+        prev->next = new ListNode(ld);
+        prev = prev->next;
+        if (c1 != nullptr)
+            c1 = c1->next;
+        if (c2 != nullptr)
+            c2 = c2->next;
+    }
+    return reverse(dummy->next);
+}
