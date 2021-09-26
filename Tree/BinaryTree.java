@@ -27,8 +27,8 @@ public static Node constructTree(int [] arr)
         return null;
     }
 
-    Node node = new Node(arr[idx]);
-    idx++;
+    Node node = new Node(arr[idx++]);
+
     node.left = constructTree(arr); // left ki call
     node.right = constructTree(arr); // right ki call
 
@@ -169,11 +169,11 @@ public static void lowestCommonAncestor(Node node,int a,int b)
     Node LCA = null;
     while(i >= 0 && j >= 0)
     {
-    if(list1.get(i) == list2.get(j)) 
-    LCA = list1.get(i);
-    //jab tk last se loop chlaate huye dono lists mei same nodes chlte rahenge hum LCA update krte rhenge.
-    i--;
-    j--;
+        if(list1.get(i) == list2.get(j)) 
+        LCA = list1.get(i);
+        //jab tk last se loop chlaate huye dono lists mei same nodes chlte rahenge hum LCA update krte rhenge.
+        i--;
+        j--;
     }
 
     System.out.println(LCA.data);
@@ -260,7 +260,7 @@ public static int kFar_02(Node node,int data,int k,ArrayList<Integer> ans)
     return -1;
 }
 
-//Burning Tree -> GFG ================================================================================
+//Burning Tree -> GFG 
 public static void kDownForBurningTree(Node node,Node block,int time,ArrayList<ArrayList<Integer>> ans)
 {
     if(node == null || node == block)
@@ -337,7 +337,7 @@ public static int diameter_03(Node node,int[] diaAns)
     return Math.max(lh,rh) + 1; // height vaala function hai same.
 }
 
-//BFS -> level order ===================================================================================
+//BFS -> level order 
 
 public static void BFS_01(Node node) // generic bfs technique.
 {
