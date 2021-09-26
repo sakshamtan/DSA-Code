@@ -649,7 +649,7 @@ public List<List<Integer>> verticalTraversal_02(TreeNode root)
     return ans;
 }
 
-//BST questions ===================================================================================
+//BST questions 
 
 //Leetcode 700 -> search in a BST.
 public TreeNode searchBST(TreeNode root, int val) 
@@ -1569,5 +1569,43 @@ public int solve(TreeNode root,int curMaxVal)
 public int goodNodes(TreeNode root) 
 {
     return solve(root,-(int)1e9);
+}
+
+//Leetcode 95 -> Unique BST II
+public List<TreeNode> generateBST(int si,int ei)
+{
+    if(si > ei)
+    {
+        List<TreeNode> base = new ArrayList<>();
+        base.add(null);
+        return base;
+    }
+        
+    List<TreeNode> ans = new ArrayList<>();
+        
+    for(int i = si; i <= ei; i++)
+    {
+            
+        List<TreeNode> left = generateBST(si,i-1);
+        List<TreeNode> right = generateBST(i+1,ei);
+            
+        for(TreeNode l : left)
+        {
+            for(TreeNode r : right)
+            {
+                TreeNode root = new TreeNode(i);
+                root.left = l;
+                root.right = r;
+                ans.add(root);
+            }
+        }
+    }
+    return ans;
+}
+
+//Leetcode function
+public List<TreeNode> generateTrees(int n) 
+{
+    return generateBST(1,n);
 }
 }
