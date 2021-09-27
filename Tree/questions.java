@@ -165,6 +165,7 @@ public static int kFar(TreeNode root,int data,int k,ArrayList<Integer> ans)
     }
     return -1;
 }
+
 //Leetcode function
 public List<Integer> distanceK(TreeNode root, TreeNode target, int K) 
 {
@@ -187,6 +188,7 @@ public int[] diameter(TreeNode root)
         
     return new int[]{dia,hei};
 }
+
 //Leetcode function.
 public int diameterOfBinaryTree(TreeNode root) 
 {
@@ -226,6 +228,7 @@ public void Pathsum(TreeNode root,int sum,List<List<Integer>> res,List<Integer> 
     Pathsum(root.right,sum-root.val,res,ans);
     ans.remove(ans.size()-1);       
 }
+
 //Leetcode function
 public List<List<Integer>> pathSum(TreeNode root, int targetSum) 
 {
