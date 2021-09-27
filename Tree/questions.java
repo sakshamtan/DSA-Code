@@ -274,6 +274,7 @@ public int NodetoNode_01(TreeNode node)
             
     return Math.max(Math.max(NodetoLeft,NodetoRight)+node.val,node.val);
 }
+
 //Leetcode Function
 public int maxPathSum(TreeNode root) 
 {
@@ -321,6 +322,7 @@ public maxNodeToNodePair NodetoNode_02(TreeNode node)
 
     return myAns;
 }
+
 //Leetcode Function
 public int maxPathSum(TreeNode root) 
 {
@@ -1610,5 +1612,40 @@ public List<TreeNode> generateBST(int si,int ei)
 public List<TreeNode> generateTrees(int n) 
 {
     return generateBST(1,n);
+}
+
+//Leetcode 1110 -> Delete Nodes and return forest
+public TreeNode deleteNodes(TreeNode root,HashSet<Integer>set,List<TreeNode> ans)
+{
+    if(root == null)
+        return null;
+        
+    root.left = deleteNodes(root.left,set,ans);  // delete nodes so postorder mei kaam
+    root.right = deleteNodes(root.right,set,ans);
+        
+    if(set.contains(root.val))
+    {
+        if(root.left != null)  
+            ans.add(root.left);
+        if(root.right != null)
+            ans.add(root.right);  // pehle children add kre node ke jisko delete krna tha  
+        return null;              // and then delete kra us node ko
+    }
+    return root;
+}
+
+//Leetcode function
+public List<TreeNode> delNodes(TreeNode root, int[] to_delete) 
+{
+    HashSet<Integer> set = new HashSet<>();
+    for(int ele : to_delete)
+        set.add(ele);
+        
+    List<TreeNode> ans = new ArrayList<>();
+    if(!set.contains(root.val))  // root agr delete nhi krni ho to vo kbhi add hi nhi kri thi ans mei
+        ans.add(root);
+    deleteNodes(root,set,ans);
+        
+    return ans;
 }
 }
