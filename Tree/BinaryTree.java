@@ -217,7 +217,7 @@ public static int rootToNodeDistance(Node node,int data)
 {
     if(node == null)
     return -1;
-    
+
     if(node.data == data)
     return 0; //in terms of edges so return 0 agr nodes ke terms mei distance hota to return 1.
 
@@ -496,7 +496,7 @@ public static class VerticalPair{
 public static List<List<Integer>> VerticalOrderTraversal_01(Node node)
 {
     LinkedList<VerticalPair> que = new LinkedList<>();
-    HashMap<Integest<Inter,Liger>> map = new HashMap<>(); // HashMap of Hlevel vs ArrayList<Integer>
+    HashMap<Integer,ArrayList<Integer>> map = new HashMap<>(); // HashMap of Hlevel vs ArrayList<Integer>
 
     int minHL = 0;
     int maxHL = 0;
