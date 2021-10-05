@@ -217,6 +217,7 @@ public static int rootToNodeDistance(Node node,int data)
 {
     if(node == null)
     return -1;
+    
     if(node.data == data)
     return 0; //in terms of edges so return 0 agr nodes ke terms mei distance hota to return 1.
 
