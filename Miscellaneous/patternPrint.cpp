@@ -99,7 +99,8 @@ void hollow_Diamond(int rows)
     {
         for (int cst = 1; cst <= nst; cst++)
         {
-            cout << "*" << " ";
+            cout << "*"
+                 << " ";
         }
         for (int csp = 1; csp <= nsp; csp++)
         {
@@ -149,8 +150,7 @@ void special_Diamond(int rows)
         {
             cout << " ";
         }
-        cout << "*"
-             << " ";
+        cout << "*" << " ";
         for (int j = 1; j <= is; j++)
         {
             cout << " ";
