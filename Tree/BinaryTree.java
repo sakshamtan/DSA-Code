@@ -751,7 +751,7 @@ public static void CeilandFloorValueInBT(Node node,int data,ceilfloorPair pair)
 
 }
 
-//Traversals ===========================================================================================
+//Traversals 
 
 //Morris In and PreOrder Traversal -> Traversal with O(n) time and O(1) space(iterative).
 public static Node rightMostNode(Node next,Node curr)
@@ -811,7 +811,8 @@ public static void morrisPreorderTraversal(Node root)
                 System.out.print(curr.data + " "); // Jaha thread create kr rhe hai vaha print for inorder
                 curr = curr.left;
             }
-            else{
+            else
+            {
                 rightMost.right = null;
                 curr = curr.right;
             }
