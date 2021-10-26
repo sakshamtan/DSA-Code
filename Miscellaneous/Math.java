@@ -86,10 +86,11 @@ public static int rotate(int n, int r)
     for(int i = 1; i <= digit; i++)
     {
         if (i <=  r)
-        mul*=10;
+        mul *= 10;
         else
-        div*=10;
+        div *= 10;
     }
+    
     int fdigits = n % div;
     int sdigits = n / div;
 
@@ -110,7 +111,7 @@ public static void inverseOfNo(int n) //pep-foundation-online.
         n /= 10;
         op++;
     }
-  System.out.println(inv);
+    System.out.println(inv);
 }
 
 public static void main(String[]args)
