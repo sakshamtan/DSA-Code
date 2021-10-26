@@ -542,8 +542,8 @@ ArrayList <Integer> printBoundary(Node node)
     return ans;
 }
 
-//Leetcode 987 -> Vertical Order Traversal -> Important ================================================
-    public class VerticalPair{
+//Leetcode 987 -> Vertical Order Traversal -> Important
+public class VerticalPair{
     TreeNode node = null;
     int Hlevel = 0;
 
