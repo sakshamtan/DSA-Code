@@ -17,22 +17,22 @@ public static boolean isPrime(int n)
 public int countPrimes(int n) 
 {
     boolean[] isPrime = new boolean[n];
-    for (int i = 2; i < n; i++) 
+    for(int i = 2; i < n; i++) 
         isPrime[i] = true;
    
    
-   for (int i = 2; i * i < n; i++) 
+   for(int i = 2; i * i < n; i++) 
     {
-        if (!isPrime[i]) continue;
-        for (int j = i * i; j < n; j += i)  // ek i ke saare multiples till n false mark as vo bhi prime nhi honge
+        if(!isPrime[i]) continue;
+        for(int j = i * i; j < n; j += i)  // ek i ke saare multiples till n false mark as vo bhi prime nhi honge
         {
             isPrime[j] = false;
         }
     }
      
     int count = 0;
-    for (int i = 2; i < n; i++) 
-        if (isPrime[i]) count++;
+    for(int i = 2; i < n; i++) 
+        if(isPrime[i]) count++;
 
     return count;
 }
@@ -66,7 +66,7 @@ public static void print_digits(int n)
 {
     int nod = digits(n);
     int div = Math.pow(10,nod - 1);
-    while (div != 0) // (n!=0) mei 0 se end hone vaale no. faste hai.
+    while(div != 0) // (n!=0) mei 0 se end hone vaale no. faste hai.
     {
         int q = n / div;
         System.out.println(q);
