@@ -114,6 +114,32 @@ public static void inverseOfNo(int n) //pep-foundation-online.
     System.out.println(inv);
 }
 
+// GCD -> HCF of two numbers
+public static void GCD(int a,int b)
+{
+    if(a > b)  // a < b always 
+    {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+
+    int gcd = 0;
+
+    for(int i = a; i >= 0; i--)
+    {
+        if((a % i) == 0 && (b % i) == 0)
+        {
+            gcd = i;
+            break;
+        }
+    }
+
+    int lcm = (a * b) / gcd;   // gcd * lcm = a * b
+    System.out.println(gcd);
+    System.out.println(lcm);
+}
+
 public static void main(String[]args)
 {
     // isPrime(5);
