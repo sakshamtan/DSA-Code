@@ -44,7 +44,8 @@ int DtoO(int num)
     return res;
 }
 
-int AnytoD(int num, int base) // for converting AnytoAny first convert Any(base1)toD and then DtoAny(base2)
+//for converting AnytoAny first convert Any(base1)toD and then DtoAny(base2)
+int AnytoD(int num, int base) 
 {
     int res = 0;
     int pow = 1;
@@ -72,7 +73,8 @@ int DtoAny(int num, int base)
     return res;
 }
 
-int getSum(int b, int n1, int n2) //any base addition of two no.s
+//any base addition of two no.s
+int getSum(int b, int n1, int n2) 
 {
     int res = 0;
     int carry = 0;
