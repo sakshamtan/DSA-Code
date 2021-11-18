@@ -221,7 +221,7 @@ int diagonalSum(vector<vector<int>> &mat)
     return sum;
 }
 
-//Leetcode 867 -> Transpose Matrix -> inPlace swpa krke nhi kr skte hai matrix mei n,m equal nhi hai
+//Leetcode 867 -> Transpose Matrix -> inPlace swap krke nhi kr skte hai matrix mei n,m equal nhi hai
 vector<vector<int> > transpose(vector<vector<int>> &matrix)
 {
     int n = matrix.size(), m = matrix[0].size();
