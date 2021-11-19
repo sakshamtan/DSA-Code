@@ -1,5 +1,4 @@
-public class bits
-{
+public class bits{
 
 //OFF -> ON and ON -> ON the kTh bit. (Similar to arr[i] = true;)
 public static void OFF_ON_Kth_bit(int n, int k)
