@@ -192,7 +192,7 @@ public static int Encodings(String str,int idx,String ans)
     return 0;
 
     count += Encodings(str,idx+1,ans + (char)((ch-'0')+('a' - 1)));
-    
+
     if(idx < str.length()-1)
     {
         int ch1 = (ch-'0') * 10 + str.charAt(idx+1) - '0';
@@ -517,7 +517,7 @@ public static void knightTour()
 
 //Har level pr saare options dene hai taaki saare arrangements aa jaaye using any no. of coins any times.
 //F-> tar 8,7,5,3 se function ko permu bnane aate hai hume bs 2,3,5,7 se unke respective targets tk pohochana hai.
-public static int coinChange_Permutation_01(int[] coins,int tar,String ans)//using multiple coins.
+public static int coinChange_Permutation_01(int[] coins,int tar,String ans) //using multiple coins.
 {
     if(tar == 0)
     {
@@ -538,7 +538,7 @@ public static int coinChange_Permutation_01(int[] coins,int tar,String ans)//usi
 
 //F-> Bs apne present idx se aage vaale indexes pr call lagani hai har level pr yaani idx se lekr end tk taaki sirf combinations aaye.
 //for eg 2 can call/use 3,5,7 and 3 can call/use 5,7 and 5 can only call/use 7 on that certain level.
-public static int coinChange_Combination_01(int[] coins,int idx,int tar,String ans)//using multiple coins.
+public static int coinChange_Combination_01(int[] coins,int idx,int tar,String ans) //using multiple coins.
 {
     if(tar == 0)
     {
@@ -547,7 +547,7 @@ public static int coinChange_Combination_01(int[] coins,int idx,int tar,String a
     }
 
     int count = 0;
-    for(int i = idx;i < coins.length; i++)//idx se lekr arr ke end tk ki call lagani hai
+    for(int i = idx;i < coins.length; i++) //idx se lekr arr ke end tk ki call lagani hai
     {
         if(tar - coins[i] >= 0)
         {
