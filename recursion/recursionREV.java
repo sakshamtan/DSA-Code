@@ -184,12 +184,15 @@ public static int Encodings(String str,int idx,String ans)
         System.out.println(ans);
         return 1;
     }
-    
+
     char ch = str.charAt(idx);
     int count = 0;
+
     if(ch == '0')
     return 0;
+
     count += Encodings(str,idx+1,ans + (char)((ch-'0')+('a' - 1)));
+    
     if(idx < str.length()-1)
     {
         int ch1 = (ch-'0') * 10 + str.charAt(idx+1) - '0';
@@ -325,7 +328,7 @@ public static void BoardwithSNL(int src, int dest, int [] snl, int [] moves, int
 
 //Faith-> (1,0),(0,1) and (1,1) se saare raste function jaanta hai humko bs vaha tk jaane ka kaam krna hai(returntype)
 //OR -> Har cell pr saare possible movements exhaust krdo jb base case hit krenge to ans mil jaayega(voidtype)
-public static int MazePath_01(int sr, int sc, int er, int ec, String psf)//horizontal,vertical,Diagonal moves allowed.
+public static int MazePath_01(int sr, int sc, int er, int ec, String psf) //horizontal,vertical,Diagonal moves allowed.
 {
     if (sr == er && sc == ec)
     {
@@ -346,7 +349,7 @@ public static int MazePath_01(int sr, int sc, int er, int ec, String psf)//horiz
     return count;
 }
 
-//F->Har cell destination tk ki journey jaanta hai hume bs h,v,d ki jumps lagani hai.
+//Faith -> Har cell destination tk ki journey jaanta hai hume bs h,v,d ki jumps lagani hai.
 public static int MazePath_MM(int sr,int sc,int er,int ec,String psf)
 {
     if (sr == er && sc == ec)
@@ -422,7 +425,7 @@ public static int floodFill_Jumps(int sr,int sc,int[][] vis,String psf)
         {
             int r = sr + jump * dir[d][0];//(0,4) means 4*(0,1)
             int c = sc + jump * dir[d][1];
-            if(r >= 0 && c >= 0 && r < vis.length && c < vis.length && vis[r][c] == 0)//jaha mei jaa rha hu (r,c) vaha ke check lagakr call lagani hai(only valid calls will be allowed.)
+            if(r >= 0 && c >= 0 && r < vis.length && c < vis.length && vis[r][c] == 0)//jaha mai jaa rha hu (r,c) vaha ke check lagakr call lagani hai(only valid calls will be allowed.)
             count += floodFill_Jumps(r,c,vis,psf + jump + dirS[d]);
         }
     }
