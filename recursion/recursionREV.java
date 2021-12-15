@@ -43,7 +43,7 @@ public static ArrayList<String> nokiaKeypad_01(String str)
 
     for (String rstr : recAns)
     {
-        String code = codes[ch - '0'];//to convert char '1' into int 1.
+        String code = codes[ch - '0']; //to convert char '1' into int 1.
         for (int i = 0; i < code.length(); i++)
         {
             char chcode = code.charAt(i);
@@ -54,7 +54,7 @@ public static ArrayList<String> nokiaKeypad_01(String str)
 }
 
 static String[] words = {".","abc","def","ghi","jkl","mno","pqr","st","uvwx","yz","<>","@&","*%"};
-public static ArrayList<String> nokiaKeypad_02(String str)//advanced version with 12 keys.
+public static ArrayList<String> nokiaKeypad_02(String str) //advanced version with 12 keys.
 {
     if (str.length() == 0)
     {
