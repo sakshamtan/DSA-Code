@@ -76,7 +76,7 @@ public static ArrayList<String> nokiaKeypad_02(String str) //advanced version wi
         }
 
     }
-    
+
     if (str.charAt(0) != 0 && str.length() > 1)
     {
         int num = (str.charAt(0)-'0') * 10 + str.charAt(1)-'0';
@@ -98,7 +98,7 @@ public static ArrayList<String> nokiaKeypad_02(String str) //advanced version wi
 
 //F -> Present level pr saare options exhaust krdo(for eg. ek baar a aayega ek baar nhi aayega next level pr same b ke liye and so on).
 //Recursion on the way up -> ans builds up when we are travelling upwards in our tree and is finally printed in the base case.
-public static int print_Subseq(String str, String asf)//voidtype version
+public static int print_Subseq(String str, String asf) //voidtype version
 {
     if (str.length() == 0)
     {
@@ -107,8 +107,10 @@ public static int print_Subseq(String str, String asf)//voidtype version
     }
 
     int count = 0;
+
     char ch = str.charAt(0);
     String rstr = str.substring(1);
+
     count += print_Subseq(rstr,asf);
     count += print_Subseq(rstr,asf + ch);
     // count += print_Subseq(rstr,asf + (int)ch);   With ASCII
@@ -117,17 +119,19 @@ public static int print_Subseq(String str, String asf)//voidtype version
 
 //F -> Ek level mei saare options exhaust krke saare combinations explore krne hai. for eg - "179" -> "1" ke saare options i.e. -> "a","b","c" exhaust krne hai pehle level mei and so on.
 // static String[] codes = {".","abc","def","ghi","jkl","mno","pqr","st","uvwx","yz","<>","@&","*%"};//already defined above.
-public static int print_nokiaKeyPad(String ques, String asf)//voidtype version
+public static int print_nokiaKeyPad(String ques, String asf) //voidtype version
 {
     if (ques.length() == 0)
     {
         System.out.println(asf);
         return 1;
     }
+
     int count = 0;
     char ch = ques.charAt(0);
     String roq = ques.substring(1);
     String chcode = codes[ch - '0'];
+
     for (int i = 0; i < chcode.length(); i++)
     {
         char chchoice = chcode.charAt(i);
@@ -148,17 +152,19 @@ public static int print_nokiaKeyPad_02(String ques, String asf)//10 means 1-0 an
     int count = 0;
     char ch = ques.charAt(0);
     String word1 = words[ch-'0'];
+
     for (int i = 0; i < word1.length(); i++)
     {
         char chchoice1 = word1.charAt(i);
         count += print_nokiaKeyPad_02(ques.substring(1),asf + chchoice1);
     }
+
     if (ques.charAt(0) != 0 && ques.length() > 1)
     {
         int idx = (ch-'0') * 10 + (ques.charAt(1)-'0');
         if (idx  >= 10 && idx <= 12)
         {
-        String word2 = words[idx];
+            String word2 = words[idx];
             for (int i = 0; i < word2.length(); i++)
             {
                 char chchoice2 = word2.charAt(i);
@@ -178,6 +184,7 @@ public static int Encodings(String str,int idx,String ans)
         System.out.println(ans);
         return 1;
     }
+    
     char ch = str.charAt(idx);
     int count = 0;
     if(ch == '0')
@@ -306,11 +313,12 @@ public static void BoardwithSNL(int src, int dest, int [] snl, int [] moves, int
     {
         if (snl[src] != 0)
         BoardwithSNL(snl[src],dest,snl,moves,mvidx);//snake ya ladder pr jaakr dice nhi chlte.
-        else{
+        else
+        {
             if (src + moves[mvidx] <= dest)
             BoardwithSNL(src + moves[mvidx],dest,snl,moves,mvidx+1);
             else
-            BoardwithSNL(src,dest,snl,moves,mvidx+1);//dest pr pohochne se zyaada no. aayega to vahi khade rhenge.
+            BoardwithSNL(src,dest,snl,moves,mvidx+1); //dest pr pohochne se zyaada no. aayega to vahi khade rhenge.
         }
     }
 }
