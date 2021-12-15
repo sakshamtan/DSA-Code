@@ -76,12 +76,13 @@ public static ArrayList<String> nokiaKeypad_02(String str) //advanced version wi
         }
 
     }
+    
     if (str.charAt(0) != 0 && str.length() > 1)
     {
         int num = (str.charAt(0)-'0') * 10 + str.charAt(1)-'0';
         if (num < 12)
         {
-        recAns = nokiaKeypad_02(str.substring(2));
+            recAns = nokiaKeypad_02(str.substring(2));
             for (String rstr : recAns)
             {
                 String word2 = words[num];
