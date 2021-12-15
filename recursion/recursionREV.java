@@ -850,9 +850,9 @@ public static int Nqueen_Combination_01(boolean[][] box,int idx,int qpsf,int tnq
         int c = i % n;
         if(isSafeToPlaceQueen(box,r,c))
         {
-            box[r][c] = true;//placing queen so next queen can check if any previous queen kills her.
+            box[r][c] = true; //placing queen so next queen can check if any previous queen kills her.
             count += Nqueen_Combination_01(box,i+1,qpsf+1,tnq,ans + "(" + r + "," + c + ")" + " ");
-            box[r][c] = false;//unplacing to make way for other combinations.
+            box[r][c] = false; //unplacing to make way for other combinations.
         }
 
     }
