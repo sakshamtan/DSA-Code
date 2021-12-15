@@ -720,7 +720,7 @@ public int KadanesAlgo_02(int[] arr)
     return gSum;
 }
 
-//Now to return the subArray with largest sum -> starting and ending indexes store
+//Now to return the subArray with largest sum -> store starting and ending indexes
 public int KadanesAlgo_01_SubArray(int[] arr)
 {
     int gSum = 0, cSum = 0, gsi = 0, gei = 0, csi = 0;  // csi -> current starting index
