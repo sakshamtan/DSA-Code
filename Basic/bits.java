@@ -122,7 +122,7 @@ public static int single_Number_02(int [] arr)
 }
 
 //Leetcode 260 -> Single Number III
-public int[] singleNumber(int[] nums) 
+public int[] singleNumber_03(int[] nums) 
 {
     int[] ans = new int[2];
         
