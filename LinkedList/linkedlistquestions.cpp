@@ -439,7 +439,7 @@ ListNode *removeNthfromEnd(ListNode *head, int n)
     return head;
 }
 
-//Leetcode 61 -> rotate list form right.
+//Leetcode 61 -> rotate list from right.
 ListNode *rotateRight(ListNode *head, int k)
 {
     if (head == nullptr || head->next == nullptr || k == 0)
