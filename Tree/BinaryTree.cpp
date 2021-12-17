@@ -377,7 +377,3 @@ vector<vector<int>> verticalTraversal(TreeNode* root)
     }
     return res;
 }
-
-
-
-
