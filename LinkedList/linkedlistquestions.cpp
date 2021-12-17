@@ -706,7 +706,7 @@ void copyRandomPointers(Node *head) //random pointers set krke aayega newly(copi
     Node *curr = head;
     while (curr != nullptr)
     {
-        if (curr->random != nullptr)                 //nhi to nullpointer exception aa jaayega.
+        if (curr->random != nullptr) //nhi to nullpointer exception aa jaayega.
             curr->next->random = curr->random->next; //newly created nodes ke random pointers ko set krdegi ye statement.
 
         curr = curr->next->next;
