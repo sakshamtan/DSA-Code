@@ -175,7 +175,6 @@ void subsets_01(vector<int> &arr, int idx, vector<int> &smallAns, vector<vector<
 
     for (int i = idx; i < arr.size(); i++)
     {
-
         smallAns.push_back(arr[i]);
         res.push_back(smallAns);
         subsets_01(arr, i + 1, smallAns, res);
