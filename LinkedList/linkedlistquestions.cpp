@@ -161,7 +161,7 @@ void reorderList(ListNode *head)
 // now Order the list i.e. 1->5->2->4 se 1->2->3->4 laana hai original list vaapis laani hai
 
 ListNode *th1 = nullptr; //temporary head and tails of both linked lists.
-ListNode *tt1 = nullptr; //declared as global.taaki upar ke functions ke change neeche
+ListNode *tt1 = nullptr; //declared as global taaki upar ke functions ke change neeche
 ListNode *th2 = nullptr; //vaale function mei bhi reflect ho th1 th2 tt1 tt2 mei.
 ListNode *tt2 = nullptr;
 void addFirst(ListNode *node) //addFirst and addLast required for orderList function.
