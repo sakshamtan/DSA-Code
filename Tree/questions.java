@@ -58,6 +58,7 @@ public int minDepth(TreeNode root)
         
     if(root.left == null && root.right == null)
     return 1;
+    
     if(root.left == null && root.right != null)//Isme test case fass rha tha leetcode ka agr saare 
     return minDepth(root.right)+1;            //nodes apne parent ke right mei ya left mei hi placed ho.
 
