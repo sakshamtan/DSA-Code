@@ -1,4 +1,3 @@
-import java.util.Arrays;
 public class maxAreaCake{
 
 public static boolean isPossibleToServeCake(int[] radiusArray,double cakeArea,int guests)

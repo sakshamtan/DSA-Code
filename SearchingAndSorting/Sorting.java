@@ -1,34 +1,35 @@
-import java.util.Arrays;
 public class Sorting {
 
 public static void Bubble_Sort(int [] arr)
 {
-    int jc = 1;
-    while (jc < arr.length)
+    int n = arr.length;
+    for(int i = 0; i < n; i++)
     {
-        for (int i = 0; i < arr.length-jc;i++)
+        for(int j = 0; j < n-i-1; j++)
         {
-            if(arr[i] > arr[i+1])
-                swap(arr,i,i+1);
+            if(arr[j+1] < arr[j])
+            {
+                swap(arr,j+1,j);
+            }
         }
-        jc++;
     }
-    display(arr);   
+    display(arr);
 }
 
 public static void Selection_Sort(int [] arr)
 {
-    int jc = 1;
-    while (jc < arr.length)
+    int n = arr.length;
+    for(int i = 0; i < n-1; i++)
     {
-        for (int i = jc; i < arr.length; i++)
+        int min = i;
+        for(int j = i+1; j < n; j++)
         {
-            if (arr[jc-1] > arr[i])
+            if(arr[j] < arr[min])
             {
-                swap(arr,i,jc-1);
+                min = j;
             }
         }
-        jc++;
+        swap(arr,i,min);
     }
     display(arr);
 }
@@ -70,7 +71,7 @@ public static void main(String[] args)
 {
     int [] arr = {10,2,3,-1,5};
     // Bubble_Sort(arr);
-    // Selection_Sort(arr);
-    insertion_Sort(arr);
+    Selection_Sort(arr);
+    // insertion_Sort(arr);
 }
 }
