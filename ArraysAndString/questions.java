@@ -63,6 +63,37 @@ public static void segregateZeroAndOne(int[] arr)
     }
 }
 
+//Leetcode 283 -> Move Zeroes
+public void moveZeroes(int[] nums) 
+{
+    int ptr = -1;
+    int itr = 0;
+    while(itr < nums.length)
+    {
+        if(nums[itr] != 0)
+            swap(nums,++ptr,itr);
+        
+        itr++;
+    }
+}
+
+//Leetcode 27 -> Remove Element -> InPlace optimized solution
+public int removeElement(int[] nums, int val) 
+{
+    int ptr = -1, itr = 0;
+    int count = 0;
+    while(itr < nums.length)
+    {
+        if(nums[itr] != val)
+        {
+            swap(nums,++ptr,itr);
+            count++;
+        }  
+        itr++;
+    }
+    return count;
+}
+
 //One pass O(N) Inplace solution (same as Leetcode 75 -> Sort Colours)
 public static void segregateZeroOneAndTwo(int[] arr)
 {

@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Sorting",
+            "request": "launch",
+            "mainClass": "Sorting",
+            "projectName": "code_a859a95b"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - hello",
             "request": "launch",
             "mainClass": "hello",
