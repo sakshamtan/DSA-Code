@@ -884,3 +884,69 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
     }
     return reverse(dummy->next);
 }
+
+//Leetcode 24 -> Swap Nodes in Pairs -> Using same strategy as reverse in K groups
+ListNode* th = nullptr;
+ListNode* tl = nullptr;
+void addFirst(ListNode* node)
+{
+    if(th == nullptr)
+    {
+        th = node;
+        tl = node;
+    }
+    else{
+        node->next = th;
+        th = node;
+    }
+}
+    
+int lenOfLL(ListNode* head)
+{
+    if(head == nullptr)
+        return 0;
+    int count = 0;
+    ListNode* curr = head;
+    while(curr != nullptr)
+    {
+        curr = curr->next;
+        count++;
+    }
+    return count;
+}
+
+//Leetcode function 
+ListNode* swapPairs(ListNode* head) 
+{
+    if(head == nullptr || head->next == nullptr)
+        return head;
+        
+    ListNode* oh = nullptr;
+    ListNode* ot = nullptr;
+        
+    ListNode* curr = head;
+    while(curr != nullptr)
+    {
+        ListNode* forw = curr->next;
+        curr->next = nullptr;
+        addFirst(curr);
+        if(lenOfLL(th) == 2)
+        {
+            if(oh == nullptr)
+            {
+                oh = th;
+                ot = tl;
+            }
+            else{
+                ot->next = th;
+                ot = tl;
+            }
+
+            th = nullptr;
+            tl = nullptr;
+        }
+        curr = forw;
+    }
+    ot->next = th; 
+    return oh;
+}
