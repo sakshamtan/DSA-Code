@@ -19,7 +19,7 @@ public static int binarySearch(int[] arr,int data)
 }
 
 // return lowest index of the multi-instant data present.
-public static int loewerBound(int[] arr,int data)
+public static int lowerBound(int[] arr,int data)
 {
     int li=0;
     int ri=arr.length - 1;
