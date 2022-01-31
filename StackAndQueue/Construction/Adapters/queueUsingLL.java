@@ -1,5 +1,8 @@
+package Adapters;
+
 import java.util.LinkedList; // stl ka use krke stack ki implementation
 public class queueUsingLL{
+    
     private LinkedList<Integer> ll = new LinkedList<>();
 
 public int size()

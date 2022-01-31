@@ -1,13 +1,16 @@
+package Adapters;
+
 public class queue{ // queue implementation using LL (LL bhi khud ki likhi huyi)
 
     private class ListNode{
         int data = 0;
         ListNode next = null;
-    }
+    
 
     public ListNode(int data)
     {
         this.data = data;
+    }
     }
 
     private ListNode head = null;

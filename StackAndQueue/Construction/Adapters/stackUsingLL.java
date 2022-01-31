@@ -1,3 +1,5 @@
+package Adapters;
+
 import java.util.LinkedList; // stl ka use krke stack ki implementation
 public class stackUsingLL{
     private LinkedList<Integer> ll = new LinkedList<>();
