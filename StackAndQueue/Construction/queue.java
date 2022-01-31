@@ -56,7 +56,7 @@ protected void queueEmptyException() throws Exception
 
 protected void queueOverFlowException() throws Exception
 {
-    if(this.NoOfElements == this.maxCapacity())
+    if(this.NoOfElements == this.maxCapacity)
     throw new Exception("QueueOverFlow");
 }
 
@@ -78,7 +78,7 @@ protected int front_()
     return this.arr[this.front];
 }
 
-public int front()
+public int front() throws Exception
 {
     queueEmptyException();
     return front_();
@@ -88,7 +88,7 @@ protected int pop_()
 {
     int rv = this.arr[this.front];
     this.arr[this.front] = 0;
-    this.front = (++this.front % this.maxCapacity); //udation of front pointer
+    this.front = (++this.front % this.maxCapacity); //updation of front pointer
     this.NoOfElements--;
     
     return rv;
@@ -96,7 +96,7 @@ protected int pop_()
 
 public int pop() throws Exception
 {
-    stackEmptyException();
+    queueEmptyException();
     return pop_();
 }
 }

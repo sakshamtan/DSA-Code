@@ -11,7 +11,7 @@ public class dynamicQueue extends queue{
     }
 
     //Constructor to convert arr into dynamicQueue
-    public int dynamicQueue(int[] arr)
+    public dynamicQueue(int[] arr)
     {
         int n = arr.length;
         super.initialize(n * 2);
@@ -26,7 +26,7 @@ public class dynamicQueue extends queue{
 @Override
 public void push(int data)
 {
-    if(super.size() == super.capacity)
+    if(super.size() == super.capacity())
     {
         int n = super.size();
         int[] temp = new int[n];
@@ -44,6 +44,6 @@ public void push(int data)
         }
 
     }
-    super.push(data);
+    super.push_(data);
 }
 }

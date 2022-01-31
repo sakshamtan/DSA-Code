@@ -1,4 +1,0 @@
-MinValue : 27
-MinExpression : (1 + ((2 * 3) + (4 * 5)))
-MaxValue : 105
-MaxExpression : ((1 + 2) * ((3 + 4) * 5))

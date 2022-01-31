@@ -146,6 +146,17 @@ public int[] singleNumber_03(int[] nums)
     return ans;
 }
 
+//Leetcode 1009 -> Complement of Base 10 Integer same as Leetcode 476 -> Number Complement
+public int bitwiseComplement(int n) 
+{
+    int mask = 1;
+    while(n > mask)
+    {
+        mask = (mask << 1) | 1;
+    }
+    return n ^ mask;
+}
+
 public static void Print_bits(int n)
 {
     for (int i = 31; i >= 0; i--)

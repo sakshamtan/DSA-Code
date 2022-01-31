@@ -640,5 +640,31 @@ public int[] smallestRange(List<List<Integer>> nums)
         }
     }
     return new int[]{sp,ep};
-} 
+}
+
+//Leetcode 290 -> Word Pattern -> Worst case N^2 as containsValue -> O(N) can be saved using two HashMaps
+public boolean wordPattern(String pattern, String s) 
+{
+    String[] strArr = s.split(" ");
+    if(pattern.length() != strArr.length)
+        return false;
+    
+    HashMap<String,Character> map = new HashMap<>();
+ 
+    for(int i = 0; i < strArr.length; i++)
+    {
+        Character ch = pattern.charAt(i);
+        String str = strArr[i];
+        
+        if(map.containsKey(str) && map.get(str) != ch)
+            return false;
+        
+        if(map.containsValue(ch) && map.get(str) != ch)
+                return false;
+        
+        map.put(str,ch);
+        
+    }
+    return true;
+}
 }
