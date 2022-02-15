@@ -69,7 +69,7 @@ public static boolean find(Node node,int data)
 
     for(Node child : node.children)
     {
-        if(find(child,data))
+        if(find(child, data))
         return true;
     }
 
@@ -88,7 +88,7 @@ public static boolean nodeToRootPath(Node node,int data,ArrayList<Node> ans)
     boolean res = false;
     for(Node child : node.children) // for loop equivalent to calls of left and right calls in BinaryTree.
     {
-        res = res || nodeToRootPath(node,data,ans);
+        res = res || nodeToRootPath(child,data,ans);
         // if(res) break;
     }
 
@@ -197,7 +197,7 @@ public static void linewiseLevelOrder(Node root)
     while(que.size() != 0)
     {
         int size = que.size();
-        System.out.print(level " -> ");
+        System.out.print(level + " -> ");
         while(size-- > 0)
         {
             Node vtx = que.removeFirst();
@@ -220,12 +220,12 @@ public static boolean isMirror(Node node1,Node node2)
     if(node1.data != node2.data)
     return false;
 
-    for(int i = 0,j = node2.children.size()-1;i < node1.children.size(),j <= 0;i++,j--)
+    for(int i = 0, j = node2.children.size()-1; i < node1.children.size() && j <= 0; i++, j--)
     {
         Node child1 = node1.children.get(i);
         Node child2 = node2.children.get(j);
 
-        if(!isMirror(child1,child2))
+        if(!isMirror(child1, child2))
         return false;
     }
     return true;
@@ -242,7 +242,7 @@ public static Node flattenGT(Node node)
 
     Node gTail = flattenGT(lastChild);
 
-    for(int i = n - 2;i >= 0;i--)
+    for(int i = n - 2; i >= 0; i--)
     {
         Node tempTail = flattenGT(node.child.get(i));
 
@@ -251,5 +251,4 @@ public static Node flattenGT(Node node)
     }
     return gTail;
 }
-
 }
