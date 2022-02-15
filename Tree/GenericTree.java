@@ -166,7 +166,7 @@ public static int BurnigGT_02(Node node,int target,List<List<Integer>> ans)
 {
     if(node.data == target)
     {
-        KdownBurnTree(node,null,0,ans)
+        KdownBurnTree(node,null,0,ans);
         return 1;
     }
 
