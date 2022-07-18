@@ -144,6 +144,6 @@ public static void GCD(int a,int b)
 public static void main(String[]args)
 {
     // isPrime(5);
-    Nth_fibo_series(5);
+    // Nth_fibo_series(5);
 }
 }
