@@ -1024,4 +1024,55 @@ public boolean canPlaceFlowers(int[] flowerbed, int n)
     }
     return count >= n;
 }
+
+// Leetcode 28 -> Find the index of first occurence of a string
+// Two pointer method
+public int strStr(String haystack, String needle) {
+    int i = 0;
+    int j = 0;
+    int possibleAns = -1;
+    if(needle.length() > haystack.length())
+    return -1;
+
+    while(i < haystack.length())
+    {
+        if(haystack.charAt(i) == needle.charAt(j))
+        {
+            if(j == 0)
+            {
+                possibleAns = i;
+            }
+            if(j == needle.length() - 1)
+            {
+                return possibleAns;
+            }
+            i++;
+            j++;
+        }
+        else {
+            if(j == 0)
+            {
+                i++;
+                possibleAns = -1;
+            }
+            else {
+                i = possibleAns + 1;
+                j = 0;
+            }
+        }
+    }
+    return -1; 
+}
+
+// Substring method
+public int strStr_02(String haystack, String needle) {
+    int end = needle.length();
+
+    for(int i = 0; i < haystack.length() - end + 1; i++)
+    {
+        if(haystack.substring(i, i + end).equals(needle))
+        return i;
+    }
+    return -1;
+}
 }
