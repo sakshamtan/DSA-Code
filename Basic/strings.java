@@ -152,7 +152,7 @@ public static void main(String[] args)
     Scanner scn = new Scanner(System.in);
     System.out.println("Enter a string:");
     String str = scn.nextLine();
-    // printChar(str);
+    printChar(str);
     // printSubstring(str);
     // System.out.println(isPalindrome(str));
     // printAllPalindromicSubstrings(str);
