@@ -1650,7 +1650,6 @@ public List<TreeNode> delNodes(TreeNode root, int[] to_delete)
         
     return ans;
 }
-
 // Leetcode 872 -> Leaf-similar trees
 public void collectLeaves(TreeNode root, ArrayList<Integer> leaves) {
     if(root == null)

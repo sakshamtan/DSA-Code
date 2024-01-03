@@ -468,7 +468,7 @@ public static List<Integer> rightView(Node node)
     while(que.size() != 0)
     {
         int size = que.size();
-        ans.add(que.getLast().val);
+        ans.add(que.getLast().data);
         while(size-- > 0)
         {
             Node vtx = que.removeFirst();
