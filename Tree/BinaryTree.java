@@ -261,7 +261,7 @@ public static int kFar_02(Node node,int data,int k,ArrayList<Integer> ans)
     return -1;
 }
 
-//Burning Tree -> GFG 
+//Burning Tree -> GFG and Leetcode 2385 -> Amount of time for Binary Tree to be Infected
 public static void kDownForBurningTree(Node node,Node block,int time,ArrayList<ArrayList<Integer>> ans)
 {
     if(node == null || node == block)
@@ -272,8 +272,8 @@ public static void kDownForBurningTree(Node node,Node block,int time,ArrayList<A
         
     ans.get(time).add(node.data);
         
-    kDown(node.left,block,time+1,ans);
-    kDown(node.right,block,time+1,ans);
+    kDownForBurningTree(node.left,block,time+1,ans);
+    kDownForBurningTree(node.right,block,time+1,ans);
 }
 
 //Similar to KFar bs K ki jagah time rakhna hai kDown mei.
@@ -285,7 +285,7 @@ public static ArrayList<ArrayList<Integer>> BurnTree(Node root, int target)
     Node prev = null;
     for(int i = 0;i < list.size();i++)
     {
-        kDown(list.get(i),prev,i,ans);
+        kDownForBurningTree(list.get(i),prev,i,ans);
         prev = list.get(i);
     }
     return ans;
