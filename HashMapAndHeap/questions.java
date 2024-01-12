@@ -1,6 +1,8 @@
 import java.util.PriorityQueue;
 import java.util.Random;
+import java.util.Stack;
 import java.util.HashSet;
+import java.util.List;
 import java.util.ArrayList;
 import hava.util.HashMap;
 
@@ -666,5 +668,26 @@ public boolean wordPattern(String pattern, String s)
         
     }
     return true;
+}
+
+// Leetcode 2870 -> Minimum Number of Operations to make Array empty and Leetcode 2224 -> Minimum Rounds to complete all tasks
+public int minOperations(int[] nums) {
+    HashMap<Integer, Integer> map = new HashMap<>();
+    for(int i = 0; i < nums.length; i++) {
+        if(!map.containsKey(nums[i])) {
+            map.put(nums[i], 1);
+        } else {
+            map.put(nums[i], map.get(nums[i]) + 1);
+        }
+    }
+    int ans = 0;
+    for(int i : map.keySet()) {
+        int freq = map.get(i);
+        if(freq == 1) {
+            return -1;
+        } 
+        ans += Math.ceil((double) freq / 3);
+    }
+    return ans;
 }
 }
