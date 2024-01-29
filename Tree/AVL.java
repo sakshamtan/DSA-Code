@@ -1,3 +1,4 @@
+// Ensure to make the diagrams and code along with diagrams in the notebook
 public class AVL{
 
 public static class Node{

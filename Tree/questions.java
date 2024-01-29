@@ -839,7 +839,7 @@ public void recoverTree(TreeNode root)
 
 //Leetcode 173 -> Binary Search Tree Iterator
 public class BSTITerator{
-    LinkedList<TreeNode> st = new LinkedList<>() // stack implemented using ll using addFirst and removeFirst functions.
+    LinkedList<TreeNode> st = new LinkedList<>(); // stack implemented using ll using addFirst and removeFirst functions.
 
     public BSTITerator(TreeNode root) // constructor of class
     {
