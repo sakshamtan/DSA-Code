@@ -2,9 +2,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 
-public class Questions{
+import org.w3c.dom.Node;
+
+public class questions{
     public class TreeNode{
     int val;
     TreeNode left;
@@ -14,18 +17,18 @@ public class Questions{
 
 //ConstructTree from preorder traversal -> GFG
 int idx = 0;
-Node constructTree(int n, int pre[], char preLN[])
+TreeNode constructTree(int n, int pre[], char preLN[])
 {
     if(idx >= n)
     return null;
         
     if(preLN[idx] == 'L')
     {
-        Node node = new Node(pre[idx++]);
+        TreeNode node = new TreeNode(pre[idx++]);
         return node;
     }
         
-    Node node = new Node(pre[idx++]);
+    TreeNode node = new TreeNode(pre[idx++]);
     node.left = constructTree(n,pre,preLN);
     node.right = constructTree(n,pre,preLN);
         
@@ -353,7 +356,7 @@ public int sumNumbers(TreeNode root)
 }
 
 //Leetcode 102 -> Binary Tree Level order traversal 
-public List<List<Integer>> levelOrder(TreeNode root)
+public List<List<Integer>> levelOrder(TreeNode node)
 {
     if(node == null) return new ArrayList<>();
     LinkedList<TreeNode> que = new LinkedList<>();
@@ -486,56 +489,56 @@ public int maxLevelSum(TreeNode root)
 }
 
 // Boundary Traversal of Binary Tree -> leftView + addLeafs + rightView
-void leftView(Node node,ArrayList<Integer> ans)
+void leftView(TreeNode node,ArrayList<Integer> ans)
 {
     if(node == null)
     return;
     if(node.left != null)
     {
-        ans.add(node.data);
+        ans.add(node.val);
         leftView(node.left,ans);
     }
     else if(node.right != null)
     {
-        ans.add(node.data);
+        ans.add(node.val);
         leftView(node.right,ans);
     }
 }
 
 //Recursive better code pdha to recursive kre hai teeno funcitons.
-void rightView(Node node,ArrayList<Integer> ans)
+void rightView(TreeNode node,ArrayList<Integer> ans)
 {
     if(node == null)
     return;
     if(node.right != null)
     {
         rightView(node.right,ans);
-        ans.add(node.data);
+        ans.add(node.val);
     }
     else if(node.left != null)
     {
         rightView(node.left,ans);
-        ans.add(node.data);
+        ans.add(node.val);
     }
 }
 
-void addLeafs(Node node,ArrayList<Integer> ans)
+void addLeafs(TreeNode node,ArrayList<Integer> ans)
 {
     if(node == null)
     return;
         
     addLeafs(node.left,ans);
     if(node.left == null && node.right == null)
-    ans.add(node.data);
+    ans.add(node.val);
     addLeafs(node.right,ans);
 }	
 //GFG Function
-ArrayList <Integer> printBoundary(Node node)
+ArrayList <Integer> printBoundary(TreeNode node)
 {
 	if(node == null)
     return new ArrayList<>();
 	ArrayList<Integer> ans = new ArrayList<>();
-    ans.add(node.data);
+    ans.add(node.val);
 	leftView(node.left,ans);
     addLeafs(node,ans);
 	rightView(node.right,ans);
@@ -898,7 +901,7 @@ public Node inorderSuccessor(Node node)
 
 //psi -> preorder starting index, iei -> inorder ending index.
 //Leetcode 105 -> construct Binary Tree from Inorder and preorder Traversal
-public TreeNode PreInTree(int[] preorder,int psi,int pei,int[] inorder,int isi,int iei);
+public TreeNode PreInTree(int[] preorder,int psi,int pei,int[] inorder,int isi,int iei)
 {
     if(psi > pei)  // or isi > iei -> same time pr hi dono saath traverse honge arrays.
     return null;
@@ -992,7 +995,7 @@ public TreeNode getTail(TreeNode node)
 }
 
 // T -> O(n^2) n for flatten and n for getTail
-public void flatten(TreeNode node)
+public void flatten_01(TreeNode node)
 {
     if(node == null)
     return;
@@ -1166,16 +1169,16 @@ public TreeNode bstFromPreorder(int[] preorder)
     return constructBSTformPre(preorder,-(int)1e8,(int)1e8);
 }
 
-int idx;
+int index;
 public TreeNode constructBSTformPost(int[] post,int lr,int rr) // lr -> left range rr -> right range
 {
-    if(idx < 0 || post[idx] < lr || post[idx] > rr)
+    if(index < 0 || post[index] < lr || post[index] > rr)
     return null;
 
-    TreeNode node = new TreeNode(pre[idx--]);
+    TreeNode node = new TreeNode(post[index--]);
 
-    node.right = constructBSTformPost(pre,node.val,rr);
-    node.left = constructBSTformPost(pre,lr,node.val);
+    node.right = constructBSTformPost(post,node.val,rr);
+    node.left = constructBSTformPost(post,lr,node.val);
 
     return node;
 }
@@ -1224,7 +1227,7 @@ public TreeNode createBSTfromLevelOrder(int[] arr)
             if(node.val < pair.par.val)
             pair.par.left = node;
             else
-            par.par.right = node;
+            pair.par.right = node;
         }
         que.addLast(new levelPair(node,pair.lr,node.val));
         que.addLast(new levelPair(node,node.val,pair.rr));
