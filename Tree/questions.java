@@ -1036,7 +1036,7 @@ public void flatten(TreeNode root)
     root = flatten_02(root);
 }
 
-//Leetcode 426 -> covert Binary Search Tree to sorted circular Doubly LinkedList(Locked)
+//Leetcode 426 -> convert Binary Search Tree to sorted circular Doubly LinkedList(Locked)
 Node dummy = new Node(-1);
 Node prev = dummy;
 public void treeToDoublyList_(Node root)
@@ -1182,7 +1182,7 @@ public TreeNode constructBSTformPost(int[] post,int lr,int rr) // lr -> left ran
 
 public TreeNode bstFromPostorder(int[] postorder) 
 {
-    idx = postorder.length-1
+    idx = postorder.length-1;
     return constructBSTformPre(postorder,-(int)1e8,(int)1e8);
 }
 
