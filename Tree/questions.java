@@ -1458,7 +1458,7 @@ public boolean findTarget(TreeNode root, int k)
 int ans = 0;
 public void pathSumIII(TreeNode node,int tar,HashMap<Integer,Integer> map,int prefixSum)
 {
-    if(node = null)
+    if(node == null)
     return;
 
     prefixSum += node.val;
