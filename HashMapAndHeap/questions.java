@@ -690,4 +690,34 @@ public int minOperations(int[] nums) {
     }
     return ans;
 }
+
+// Leetcode 791 -> Custom Sort String
+public String customSortString(String order, String s) {
+    int[] freq = new int[26];
+    for (int i = 0; i < s.length(); i++) {
+      freq[s.charAt(i) - 'a']++;
+    }
+    
+    StringBuilder ans = new StringBuilder();
+    for (int i = 0; i < order.length(); i++) {
+      char ch = order.charAt(i);
+      int idx = (int)(ch - 'a');
+      int c = freq[idx];
+      freq[idx] = 0;
+      if (c > 0) {
+        for (int j = 0; j < c; j++) {
+          ans.append(ch);
+        }
+      }
+    }
+    for (int i = 0; i < 26; ++i) {
+      if (freq[i] > 0) {
+        char ch = (char)(i + 'a');
+        for (int j = 0; j < freq[i]; j++) {
+          ans.append(ch);
+        }
+      }
+    }
+    return ans.toString();
+}
 }
