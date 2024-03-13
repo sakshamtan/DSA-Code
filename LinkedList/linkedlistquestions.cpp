@@ -950,3 +950,37 @@ ListNode* swapPairs(ListNode* head)
     ot->next = th; 
     return oh;
 }
+
+// Leetcode 1171 -> Remove Zero consecutive Nodes from LinkedList
+ListNode* removeZeroSumSublists(ListNode* head) 
+{
+    if(head == nullptr)
+    return head;
+
+    int prefixSum = 0;
+    unordered_map<int, ListNode*> map;
+    ListNode* dummy = new ListNode(0);
+    dummy->next = head;
+    ListNode* curr = head;
+    map[0] = dummy;
+    while(curr != nullptr) {
+        prefixSum += curr->val;
+        if(map.find(prefixSum) != map.end()) {
+            // delete the consecutive nodes as sum = 0
+            ListNode* start = map[prefixSum];
+            ListNode* temp = start;
+            int psum = prefixSum;
+            while(temp != curr) {
+                temp = temp->next;
+                psum += temp->val;
+                if(temp != curr)
+                    map.erase(psum); // prefix sum remove bhi krna hai deleted nodes ka map se
+            }
+            start->next = curr->next;
+        } else {
+            map[prefixSum] = curr;
+        }
+        curr = curr->next;
+    }
+    return dummy->next;    
+}
