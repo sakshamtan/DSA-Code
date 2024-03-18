@@ -1094,4 +1094,22 @@ public int strStr_02(String haystack, String needle) {
     }
     return -1;
 }
+
+// Leetcode 452 -> Minimum number of arrows to burst balloons
+// Sort Array on the basis of end point and if current balloon's start point is greater than previous balloons then disjoint interval means we need two balloons to burst both of them.
+public int findMinArrowShots(int[][] points) {
+    // Sorting points on the basis of end points
+    Arrays.sort(points, (a, b) -> Integer.compare(a[1], b[1]));
+
+    int arrows = 1;
+    int prevEnd = points[0][1];
+
+    for(int i = 1; i < points.length; i++) {
+        if(points[i][0] > prevEnd) {
+            arrows++;
+            prevEnd = points[i][1];
+        }
+    }
+    return arrows;
+}
 }
