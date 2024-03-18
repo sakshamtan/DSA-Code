@@ -434,7 +434,7 @@ bool canFinish(int numCourses, vector<vector<int>>& prerequisites)
     vector<vector<int>> graph(numCourses); //numCourses = 'N'
     for(vector<int> arr : prerequisites)
     {
-        graph[arr[0]].push_back(arr[1]); // as given prerequistes[0].length == 2(contraint).
+        graph[arr[0]].push_back(arr[1]); // as given prerequistes[0].length == 2(constraint).
     }
         
     return kahnsAlgo(graph,numCourses).size == N;        
