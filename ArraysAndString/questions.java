@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 public class questions{
@@ -1130,5 +1131,22 @@ public int numSubarrayProductLessThanK(int[] nums, int k) {
         totalCount += right - left + 1;
     }
     return totalCount;
+}
+
+// Leetcode 2958 -> Length of longest subarray with at most K frequency 
+// Counting + sliding window similar pattern as done above
+public int maxSubarrayLength(int[] nums, int k) {
+    int maxLen = 0, left = -1;
+    Map<Integer, Integer> frequency = new HashMap();
+        
+    for (int right = 0; right < nums.length; right++) {
+        frequency.put(nums[right], frequency.getOrDefault(nums[right], 0) + 1);
+        while (frequency.get(nums[right]) > k) {
+            left++;
+            frequency.put(nums[left], frequency.get(nums[left]) - 1);
+        }
+        maxLen = Math.max(maxLen, right - left);
+    }        
+    return maxLen;
 }
 }
