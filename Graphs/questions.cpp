@@ -819,8 +819,8 @@ int numIslands(vector<vector<char>>& grid)
         {
             if(grid[i][j] == '1')
             {
-            onesCount++;
-            int p1  = findPar(i * m + j); // p1 ka par ek baar update ho rha hai and p2 ka par dir times update ho skta hai to p1 ko hi par bnaenge as poore island ka final par vohi bnna chahiye.
+                onesCount++;
+                int p1  = findPar(i * m + j); // p1 ka par ek baar update ho rha hai and p2 ka par dir times update ho skta hai to p1 ko hi par bnaenge as poore island ka final par vohi bnna chahiye.
                 for(int d = 0; d < dir.size();d++)
                 {
                     int r = i + dir[d][0];
