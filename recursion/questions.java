@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class questions{
 //Leetcode 51 -> N - Queens
 boolean [][] chess;
@@ -112,5 +115,46 @@ public List<String> wordBreak(String s, List<String> wordDict)
         }
     }
     return ans;
+}
+
+// Leetcode 79 -> Word Search
+public boolean wordSearch(char[][] board, String word, int i, int j, int[][] dir, int idx) {
+    if(idx == word.length()) 
+    return true;
+
+    if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] == '*' || board[i][j] != word.charAt(idx)) {
+        return false;
+    } 
+
+    board[i][j] = '*';
+    for(int d = 0; d < dir.length; d++) {
+        int r = i + dir[d][0];
+        int c = j + dir[d][1];
+
+        if(wordSearch(board, word, r, c, dir, idx+1)) {
+            return true;
+        }
+    }
+    board[i][j] = word.charAt(idx);
+    return false;
+}
+
+// Leetcode function
+public boolean exist(char[][] board, String word) {
+    int x = board.length;
+    int y = board[0].length;
+    int[][] dir = new int[][]{{0,1}, {0,-1}, {-1,0}, {1, 0}};
+
+    boolean res = false;
+    for(int i = 0; i < x; i++) {
+        for(int j = 0; j < y; j++) {
+            if(board[i][j] == word.charAt(0)) {
+                res = wordSearch(board, word, i, j, dir, 0);
+                if(res) return true;
+            }
+        }
+    }
+    return false;
+}
 }
 }
