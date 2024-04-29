@@ -157,6 +157,24 @@ public int bitwiseComplement(int n)
     return n ^ mask;
 }
 
+// Leetcode 2997 -> Minimum Operations to make Array XOR Equal to K
+public int minOperations(int[] nums, int k) 
+{
+    int xorNums = 0;
+    for(int ele : nums) 
+    {
+        xorNums ^= ele;
+    }
+    int ans = 0;
+    for (int i = 31; i >= 0; i--)
+    {
+        int mask = (1 << i);
+        if ((k & mask) != (xorNums & mask)) 
+            ans++;
+    }
+    return ans;
+}
+
 public static void Print_bits(int n)
 {
     for (int i = 31; i >= 0; i--)
