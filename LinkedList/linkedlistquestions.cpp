@@ -984,3 +984,37 @@ ListNode* removeZeroSumSublists(ListNode* head)
     }
     return dummy->next;    
 }
+
+// Leetcode 2487 -> Remove Nodes from LinkedList
+ListNode* th = nullptr;
+ListNode* tl = nullptr;
+void addFirst(ListNode* node)
+{
+    if(th == nullptr)
+    {
+        th = node;
+        tl = node;
+    }
+    else{
+        node->next = th;
+        th = node;
+    }
+}
+
+// Leetcode function 
+ListNode* removeNodes(ListNode* head) 
+{
+    head = reverseList(head);
+    int maxVal = -1;
+    ListNode* curr = head;
+    while(curr != nullptr) {
+        ListNode* next = curr->next;
+        if(curr->val >= maxVal) {
+            maxVal = curr->val;
+            curr->next = nullptr;
+            addFirst(curr);
+        }
+        curr = next;
+    }
+    return th;
+}
