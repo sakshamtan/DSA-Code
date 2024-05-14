@@ -156,5 +156,38 @@ public boolean exist(char[][] board, String word) {
     }
     return false;
 }
+
+// Leetcode 1219 -> Path with Maximum Gold
+public int dfsMaximumGold(int[][] grid, int i, int j) {
+    int[][] dir = new int[][] {{-1,0}, {0,-1}, {1,0}, {0,1}};
+    int maxGold = 0;
+    int originalVal = grid[i][j];
+    grid[i][j] = 0;
+    for(int d = 0; d < dir.length; d++) {
+        int r = i + dir[d][0];
+        int c = j + dir[d][1];
+
+        if(r >= 0 && c >= 0 && r < grid.length && c < grid[0].length && grid[r][c] != 0) {
+            maxGold = Math.max(maxGold, dfsMaximumGold(grid, r, c));
+        }
+    }
+    grid[i][j] = originalVal;
+    return maxGold + originalVal;
+}
+
+// Leetcode function 
+public int getMaximumGold(int[][] grid) {
+    int n = grid.length;
+    int m = grid[0].length;
+    int maxGold = 0;
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(grid[i][j] != 0) {
+                maxGold = Math.max(maxGold, dfsMaximumGold(grid,i, j));
+            }
+        }
+    }
+    return maxGold;
 }
 }
