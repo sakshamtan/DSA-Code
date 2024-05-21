@@ -1188,3 +1188,29 @@ int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int
     }
     return -1;
 }
+
+// Leetcode 841 -> Keys and Rooms -> Will keep a visited with hasPath and return false if even not one room is left unvisited
+void hasPath(vector<vector<int>>& graph, int src,vector<bool>& vis)
+{
+    if(vis[src])
+    return;
+
+    vis[src] = true;
+    for(int e : graph[src])
+    {   
+        if(e == src) continue;
+        if(!vis[e])
+        hasPath(graph,e, vis);
+    }
+}
+
+// Leetcode function
+bool canVisitAllRooms(vector<vector<int>>& rooms) {
+    vector<bool> vis(rooms.size()+1, false);
+    hasPath(rooms, 0, vis);  
+    for(int i = 0; i < rooms.size(); i++) {
+        if(vis[i] == false)
+        return false;
+    } 
+    return true;
+}
