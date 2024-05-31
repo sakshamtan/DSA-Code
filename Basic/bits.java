@@ -133,7 +133,7 @@ public int[] singleNumber_03(int[] nums)
     int d = (val & (-val));  // d will contain the last set bit of val
         
     int x = 0, y = 0;
-    for(int ele : nums)   // dividing all no.s into two sets such that har unique ele diff set mei aaye and single Number I vaal aconcept use ho jaaye
+    for(int ele : nums)   // dividing all no.s into two sets such that har unique ele diff set mei aaye and single Number I vaala concept use ho jaaye
     {
         if((d & ele) != 0)
             x ^= ele;  
