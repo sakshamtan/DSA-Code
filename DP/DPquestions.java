@@ -401,4 +401,17 @@ public List<String> wordBreak(String s, List<String> wordDict)
     map.put(s,ans);
     return ans;
 }
+
+// Leetcode 1014 -> Best Sightseeing Pair (find a piar i, j such that arr[i] + arr[j] + i - j is maximized)
+public int maxScoreSightseeingPair(int[] values){
+    int n = values.length;
+    int res = Integer.MIN_VALUE;
+    int maxLeft = values[0]; // value[i] + i
+        
+    for(int i = 1; i < n; i++){
+        res = Math.max(res, maxLeft + values[i] - i);
+        maxLeft = Math.max(maxLeft, (values[i] + i));
+    }
+    return res; 
+}
 }
