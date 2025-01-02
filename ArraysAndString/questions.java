@@ -1149,4 +1149,30 @@ public int maxSubarrayLength(int[] nums, int k) {
     }        
     return maxLen;
 }
+
+// Leetcode 2559 -> Count Vowels in ranges
+public int[] vowelStrings(String[] words, int[][] queries) {
+    HashSet<Character> set = new HashSet<>(
+        Arrays.asList('a', 'e', 'i', 'o', 'u')
+    );
+
+    int[] prefixArr = new int[words.length];
+    int sum = 0;
+    for(int i = 0; i < words.length; i++) {
+        String currentWord = words[i];
+        if(set.contains(currentWord.charAt(0)) && set.contains(currentWord.charAt(currentWord.length()-1))) {
+            sum++;
+        }
+        prefixArr[i] = sum;
+    }
+
+    int[] ans = new int[queries.length];
+    for(int i = 0; i < queries.length; i++) {
+        int[] currQuery = queries[i];
+        int left = currQuery[0];
+        int right = currQuery[1];
+        ans[i] = prefixArr[right] - (left == 0 ? 0 : prefixArr[left-1]);
+    }
+    return ans;
+}
 }
