@@ -203,6 +203,20 @@ public int xorAllNums(int[] nums1, int[] nums2) {
     return xor1 ^ xor2;
 }
 
+// Leetcode 2683 -> Neighboring Bitwise XOR
+// derived[0] = original[0] XOR original[1]
+// derived[1] = original[1] XOR original[2]
+// derived[2] = original[2] XOR original[3]
+// derived[n-1] = original[n-1] XOR original[0]
+// Xoring the above equations will give rhs as 0 for a valid derived array if we don't get 0 then the derived array is not valid
+public boolean doesValidArrayExist(int[] derived) {
+    int xor = 0;
+    for(int ele : derived) {
+        xor ^= ele;
+    }
+    return xor == 0;
+}
+
 public static void Print_bits(int n)
 {
     for (int i = 31; i >= 0; i--)
