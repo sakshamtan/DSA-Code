@@ -84,6 +84,42 @@ int maxAreaOfIsland(vector<vector<int>>& grid)
     return maxArea;
 }
 
+// Leetcode 2658 -> Maximum Number of Fish in a Grid
+int dfsFish(int i,int j,int n,int m,vector<vector<int>>& grid,vector<vector<int>>& dir)
+{
+    int fish = grid[i][j];
+    grid[i][j] = 0;
+    for(int d = 0; d < dir.size(); d++)
+    {
+        int r = i + dir[d][0];
+        int c = j + dir[d][1];
+        if(r >= 0 && c >= 0 && r < n && c < m && grid[r][c] != 0)
+        fish += dfsFish(r,c,n,m,grid,dir);
+    }
+    return fish;
+}
+
+// Leetcode function
+int findMaxFish(vector<vector<int>>& grid) {
+    if(grid.size() == 0 || grid[0].size() == 0)
+    return 0;
+
+    int maxFish = 0;
+    vector<vector<int>> dir{{0,1},{0,-1},{1,0},{-1,0}};
+    int n = grid.size();
+    int m = grid[0].size();
+
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            if(grid[i][j] != 0)
+            maxFish = max(maxFish,dfsFish(i,j,n,m,grid,dir));
+        }
+    }
+    return maxFish;
+}
+
 //Leetcode 463 -> Island Perimeter
 //Peri = 4 * (totoal no of 1's) - (total no of neibhours)
 int islandPerimeter(vector<vector<int>>& grid) 
