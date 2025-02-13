@@ -720,4 +720,24 @@ public String customSortString(String order, String s) {
     }
     return ans.toString();
 }
+
+// Leetcode 3066 -> Minimum Operations to Exceed threshold value II
+public int minOperations(int[] nums, int k) {
+    PriorityQueue<Long> pq = new PriorityQueue<>();
+
+    for(long ele : nums) {
+        pq.add(ele);
+    }
+
+    int operations = 0;
+        while(pq.peek() < k) {
+                
+            long a = pq.remove();
+            long b = pq.remove();
+
+            pq.add(Math.min(a,b) * 2 + Math.max(a,b));
+            operations++;
+    }
+    return operations;
+}
 }
