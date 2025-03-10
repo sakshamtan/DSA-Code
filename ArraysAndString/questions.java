@@ -1175,4 +1175,40 @@ public int[] vowelStrings(String[] words, int[][] queries) {
     }
     return ans;
 }
+
+// Leetcode 73 -> Set Matrix Zeroes
+// Using shadow method, can use bits/or first row and col of the matrix for 0(1) space solution
+public void setZeroes(int[][] matrix) {
+    int m = matrix.length;
+    int n = matrix[0].length;
+
+    boolean[] rowShadow = new boolean[m];
+    boolean[] colShadow = new boolean[n];
+
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            if(matrix[i][j] == 0) {
+                rowShadow[i] = true;
+                colShadow[j] = true;
+            }
+        }
+    }
+
+    for(int i = 0; i < m; i++) {
+        if(rowShadow[i]) {
+            for(int c = 0; c < n; c++) {
+                matrix[i][c] = 0;
+            }
+        }
+    }
+
+
+    for(int i = 0; i < n; i++) {
+        if(colShadow[i]) {
+            for(int r = 0; r < m; r++) {
+                matrix[r][i] = 0;
+            }
+        }
+    }
+}
 }
