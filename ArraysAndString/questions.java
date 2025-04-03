@@ -1211,4 +1211,22 @@ public void setZeroes(int[][] matrix) {
         }
     }
 }
+
+// Leetcode 2874 -> Maximum Value of an Ordered Triplet II
+// Keeping track of left max and right max (prefixMax and suffixMax) arrays
+public long maximumTripletValue(int[] nums) {
+    int n = nums.length;
+    int[] leftMax = new int[n];
+    int[] rightMax = new int[n];
+    for(int i = 1; i < n; i++) {
+        leftMax[i] = Math.max(leftMax[i-1], nums[i-1]);
+        rightMax[n - 1 - i] = Math.max(rightMax[n-i], nums[n-i]);
+    }
+
+    long maxTriplet = 0;
+    for(int i = 1; i < n-1; i++) {
+        maxTriplet = Math.max(maxTriplet, (long)(leftMax[i] - nums[i]) * rightMax[i]);
+    }
+    return maxTriplet;
+}
 }
