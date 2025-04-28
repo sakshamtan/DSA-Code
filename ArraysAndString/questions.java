@@ -1229,4 +1229,21 @@ public long maximumTripletValue(int[] nums) {
     }
     return maxTriplet;
 }
+
+// Leetcode 2302 -> Count Subarrays With Score Less Than K
+// Counting + sliding window similar pattern as done above
+public long countSubarraysWithScoreLessThanK(int[] nums, long k) {
+    long count = 0, currentSum = 0;
+    int left = 0, right = 0;
+
+    while (right < nums.length) {
+        currentSum += nums[right];
+        while (left <= right && currentSum * (right - left + 1) >= k) {
+            currentSum -= nums[left];
+            left++;
+        }
+        count += right - left + 1;
+        right++;
+    }
+    return count;
 }
