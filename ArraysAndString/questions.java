@@ -1276,3 +1276,31 @@ public long countSubarraysWithScoreLessThanK(int[] nums, long k) {
     }
     return count;
 }
+
+// Leetcode 135 -> Candy (Greedy Approach -> 2 pass solution)
+// Traversal from left to right and right to left
+public int candy(int[] ratings) {
+    int n = ratings.length;
+    int[] candies = new int[n];
+    Arrays.fill(candies, 1);
+
+    // Left to Right
+    for(int i = 1; i < n; i++) {
+        if(ratings[i] > ratings[i-1]) {
+            candies[i] = candies[i-1] + 1;
+        }
+    }
+
+    // Right to Left
+    for(int i = n - 2; i >= 0; i--) {
+        if(ratings[i] > ratings[i+1]) {
+            candies[i] = Math.max(candies[i], candies[i+1] + 1);
+        }
+    }
+
+    int minCandies = 0;
+    for(int ele : candies) {
+        minCandies += ele;
+    }
+    return minCandies;
+}
