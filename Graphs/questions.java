@@ -222,4 +222,52 @@ public int minMalwareSpread(int[][] graph, int[] initial)
     }            
     return ans;
 }
+
+// Leetcode 1298 -> Maximum Candies you can get from Boxes -> Using BFS 
+public int maxCandies(int[] status, int[] candies, int[][] keys, int[][] containedBoxes, int[] initialBoxes) {
+    int n = status.length;
+    boolean[] canOpen = new boolean[n];
+    boolean[] hasBox = new boolean[n];
+    boolean[] used = new boolean[n];
+
+    for(int i = 0; i < n; i++) {
+        canOpen[i] = (status[i] == 1);
+    }
+
+    LinkedList<Integer> que = new LinkedList<>();
+    for(int initalBox : initialBoxes) {
+        hasBox[initalBox] = true;
+        if(canOpen[initalBox]) {
+            used[initalBox] = true;
+            que.addLast(initalBox);
+        }
+    }
+
+    int totalCandies = 0;
+
+    while(que.size() != 0) {
+        int size = que.size();
+        while(size-- > 0) {
+            Integer vtx = que.removeFirst();
+            totalCandies += candies[vtx];
+
+            for(int avlKey : keys[vtx]) {
+                canOpen[avlKey] = true;
+                if(!used[avlKey] && hasBox[avlKey]) {
+                    que.addLast(avlKey);
+                    used[avlKey] = true;
+                }
+            }
+
+            for(int avlBox : containedBoxes[vtx]) {
+                hasBox[avlBox] = true;
+                if(!used[avlBox] && canOpen[avlBox]) {
+                    que.addLast(avlBox);
+                    used[avlBox] = true;
+                }
+            }
+        }
+    }
+    return totalCandies;
+}
 }
