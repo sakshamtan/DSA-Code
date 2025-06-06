@@ -139,6 +139,29 @@ vector<vector<int> > permuteUnique(vector<int> &nums)
     return res;
 }
 
+// Leetcode 77 -> Combinations -> Same faith as permutations just i = idx + 1 in recursion to get unique combinations
+void combine_(int n, int k, int idx, vector<int>& smallAns, vector<vector<int>>& ans) {
+    if(smallAns.size() == k) {
+        ans.push_back(smallAns);
+        return;
+    }
+
+    for(int i = idx; i <= n; i++) {
+        smallAns.push_back(i);
+        combine_(n, k, i + 1, smallAns, ans);
+        smallAns.pop_back();
+    }
+} 
+
+// Leetcode function
+vector<vector<int>> combine(int n, int k) {
+    vector<int> smallAns;
+    vector<vector<int>> ans;
+
+    combine_(n, k, 1, smallAns, ans);
+    return ans;     
+}
+
 //Leetcode 39 -> Combination Sum
 void coinChange_Combi_Infi(vector<int> &arr, int tar, int idx, vector<int> &ans, vector<vector<int> > &res)
 {
