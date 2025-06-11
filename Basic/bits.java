@@ -240,6 +240,17 @@ public int rangeBitwiseAnd(int left, int right) {
     return right;
 }
 
+// Leetcode 190 -> Reverse Bits
+public int reverseBits(int n) {
+    int ans = 0;
+    for(int i = 0; i < 32; i++) {
+        ans = ans << 1; // shift ans to left to make space for the next bit
+        ans += (n & 1); // add the least significant 
+        n = n >> 1; // shift n to right to process the next bit
+    }
+    return ans;
+} 
+
 public static void main(String[] args)
 {
     // System.out.println(Integer.toBinaryString(57));
