@@ -229,7 +229,16 @@ public static void Print_bits(int n)
             System.out.print(1);
         }
     }
-}   
+} 
+
+// Leetcode 201 -> Bitwise And of Numbers Range
+// And of right to left so we know (n & n-1) sets the last set bit as 0. Also And operation decreases the value so we are decreasing the value towards left and if right < left we have our answer.
+public int rangeBitwiseAnd(int left, int right) {
+    while(right > left) {
+        right = right & (right - 1);
+    }
+    return right;
+}
 
 public static void main(String[] args)
 {
