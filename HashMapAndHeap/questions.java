@@ -740,4 +740,22 @@ public int minOperations(int[] nums, int k) {
     }
     return operations;
 }
+
+// Leetcode 594 -> Longest Harmonious Subsequence
+public int findLHS(int[] nums) {
+    HashMap<Integer, Integer> freqMap = new HashMap<>();
+    for(int i = 0; i < nums.length; i++) {
+        freqMap.put(nums[i], freqMap.getOrDefault(nums[i], 0) + 1);
+    }
+
+    int maxLength = 0;
+    for(int num : freqMap.keySet()) {
+        if (freqMap.containsKey(num + 1)) {
+            // Only have to find the longest subsequence of atmost 2 consecutive numbers
+            int currentLength = freqMap.get(num) + freqMap.get(num + 1);
+            maxLength = Math.max(maxLength, currentLength);
+        }
+    }
+    return maxLength;
+}
 }
